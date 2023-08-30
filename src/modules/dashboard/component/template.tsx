@@ -3,6 +3,7 @@
 import { AppShell, useMantineTheme } from "@mantine/core"
 import { NavbarDashboard } from "./navbar"
 import { HeaderDashboard } from "./header"
+import { NavbarMobile } from "./navbar_mobile";
 
 
 export function Dashboard({ children }: { children: React.ReactNode }) {
@@ -18,12 +19,13 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
                 navbarOffsetBreakpoint="sm"
                 asideOffsetBreakpoint="sm"
                 navbar={
-                    <NavbarDashboard  />
+                    <NavbarDashboard />
                 }
 
                 header={
                     <HeaderDashboard />
                 }
+                footer={<NavbarMobile/>}
             >
                 {children}
             </AppShell>
