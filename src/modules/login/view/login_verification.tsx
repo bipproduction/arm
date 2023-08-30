@@ -8,9 +8,32 @@ import {
   PinInput,
   Text,
 } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
+import { useFocusTrap } from "@mantine/hooks";
+import toast from "react-simple-toasts";
+import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { OtpView, RandomNew } from "..";
 
 export function LoginVerification() {
+  const focusTrapRef = useFocusTrap();
+  const [inpTlp, serInpTlp] = useState<any | null>(null);
+  const router = useRouter();
+  const [otp, setotp] = useAtom(OtpView);
+  const [ranOTP,setRanOTP ] = useAtom(RandomNew)
+
+  async function getverification() {
+    console.log(otp)
+    if (otp == ranOTP) {
+      console.log("berhasil")
+      toast("Success", { theme: "dark" });
+      router.push("/dashboard");
+    } else {
+      toast("OTP Salah", { theme: "dark" });
+      console.log("salahh")
+    }
+  }
+
   return (
     <>
       <Flex
@@ -35,17 +58,18 @@ export function LoginVerification() {
           <Group position="center" mt={30}>
             <Text color="white">Enter Verification Code</Text>
           </Group>
-          <Group position="center" mt={30}>
-            <PinInput />
-          </Group>
+          <div ref={focusTrapRef}>
+            <Group position="center" mt={30}>
+              <PinInput onChange={setotp} />
+            </Group>
+          </div>
           <Group position="center">
             <Button
               mt={30}
               radius={"md"}
               color="gray"
               w={250}
-              component="a"
-              href="/dashboard"
+              onClick={getverification}
             >
               Submit
             </Button>
