@@ -1,5 +1,6 @@
 "use client";
 
+import { isMobile } from "@/modules/_global";
 import {
   Anchor,
   NavLink,
@@ -8,6 +9,7 @@ import {
   createStyles,
   getStylesRef,
 } from "@mantine/core";
+import { useAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -118,6 +120,9 @@ export function NavbarDashboard() {
   const pathname = usePathname();
   const [active, setActive] = useState(pathname);
   const [opened, setOpened] = useState(false);
+  const [valMobile, setMobile] = useAtom(isMobile);
+  
+  if(valMobile) return <></>
   return (
     <>
       <Navbar
