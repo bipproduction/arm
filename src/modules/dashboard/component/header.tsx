@@ -19,7 +19,7 @@ export function HeaderDashboard() {
                         />
                     </MediaQuery>
 
-                    <Text>Application header</Text>
+                    <Text fz={25} fw={700}>A.R.M</Text>
                 </div>
             </Header>
         </>
