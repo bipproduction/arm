@@ -88,12 +88,12 @@ const useStyles = createStyles((theme) => ({
     "&, &:hover": {
       backgroundColor: theme.fn.variant({
         variant: "light",
-        color: theme.primaryColor,
+        color: "grape.7",
       }).background,
-      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+      color: theme.fn.variant({ variant: "light", color: "grape.7" })
         .color,
       [`& .${getStylesRef("icon")}`]: {
-        color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+        color: theme.fn.variant({ variant: "light", color: "grape.7" })
           .color,
       },
     },
