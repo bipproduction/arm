@@ -1,9 +1,9 @@
-import { LoadingDashboard } from "@/modules/dashboard";
+import { DashboardView, LoadingDashboard } from "@/modules/dashboard";
 
 export default function Page(){
     return (
         <>
-            <LoadingDashboard/>
+            <DashboardView/>
         </>
     )
 }

@@ -1,45 +1,42 @@
-'use client';
-
-
-import {
-    TextInput,
-    PasswordInput,
-    Checkbox,
-    Anchor,
-    Paper,
-    Title,
-    Text,
-    Container,
-    Group,
-    Button,
-} from '@mantine/core';
+"use client";
+import { Box, Button, Flex, Group, Text, TextInput } from "@mantine/core";
+import React from "react";
 
 export function LoginView() {
-    return (
-        <Container size={420} my={40}>
-            <Title align="center">
-                Welcome back!
-            </Title>
-            <Text color="dimmed" size="sm" align="center" mt={5}>
-                Do not have an account yet?{' '}
-                <Anchor size="sm" component="button">
-                    Create account
-                </Anchor>
+  return (
+    <>
+      <Flex
+        justify={"center"}
+        align={"center"}
+        direction={"column"}
+        h={"100vh"}
+      >
+        <Box
+          sx={{
+            backgroundColor: "#61677A",
+            padding: 30,
+            borderRadius: 10,
+          }}
+          w={{ base: 300, sm: 400 }}
+        >
+          <Group position="center">
+            <Text fw={700} fz={28} color="white">
+              LOGIN
             </Text>
-
-            <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-                <TextInput label="Email" placeholder="you@mantine.dev" required />
-                <PasswordInput label="Password" placeholder="Your password" required mt="md" />
-                <Group position="apart" mt="lg">
-                    <Checkbox label="Remember me" />
-                    <Anchor component="button" size="sm">
-                        Forgot password?
-                    </Anchor>
-                </Group>
-                <Button fullWidth mt="xl">
-                    Sign in
-                </Button>
-            </Paper>
-        </Container>
-    );
+          </Group>
+          <TextInput placeholder="Phone" mt={30} />
+          <Button
+            mt={30}
+            radius={"md"}
+            color="gray"
+            fullWidth
+            component="a"
+            href="/login-verification"
+          >
+            Login
+          </Button>
+        </Box>
+      </Flex>
+    </>
+  );
 }

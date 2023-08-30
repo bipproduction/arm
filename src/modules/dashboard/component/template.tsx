@@ -18,7 +18,7 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
                 navbarOffsetBreakpoint="sm"
                 asideOffsetBreakpoint="sm"
                 navbar={
-                    <NavbarDashboard />
+                    <NavbarDashboard  />
                 }
 
                 header={
