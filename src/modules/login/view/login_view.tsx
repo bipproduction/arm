@@ -3,30 +3,32 @@ import { Box, Button, Flex, Group, Text, TextInput } from "@mantine/core";
 import React, { useState } from "react";
 import { useFocusTrap } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
-import  "react-simple-toasts/dist/theme/dark.css"
+import "react-simple-toasts/dist/theme/dark.css"
 import toast from "react-simple-toasts"
 import { useAtom } from "jotai";
-import { RandomNew } from "..";
+import { RandomNew, phoneLogin } from "..";
 
 export function LoginView() {
   const focusTrapRef = useFocusTrap();
   const [inpTlp, setInpTlp] = useState<any | null>(null);
   const router = useRouter()
-  const [ranOTP,setRanOTP ] = useAtom(RandomNew)
-  
-  async function getDataNomor() {
-   const res = await  fetch(`https://wa.makurostudio.my.id/code?nom=${inpTlp}&text=${ranOTP}`)
-   .then(
-      async (res) => {
-        if (res.status == 200) {
-          return 
+  const [ranOTP, setRanOTP] = useAtom(RandomNew)
+  const [valPhoneLogin, setPhoneLogin] = useAtom(phoneLogin)
+
+  async function sendOTP() {
+    setRanOTP
+    const res = await fetch(`https://wa.makurostudio.my.id/code?nom=${inpTlp}&text=${ranOTP}`)
+      .then(
+        async (res) => {
+          if (res.status == 200) {
+            toast('Verification code has been sent', { theme: 'dark' })
+            setPhoneLogin(inpTlp);
+            router.push('/login-verification')
+          } else {
+            toast('Error', { theme: 'dark' })
+          }
         }
-        toast('Erorr', { theme: 'dark' })
-      }
-    );
-    toast('Success', { theme: 'dark' })
-    router.push('/login-verification')
-    console.log(ranOTP)
+      );
   }
   return (
     <>
@@ -50,16 +52,15 @@ export function LoginView() {
                 LOGIN
               </Text>
             </Group>
-            <TextInput placeholder="62" mt={30} onChange={(val) => setInpTlp(val.target.value)}/>
+            <TextInput placeholder="62" mt={30} onChange={(val) => setInpTlp(val.target.value)} />
             <Button
               mt={30}
               radius={"md"}
               color="gray"
               fullWidth
-              onClick={()=> {
-                getDataNomor()
-               setRanOTP
-              }} 
+              onClick={() => {
+                sendOTP()
+              }}
             >
               Login
             </Button>
