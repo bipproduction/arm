@@ -13,29 +13,51 @@ import { useFocusTrap } from "@mantine/hooks";
 import toast from "react-simple-toasts";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
-import { OtpView, RandomNew } from "..";
+import { OtpView, RandomNew, phoneLogin } from "..";
+import { MdArrowBackIosNew, MdArrowCircleLeft } from "react-icons/md";
+import { isMobile } from "@/modules/_global";
 
 export function LoginVerification() {
   const focusTrapRef = useFocusTrap();
   const [inpTlp, serInpTlp] = useState<any | null>(null);
   const router = useRouter();
   const [otp, setotp] = useAtom(OtpView);
-  const [ranOTP,setRanOTP ] = useAtom(RandomNew)
+  const [ranOTP, setRanOTP] = useAtom(RandomNew)
+  const [valPhoneLogin, setPhoneLogin] = useAtom(phoneLogin)
+  const [valMobile, setMobile] = useAtom(isMobile)
 
   async function getverification() {
-    console.log(otp)
     if (otp == ranOTP) {
-      console.log("berhasil")
-      toast("Success", { theme: "dark" });
+      setPhoneLogin(null)
+      toast("Verification code is correct", { theme: "dark" });
       router.push("/dashboard");
     } else {
-      toast("OTP Salah", { theme: "dark" });
-      console.log("salahh")
+      toast("Incorrect verification code", { theme: "dark" });
     }
+  }
+
+  async function sendOTP() {
+    setRanOTP
+    const res = await fetch(`https://wa.makurostudio.my.id/code?nom=${valPhoneLogin}&text=${ranOTP}`)
+      .then(
+        async (res) => {
+          if (res.status == 200) {
+            toast('Verification code has been sent', { theme: 'dark' })
+          } else {
+            toast('Error', { theme: 'dark' })
+          }
+        }
+      );
   }
 
   return (
     <>
+      {valMobile &&
+        <Button compact variant="white" color="black" component="a" href="/" px={2} my={10}>
+          <MdArrowBackIosNew size="25
+          " color="black" />
+        </Button>
+      }
       <Flex
         justify={"center"}
         align={"center"}
@@ -77,7 +99,7 @@ export function LoginVerification() {
           <Group position="center" mt={5}>
             <Text fz={12} color="white">
               Didnt receive a code ? {""}
-              <Anchor color="white">Resend</Anchor>
+              <Anchor color="white" onClick={sendOTP}>Resend</Anchor>
             </Text>
           </Group>
         </Box>
