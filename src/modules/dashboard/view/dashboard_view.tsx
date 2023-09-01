@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { isMobile } from "../../_global/val/isMobile";
 import { Box, Button, Group, SimpleGrid, Stack, Text } from "@mantine/core";
 import { useShallowEffect } from "@mantine/hooks";
-import { EchartsDashboard } from "..";
 import { COLOR } from "@/modules/_global";
+import { EchartsDashboard } from "../component/echarts_dashboard";
 
 export function DashboardView() {
   const [inMobile, setMobile] = useAtom(isMobile);
@@ -16,9 +16,12 @@ export function DashboardView() {
       <Text>Dashboard MObile</Text>
       {inMobile && <Text>Mobile nihh</Text>} */}
       <Stack>
-        <Box>
+        <Box pt={10}>
+        <Box pb={20}>
+          <Text fw={700}>DASHBOARD</Text>
+        </Box>
           <Group position="right">
-            <Button color="gray">CREATE PROJECTS</Button>
+            <Button color="gray" component="a" href="/dashboard/list-client">CREATE PROJECTS</Button>
             <Button color="gray">RECENT ACTIVITY</Button>
           </Group>
           <Box pt={40}>
