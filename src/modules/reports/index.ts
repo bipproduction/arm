@@ -1,0 +1,1 @@
+export { ListLogisticReport } from './view/list_logistic_report'
