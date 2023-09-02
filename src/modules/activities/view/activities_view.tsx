@@ -1,15 +1,13 @@
 "use client";
 
 import { Box, Grid, SimpleGrid, Text } from "@mantine/core";
-import {
-  Archive,
-  CreateProject,
-  DeliveryStatus,
-  DraftProjects,
-  ProjectsStatus,
-  Quotation,
-} from "..";
 import { COLOR } from "@/modules/_global";
+import { DraftProjects } from "../components/draft_projects";
+import { CreateProject } from "../components/create_project";
+import { Archive } from "../components/archive";
+import { Quotation } from "../components/quotation";
+import { ProjectsStatus } from "../components/projects_status";
+import { DeliveryStatus } from "../components/delivery_status";
 
 export function ActivitiesView() {
   return (
