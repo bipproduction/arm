@@ -11,43 +11,11 @@ import {
 } from "@mantine/core";
 import { useAtom } from "jotai";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
+import { isBurger } from "../val/isBurger";
+import { menuDashboard } from "../val/data_menu";
 
-const data = [
-  { key: "md1", link: "/dashboard", label: "Dashboard", icon: AiOutlineHome },
-  {
-    key: "md2",
-    link: "/dashboard/activities",
-    label: "Activities",
-    icon: AiOutlineHome,
-  },
-  {
-    key: "md3",
-    link: "/dashboard/assets",
-    label: "Assets",
-    icon: AiOutlineHome,
-  },
-  {
-    key: "md4",
-    link: "/dashboard/bills",
-    label: "Bills & Reimbursements",
-    icon: AiOutlineHome,
-  },
-  {
-    key: "md5",
-    link: "/dashboard/insights",
-    label: "Insights",
-    icon: AiOutlineHome,
-  },
-  {
-    key: "md6",
-    link: "/dashboard/help",
-    label: "Help & Support",
-    icon: AiOutlineHome,
-  },
-];
+const data = menuDashboard
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -115,14 +83,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function NavbarDashboard() {
-  const router = useRouter();
   const { classes, cx } = useStyles();
   const pathname = usePathname();
   const [active, setActive] = useState(pathname);
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useAtom(isBurger);
   const [valMobile, setMobile] = useAtom(isMobile);
-  
-  if(valMobile) return <></>
+
+  if (valMobile) return <></>
   return (
     <>
       <Navbar
@@ -134,10 +101,6 @@ export function NavbarDashboard() {
         <Navbar.Section grow>
           {data.map((item) => {
             return (
-              // <Anchor href={item.link} key={item.key} className={cx(classes.link, { [classes.linkActive]: item.link === active })}>
-
-              //     <span>{item.label}</span>
-              // </Anchor>
               <NavLink
                 key={item.key}
                 className={cx(classes.link, {
