@@ -12,15 +12,13 @@ import {
   rem,
 } from "@mantine/core";
 import { useAtom } from "jotai";
-import { LuHelpCircle, LuLayoutDashboard } from "react-icons/lu";
-import { HiOutlineBriefcase, HiOutlineCurrencyDollar, HiOutlineIdentification, HiOutlinePresentationChartLine } from "react-icons/hi";
+import { menuDashboard } from "../val/data_menu";
 
 const useStyles = createStyles((theme) => ({
   footer: {
     marginTop: rem(120),
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[1]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[1]
+      }`,
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[6],
     position: "sticky",
     bottom: 0,
@@ -44,39 +42,8 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-const data = [
-  { key: "md1", link: "/dashboard", label: "Dashboard", icon: LuLayoutDashboard },
-  {
-    key: "md2",
-    link: "/dashboard/activities",
-    label: "Activities",
-    icon: HiOutlineIdentification,
-  },
-  {
-    key: "md3",
-    link: "/dashboard/assets",
-    label: "Assets",
-    icon: HiOutlineBriefcase,
-  },
-  {
-    key: "md4",
-    link: "/dashboard/bills",
-    label: "Bills",
-    icon: HiOutlineCurrencyDollar,
-  },
-  {
-    key: "md5",
-    link: "/dashboard/insights",
-    label: "Insights",
-    icon: HiOutlinePresentationChartLine,
-  },
-  {
-    key: "md6",
-    link: "/dashboard/help",
-    label: "Help",
-    icon: LuHelpCircle,
-  },
-];
+
+const data = menuDashboard
 
 export function NavbarMobile() {
   const { classes } = useStyles();
@@ -86,19 +53,19 @@ export function NavbarMobile() {
     <>
       <div className={classes.footer}>
         <div className={classes.inner}>
-          <Group spacing="xs"  noWrap>
+          <Group spacing="xs" noWrap>
             {data.map((item) => {
-                return (
-            <Box style={{cursor: "pointer", textDecoration: "none"}} key={item.key} component="a"
-            href={item.link} m={9}>
-              <Center>
-              <ActionIcon color={"gray.0"}>
-                  <item.icon size="20"/>
-              </ActionIcon>
-              </Center>
-              <Text ta={"center"} color={"white"} fz={8}>{item.label}</Text>
-            </Box>
-                )
+              return (
+                <Box style={{ cursor: "pointer", textDecoration: "none" }} key={item.key} component="a"
+                  href={item.link} m={9}>
+                  <Center>
+                    <ActionIcon color={"gray.0"}>
+                      <item.icon size="20" />
+                    </ActionIcon>
+                  </Center>
+                  <Text ta={"center"} color={"white"} fz={8}>{item.labelMobile}</Text>
+                </Box>
+              )
             })}
           </Group>
         </div>

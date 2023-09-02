@@ -1,5 +1,6 @@
 'use client'
 
+import { PageTitle } from "@/modules/_global";
 import { ActionIcon, Card, Grid, Group, Image, Pagination, Text, Title, createStyles, rem } from "@mantine/core"
 import { MdOutlineDriveFileRenameOutline, MdOutlinePrint } from "react-icons/md";
 const useStyles = createStyles((theme) => ({
@@ -24,6 +25,7 @@ export function AssetsView() {
     const { classes, theme } = useStyles();
     return (
         <>
+            <PageTitle text="ASSETS"/>
             <Grid>
                 <Grid.Col span={3}>
                     <Card withBorder padding="lg" radius="md" className={classes.card}>
