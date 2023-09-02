@@ -1,4 +1,5 @@
 'use client'
+import { COLOR, PageTitle } from "@/modules/_global";
 import { Button, Grid, Group, Paper, Text, ThemeIcon, createStyles, rem } from "@mantine/core";
 import { MdOutlineAreaChart, MdOutlineAutoGraph, MdOutlineFolderCopy, MdOutlineHomeWork, MdOutlineInventory2 } from "react-icons/md";
 
@@ -28,10 +29,11 @@ export function InsightsView() {
     const { classes } = useStyles();
     return (
         <>
+            <PageTitle text="INSIGHTS"/>
             <Grid grow>
                 <Grid.Col span={4}>
                     <Paper radius="md" withBorder className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-                        <ThemeIcon className={classes.icon} bg={"grey"} size={ICON_SIZE} radius={ICON_SIZE}>
+                        <ThemeIcon className={classes.icon} bg={COLOR.AbuMuda} size={ICON_SIZE} radius={ICON_SIZE}>
                             <MdOutlineHomeWork size="2rem" stroke={1.5} />
                         </ThemeIcon>
 
@@ -40,12 +42,12 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={"grey"} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/outlet">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
                     <Paper radius="md" withBorder className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-                        <ThemeIcon className={classes.icon} bg={"grey"} size={ICON_SIZE} radius={ICON_SIZE}>
+                        <ThemeIcon className={classes.icon} bg={COLOR.AbuMuda} size={ICON_SIZE} radius={ICON_SIZE}>
                             <MdOutlineInventory2 size="2rem" stroke={1.5} />
                         </ThemeIcon>
 
@@ -54,12 +56,12 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={"grey"} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/logistic-reports">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
                     <Paper radius="md" withBorder className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-                        <ThemeIcon className={classes.icon} bg={"grey"} size={ICON_SIZE} radius={ICON_SIZE}>
+                        <ThemeIcon className={classes.icon} bg={COLOR.AbuMuda} size={ICON_SIZE} radius={ICON_SIZE}>
                             <MdOutlineFolderCopy size="2rem" stroke={1.5} />
                         </ThemeIcon>
 
@@ -68,12 +70,12 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={"grey"} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
                     <Paper radius="md" withBorder className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-                        <ThemeIcon className={classes.icon} bg={"grey"} size={ICON_SIZE} radius={ICON_SIZE}>
+                        <ThemeIcon className={classes.icon} bg={COLOR.AbuMuda} size={ICON_SIZE} radius={ICON_SIZE}>
                             <MdOutlineAreaChart size="2rem" stroke={1.5} />
                         </ThemeIcon>
 
@@ -82,12 +84,12 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={"grey"} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
                     <Paper radius="md" withBorder className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-                        <ThemeIcon className={classes.icon} bg={"grey"} size={ICON_SIZE} radius={ICON_SIZE}>
+                        <ThemeIcon className={classes.icon} bg={COLOR.AbuMuda} size={ICON_SIZE} radius={ICON_SIZE}>
                             <MdOutlineAutoGraph size="2rem" stroke={1.5} />
                         </ThemeIcon>
 
@@ -96,7 +98,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={"grey"} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
             </Grid>
