@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { OtpView, RandomNew, phoneLogin } from "..";
 import { MdArrowBackIosNew, MdArrowCircleLeft } from "react-icons/md";
-import { isMobile } from "@/modules/_global";
+import { ButtonBack, isMobile } from "@/modules/_global";
 
 export function LoginVerification() {
   const focusTrapRef = useFocusTrap();
@@ -52,12 +52,7 @@ export function LoginVerification() {
 
   return (
     <>
-      {valMobile &&
-        <Button compact variant="white" color="black" component="a" href="/" px={2} my={10}>
-          <MdArrowBackIosNew size="25
-          " color="black" />
-        </Button>
-      }
+      {valMobile && <ButtonBack link="/" />}
       <Flex
         justify={"center"}
         align={"center"}
