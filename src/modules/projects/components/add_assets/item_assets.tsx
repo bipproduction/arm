@@ -3,9 +3,11 @@ import {
   Box,
   Button,
   Card,
+  Flex,
   Grid,
   Group,
   Image,
+  Paper,
   SimpleGrid,
   Stack,
   Text,
@@ -17,7 +19,22 @@ const img = [
   {
     id: 1,
     image: "../img/meja.jpeg",
-    link: "/dashboard/detail-add-assets"
+    link: "/dashboard/detail-add-assets",
+  },
+  {
+    id: 2,
+    image: "../img/meja.jpeg",
+    link: "/dashboard/detail-add-assets",
+  },
+  {
+    id: 3,
+    image: "../img/meja.jpeg",
+    link: "/dashboard/detail-add-assets",
+  },
+  {
+    id: 4,
+    image: "../img/meja.jpeg",
+    link: "/dashboard/detail-add-assets",
   },
 ];
 
@@ -49,65 +66,24 @@ function ItemAssets() {
         </Grid>
       </Box>
       <Box pt={40}>
-        <Grid>
-          <Grid.Col md={6} lg={3}>
-            {img.map((item) => (
-            <Box key={item.id}>
-              <Card
-                shadow="sm"
-                padding="xl"
-                component="a"
-                href={item.link}
-                target="_blank"
-              
-              >
-                <Card.Section>
-                  <Box p={10}>
-                    <Image src={item.image} maw={240} mx="auto" alt="No way!" />
-                  </Box>
-                </Card.Section>
-                <Box pt={5}>
-                  <Text fw={700} fz={25}>
-                    ITEM NAME
-                  </Text>
-                  <Text fw={700} fz={10}>
-                    TOTAL QTY : 25
-                  </Text>
-                </Box>
-                <Group position="right" pt={10}>
-                  <Box>
-                    <Text fz={12}>AVAILABLE</Text>
-                    <Group position="right">
-                      <Text fz={12}>QTY</Text>
-                    </Group>
-                  </Box>
-                  <Box>
-                    <Text fw={700} fz={40}>
-                      20
-                    </Text>
-                  </Box>
-                </Group>
-              </Card>
-            </Box>
-            ))}
-          </Grid.Col>
-          <Grid.Col md={6} lg={3}>
+        <Flex
+          gap={{ base: "sm", sm: "lg" }}
+          justify={{ base: "center" }}
+          wrap="wrap"
+        >
           {img.map((item) => (
             <Box key={item.id}>
-              <Card
-                shadow="sm"
-                padding="xl"
+              <Paper
+                p={20}
+                key={item.id}
+                shadow="xl"
                 component="a"
                 href={item.link}
-                target="_blank"
-              
+                w={318}
+                h={360}
               >
-                <Card.Section>
-                  <Box p={10}>
-                    <Image src={item.image} maw={240} mx="auto" alt="No way!" />
-                  </Box>
-                </Card.Section>
-                <Box pt={5}>
+                <Image src={"../img/meja.jpeg"} maw={240} mx="auto" alt="a" />
+                <Box pt={20}>
                   <Text fw={700} fz={25}>
                     ITEM NAME
                   </Text>
@@ -128,93 +104,10 @@ function ItemAssets() {
                     </Text>
                   </Box>
                 </Group>
-              </Card>
+              </Paper>
             </Box>
-            ))}
-          </Grid.Col>
-          <Grid.Col md={6} lg={3}>
-          {img.map((item) => (
-            <Box key={item.id}>
-              <Card
-                shadow="sm"
-                padding="xl"
-                component="a"
-                href={item.link}
-                target="_blank"
-              
-              >
-                <Card.Section>
-                  <Box p={10}>
-                    <Image src={item.image} maw={240} mx="auto"alt="No way!" />
-                  </Box>
-                </Card.Section>
-                <Box pt={5}>
-                  <Text fw={700} fz={25}>
-                    ITEM NAME
-                  </Text>
-                  <Text fw={700} fz={10}>
-                    TOTAL QTY : 25
-                  </Text>
-                </Box>
-                <Group position="right" pt={10}>
-                  <Box>
-                    <Text fz={12}>AVAILABLE</Text>
-                    <Group position="right">
-                      <Text fz={12}>QTY</Text>
-                    </Group>
-                  </Box>
-                  <Box>
-                    <Text fw={700} fz={40}>
-                      20
-                    </Text>
-                  </Box>
-                </Group>
-              </Card>
-            </Box>
-            ))}
-          </Grid.Col>
-          <Grid.Col md={6} lg={3}>
-          {img.map((item) => (
-            <Box key={item.id}>
-              <Card
-                shadow="sm"
-                padding="xl"
-                component="a"
-                href={item.link}
-                target="_blank"
-              
-              >
-                <Card.Section>
-                  <Box p={10}>
-                    <Image src={item.image} maw={240} mx="auto" alt="No way!" />
-                  </Box>
-                </Card.Section>
-                <Box pt={5}>
-                  <Text fw={700} fz={25}>
-                    ITEM NAME
-                  </Text>
-                  <Text fw={700} fz={10}>
-                    TOTAL QTY : 25
-                  </Text>
-                </Box>
-                <Group position="right" pt={10}>
-                  <Box>
-                    <Text fz={12}>AVAILABLE</Text>
-                    <Group position="right">
-                      <Text fz={12}>QTY</Text>
-                    </Group>
-                  </Box>
-                  <Box>
-                    <Text fw={700} fz={40}>
-                      20
-                    </Text>
-                  </Box>
-                </Group>
-              </Card>
-            </Box>
-            ))}
-          </Grid.Col>
-        </Grid>
+          ))}
+        </Flex>
       </Box>
       <Box pt={20}></Box>
     </>

@@ -110,7 +110,7 @@ function FormNormal() {
       </Box>
       <Grid pt={20}>
       <Grid.Col md={3} sm={12}>
-      <Button fullWidth  radius={10} color="gray.7">SUBMIT</Button>
+      <Button fullWidth  radius={10} color="gray.7" component="a" href="/dashboard/recent-activity">SUBMIT</Button>
       </Grid.Col>
     </Grid>
     </>
