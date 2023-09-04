@@ -1,88 +1,95 @@
 'use client'
 
-import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
-import { ActionIcon, Box, Center, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
+import { ActionIcon, Box, Button, Center, Grid, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 
-const dataLogisticReport = [
+
+const dataProjectReport = [
     {
         id: 1,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 2,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 3,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 4,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 5,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 6,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 7,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 8,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 9,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
     {
         id: 10,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
-        qty: "30 pcs",
-        status: "approved"
+        price: "21.000.000 IDR"
     },
 ];
-
-export function ListLogisticReport() {
+export function ListProjectReport() {
     return (
         <>
             <Stack>
                 <ButtonBack link="/dashboard/insights" />
-                <PageSubTitle text="LOGISTIC REPORTS" />
+                <PageSubTitle text="PROJECT REPORTS" />
+                <Grid mt={10}>
+                    <Grid.Col md={6} lg={3}>
+                        <Button color="gray" fullWidth>
+                            BRAND
+                        </Button>
+                    </Grid.Col>
+                    <Grid.Col md={6} lg={3}>
+                        <Button color="gray" fullWidth>
+                            CITIES
+                        </Button>
+                    </Grid.Col>
+                    <Grid.Col md={6} lg={3}>
+                        <Button color="gray" fullWidth>
+                            CAMPAIGN NAME
+                        </Button>
+                    </Grid.Col>
+                </Grid>
                 <Box pt={20}>
                     <Box
                         sx={{
@@ -103,8 +110,7 @@ export function ListLogisticReport() {
                                             <th>No</th>
                                             <th>NAME</th>
                                             <th>DATE</th>
-                                            <th>QUANTITY</th>
-                                            <th>STATUS</th>
+                                            <th>PRICE</th>
                                             <th>
                                                 <Center>
                                                     <Text>ACTIONS</Text>
@@ -114,16 +120,15 @@ export function ListLogisticReport() {
                                     </thead>
                                     <tbody>
                                         {
-                                            dataLogisticReport.map((item) => (
+                                            dataProjectReport.map((item) => (
                                                 <tr key={item.id}>
                                                     <td>{item.id}</td>
                                                     <td>{item.name}</td>
                                                     <td>{item.date}</td>
-                                                    <td>{item.qty}</td>
-                                                    <td>{item.status}</td>
+                                                    <td>{item.price}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/logistic-report/1293849">
+                                                            <ActionIcon color="dark" component="a" href="/dashboard/project-report/1293849">
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>
