@@ -29,7 +29,7 @@ export function InsightsView() {
     const { classes } = useStyles();
     return (
         <>
-            <PageTitle text="INSIGHTS"/>
+            <PageTitle text="INSIGHTS" />
             <Grid grow>
                 <Grid.Col span={4}>
                     <Paper radius="md" withBorder className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
@@ -42,7 +42,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/outlet">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/outlet">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -56,7 +56,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/logistic-reports">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/logistic-report">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -70,7 +70,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/project-report">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -84,7 +84,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/spending-analytic">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -98,7 +98,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled"bg={COLOR.AbuMuda} mt={30}>VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/activities-analytic">VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
             </Grid>
