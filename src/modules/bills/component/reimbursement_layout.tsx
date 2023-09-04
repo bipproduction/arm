@@ -32,7 +32,7 @@ export function ReimbursementLayout() {
                                     80
                                 </Text>
                             </Box>
-                            <Box style={{ cursor: "pointer" }}>
+                            <Box style={{ cursor: "pointer", textDecoration:"none" }} component="a" href="/dashboard/reimbursement">
                                 <Group position="right" pt={22} pb={10} pr={20}>
                                     <Text fz={10} color="dark">
                                         Detail Reimbursements
