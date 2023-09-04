@@ -32,7 +32,7 @@ const dataInvoice = [
     },
     {
         id: 5,
-        name: "Outlet Aion",
+        name: "Outlet A",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
@@ -112,7 +112,7 @@ export function ListInvoice() {
                                                     <td>{item.price}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/create-project">
+                                                            <ActionIcon color="dark" component="a" href="/dashboard/invoice/271837199">
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>
