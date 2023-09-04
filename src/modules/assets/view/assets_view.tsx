@@ -25,7 +25,7 @@ export function AssetsView() {
     const { classes, theme } = useStyles();
     return (
         <>
-            <PageTitle text="ASSETS"/>
+            <PageTitle text="ASSETS" />
             <Grid>
                 <Grid.Col span={3}>
                     <Card withBorder padding="lg" radius="md" className={classes.card}>
@@ -276,8 +276,10 @@ export function AssetsView() {
                     </Card>
                 </Grid.Col>
             </Grid>
-            
-            <Pagination total={10} />
+
+            <Group position="right" pt={10}>
+                <Pagination total={10} />
+            </Group>
         </>
     )
 }
