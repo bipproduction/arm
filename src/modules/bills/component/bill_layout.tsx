@@ -36,7 +36,7 @@ export function BillLayout() {
                         </Box>
                     </Group>
                 </Box>
-                <Box style={{ cursor: "pointer" }}>
+                <Box style={{ cursor: "pointer", textDecoration: "none" }} component="a" href="/dashboard/billing">
                     <Group position="right" pt={10} pb={10}>
                         <Text fz={10} color="white">
                             Detail Billing

@@ -35,7 +35,7 @@ const dataLogisticReport = [
     },
     {
         id: 5,
-        name: "Outlet Aion",
+        name: "Outlet A",
         date: "23 Feb 2023",
         qty: "30 pcs",
         status: "approved"
@@ -123,7 +123,7 @@ export function ListLogisticReport() {
                                                     <td>{item.status}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/create-project">
+                                                            <ActionIcon color="dark" component="a" href="/dashboard/logistic-report/1293849">
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>

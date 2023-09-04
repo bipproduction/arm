@@ -1,79 +1,95 @@
 'use client'
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
-import { ActionIcon, Box, Center, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import { ActionIcon, Box, Button, Center, Grid, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 
 
-const dataInvoice = [
+const dataProjectReport = [
     {
         id: 1,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 2,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 3,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 4,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 5,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 6,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 7,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 8,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 9,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
     {
         id: 10,
-        name: "Outlet A",
+        name: "PT. Mekar Sejati",
         date: "23 Feb 2023",
         price: "21.000.000 IDR"
     },
 ];
-
-export function ListInvoice() {
+export function ListProjectReport() {
     return (
         <>
             <Stack>
-                <ButtonBack link="/dashboard/bills" />
-                <PageSubTitle text="LIST INVOICE" />
+                <ButtonBack link="/dashboard/insights" />
+                <PageSubTitle text="PROJECT REPORTS" />
+                <Grid mt={10}>
+                    <Grid.Col md={6} lg={3}>
+                        <Button color="gray" fullWidth>
+                            BRAND
+                        </Button>
+                    </Grid.Col>
+                    <Grid.Col md={6} lg={3}>
+                        <Button color="gray" fullWidth>
+                            CITIES
+                        </Button>
+                    </Grid.Col>
+                    <Grid.Col md={6} lg={3}>
+                        <Button color="gray" fullWidth>
+                            CAMPAIGN NAME
+                        </Button>
+                    </Grid.Col>
+                </Grid>
                 <Box pt={20}>
                     <Box
                         sx={{
@@ -104,7 +120,7 @@ export function ListInvoice() {
                                     </thead>
                                     <tbody>
                                         {
-                                            dataInvoice.map((item) => (
+                                            dataProjectReport.map((item) => (
                                                 <tr key={item.id}>
                                                     <td>{item.id}</td>
                                                     <td>{item.name}</td>
@@ -112,7 +128,7 @@ export function ListInvoice() {
                                                     <td>{item.price}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/invoice/271837199">
+                                                            <ActionIcon color="dark" component="a" href="/dashboard/project-report/1293849">
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>

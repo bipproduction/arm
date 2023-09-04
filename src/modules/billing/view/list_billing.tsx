@@ -5,7 +5,7 @@ import { ActionIcon, Box, Center, Group, Pagination, ScrollArea, SimpleGrid, Sta
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 
 
-const dataInvoice = [
+const dataBilling = [
     {
         id: 1,
         name: "Outlet A",
@@ -68,12 +68,13 @@ const dataInvoice = [
     },
 ];
 
-export function ListInvoice() {
+
+export function ListBilling() {
     return (
         <>
             <Stack>
                 <ButtonBack link="/dashboard/bills" />
-                <PageSubTitle text="LIST INVOICE" />
+                <PageSubTitle text="LIST BILLING" />
                 <Box pt={20}>
                     <Box
                         sx={{
@@ -104,7 +105,7 @@ export function ListInvoice() {
                                     </thead>
                                     <tbody>
                                         {
-                                            dataInvoice.map((item) => (
+                                            dataBilling.map((item) => (
                                                 <tr key={item.id}>
                                                     <td>{item.id}</td>
                                                     <td>{item.name}</td>
@@ -112,7 +113,7 @@ export function ListInvoice() {
                                                     <td>{item.price}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/invoice/271837199">
+                                                            <ActionIcon color="dark" component="a" href="/dashboard/billing/271837199">
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>

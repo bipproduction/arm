@@ -36,7 +36,7 @@ export function InvoiceLayout() {
                         </Box>
                     </Group>
                 </Box>
-                <Box style={{ cursor: "pointer" }} component="a" href="/dashboard/invoice">
+                <Box style={{ cursor: "pointer", textDecoration: "none" }} component="a" href="/dashboard/invoice">
                     <Group position="right" pt={10} pb={10}>
                         <Text fz={10} color="white">
                             Detail Invoice
