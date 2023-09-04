@@ -38,7 +38,7 @@ export function FaqLayout() {
       >
         <Box>
           {DataHelp.map((item) => (
-            <Accordion variant="contained" key={item.id}>
+            <Accordion variant="contained" key={item.id} mb={10}>
               <Accordion.Item value="photos">
                 <Accordion.Control>{item.title}</Accordion.Control>
                 <Accordion.Panel>{item.isi}</Accordion.Panel>
@@ -48,7 +48,7 @@ export function FaqLayout() {
         </Box>
         <Box>
           {DataHelp.map((item) => (
-            <Accordion variant="contained" key={item.id}>
+            <Accordion variant="contained" key={item.id} mb={10}>
               <Accordion.Item value="photos">
                 <Accordion.Control>{item.title}</Accordion.Control>
                 <Accordion.Panel>{item.isi}</Accordion.Panel>
