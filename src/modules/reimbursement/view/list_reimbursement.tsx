@@ -2,6 +2,7 @@
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { ActionIcon, Box, Button, Center, Grid, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { MdAdd, MdOutlineCreateNewFolder } from "react-icons/md";
 
 
@@ -12,7 +13,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Approval",
-        no:"123"
+        no: "123"
     },
     {
         id: 2,
@@ -20,7 +21,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Approved",
-        no:"222"
+        no: "222"
     },
     {
         id: 3,
@@ -28,7 +29,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Declined",
-        no:"111"
+        no: "111"
     },
     {
         id: 4,
@@ -36,7 +37,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Paid",
-        no:"333"
+        no: "333"
     },
     {
         id: 5,
@@ -44,7 +45,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Paid",
-        no:"333"
+        no: "333"
     },
     {
         id: 6,
@@ -52,7 +53,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Approval",
-        no:"123"
+        no: "123"
     },
     {
         id: 7,
@@ -60,7 +61,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Approved",
-        no:"222"
+        no: "222"
     },
     {
         id: 8,
@@ -68,7 +69,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Declined",
-        no:"111"
+        no: "111"
     },
     {
         id: 9,
@@ -76,7 +77,7 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Declined",
-        no:"111"
+        no: "111"
     },
     {
         id: 10,
@@ -84,11 +85,12 @@ const dataReimbursement = [
         date: "23 Feb 2023",
         price: "21.000.000 IDR",
         status: "Approved",
-        no:"222"
+        no: "222"
     },
 ];
 
 export function ListReimbursement() {
+    const router = useRouter();
     return (
         <>
             <Stack>
@@ -96,7 +98,7 @@ export function ListReimbursement() {
                 <PageSubTitle text="LIST REIMBURSEMENTS" />
                 <Box pt={20}>
                     <Group position="right">
-                        <Button style={{ backgroundColor: COLOR.AbuAbu }} leftIcon={<MdAdd size="1rem" />}>
+                        <Button style={{ backgroundColor: COLOR.AbuAbu }} leftIcon={<MdAdd size="1rem" />} onClick={()=>router.push('reimbursement/add')}>
                             Add Reimbursement
                         </Button>
                     </Group>
@@ -163,7 +165,7 @@ export function ListReimbursement() {
                                                     <td>{item.status}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href={`/dashboard/reimbursement/`+item.no}>
+                                                            <ActionIcon color="dark" onClick={() => router.push(`/dashboard/reimbursement/` + item.no)}>
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>
