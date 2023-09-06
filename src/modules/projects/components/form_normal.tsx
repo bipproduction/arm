@@ -14,12 +14,12 @@ import {
   rem,
 } from "@mantine/core";
 import { useFocusTrap } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
 import React from "react";
-
 
 function FormNormal() {
   const focusTrapRef = useFocusTrap();
-
+  const router = useRouter();
   return (
     <>
       <Box pt={20}>
@@ -79,7 +79,12 @@ function FormNormal() {
                 <TextInput placeholder="Form input" />
               </SimpleGrid>
               <Group position="right">
-                <Button color="gray.7" component="a" href="/dashboard/add-assets">ADD ASSETS</Button>
+                <Button
+                  color="gray.7"
+                  onClick={() => router.push("/dashboard/add-assets")}
+                >
+                  ADD ASSETS
+                </Button>
               </Group>
             </Stack>
           </Box>
@@ -109,10 +114,17 @@ function FormNormal() {
         </Box>
       </Box>
       <Grid pt={20}>
-      <Grid.Col md={3} sm={12}>
-      <Button fullWidth  radius={10} color="gray.7" component="a" href="/dashboard/recent-activity">SUBMIT</Button>
-      </Grid.Col>
-    </Grid>
+        <Grid.Col md={3} sm={12}>
+          <Button
+            fullWidth
+            radius={10}
+            color="gray.7"
+            onClick={() => router.push("/dashboard/recent-activity")}
+          >
+            SUBMIT
+          </Button>
+        </Grid.Col>
+      </Grid>
     </>
   );
 }

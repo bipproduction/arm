@@ -1,0 +1,221 @@
+"use client";
+import { COLOR } from "@/modules/_global";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Collapse,
+  Divider,
+  Grid,
+  Group,
+  Image,
+  Modal,
+  ModalBase,
+  SimpleGrid,
+  Stack,
+  Text,
+  TextInput,
+  Textarea,
+} from "@mantine/core";
+import { useDisclosure, useFocusTrap } from "@mantine/hooks";
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+import React from "react";
+import { MdOutlineNoteAlt } from "react-icons/md";
+import ModalNote from "./modal_note";
+const val_open_modal = atomWithStorage("val_open_modal", false)
+
+function ItemUpdateProject() {
+  const focusTrapRef = useFocusTrap();
+  const [opened, { toggle }] = useDisclosure(false);
+  const [openModal, setOpenModal] = useAtom(val_open_modal)
+  return (
+    <>
+      <Box pt={20}>
+        <Box
+          sx={{
+            backgroundColor: COLOR.AbuMuda,
+            padding: 15,
+            borderRadius: 5,
+          }}
+        >
+          <Box ref={focusTrapRef}>
+            <Divider
+              my="xs"
+              label={
+                <Text fw={700} fz={14} color="dark.9">
+                  DETAIL PROJECT
+                </Text>
+              }
+              size="md"
+              color="dark"
+            />
+            <Box pt={10}>
+              <Stack>
+                <Text color="gray.0">Event : We The Fest</Text>
+                <Text color="gray.0">Location : Jakarta Selatan</Text>
+                <Text color="gray.0">Date : 23 May 2023</Text>
+                <Text color="gray.0">Name : PT. Mekar Jaya</Text>
+                <Text color="gray.0">
+                  .......... : ........... ......... ........... ...........
+                </Text>
+                <Text color="gray.0">
+                  .......... : ........... ......... ........... ...........
+                </Text>
+                <Text color="gray.0">
+                  .......... : ........... ......... ........... ...........
+                </Text>
+                <Text color="gray.0">
+                  .......... : ........... ......... ........... ...........
+                </Text>
+                <Text color="gray.0">
+                  .......... : ........... ......... ........... ...........
+                </Text>
+              </Stack>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box pt={20}>
+        <Box
+          sx={{
+            backgroundColor: COLOR.AbuMuda,
+            padding: 5,
+            borderRadius: 5,
+          }}
+          px={20}
+          mb={10}
+          py={20}
+        >
+          <Divider
+            mb={5}
+            label={
+              <Text fw={700} fz={17} color="dark.9">
+                ASSETS
+              </Text>
+            }
+            size="md"
+            color="dark"
+          />
+          <Box pt={20}>
+            <Box
+              sx={{
+                backgroundColor: COLOR.AbuAbu,
+                padding: 20,
+                borderRadius: 10,
+              }}
+            >
+              <Group position="apart">
+                <Group>
+                  <Box>
+                    <Image
+                      src={"../../img/meja.jpeg"}
+                      radius={10}
+                      maw={{ base: 100, sm: 200 }}
+                      mx="auto"
+                      alt="img"
+                    />
+                  </Box>
+                  <Box>
+                    <Text fw={700} color="white" fz={{ sm: 20, base: 10 }}>
+                      THE MACALLAN
+                    </Text>
+                    <Text color="gray.5" fz={{ sm: 13, base: 9 }}>
+                      Harmony 2
+                    </Text>
+                    <Text color="gray.5" fz={{ sm: 13, base: 9 }}>
+                      Display
+                    </Text>
+                  </Box>
+                </Group>
+                <Group>
+                  <Box>
+                    <Text
+                      fw={700}
+                      fz={{ sm: 40, base: 20 }}
+                      pr={40}
+                      color="white"
+                    >
+                      x2
+                    </Text>
+                  </Box>
+                </Group>
+              </Group>
+              <Group pt={20}>
+                <Group style={{ cursor: "pointer" }} onClick={toggle}>
+                  <Text fz={{ sm: 13, base: 9 }} fw={700} color="white">
+                    NOTE
+                  </Text>
+                  <ActionIcon color="gray.0">
+                    <MdOutlineNoteAlt />
+                  </ActionIcon>
+                </Group>
+              </Group>
+              <Collapse in={opened}>
+                <Textarea />
+              </Collapse>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box pt={20}>
+        <Box
+          sx={{
+            backgroundColor: COLOR.AbuMuda,
+            padding: 5,
+            borderRadius: 5,
+          }}
+          px={20}
+          mb={10}
+          py={20}
+        >
+          <Divider
+            mb={5}
+            label={
+              <Text fw={700} fz={17} color="dark.9">
+                QUOTATION
+              </Text>
+            }
+            size="md"
+            color="dark"
+          />
+          <Box pt={10}>
+            <TextInput placeholder="ESTIMATES BUDGET" />
+          </Box>
+        </Box>
+      </Box>
+      <Grid pt={20}>
+        <Grid.Col md={3} sm={12}>
+          <Button
+            fullWidth
+            radius={10}
+            color="gray.7"
+            onClick={() => setOpenModal(true)}
+          >
+            SUBMIT
+          </Button>
+        </Grid.Col>
+      </Grid>
+      <ModalNoteStatus/>
+    </>
+  );
+}
+
+export function ModalNoteStatus() {
+  const [openModal, setOpenModal] = useAtom(val_open_modal)
+return(
+  <>
+  <Modal 
+  size={"md"}
+  opened={openModal}
+  onClose={() => setOpenModal(false)}
+  centered
+  withCloseButton={false}
+  >
+    <ModalNote closeMedia={() => setOpenModal(false)}/>
+  </Modal>
+  </>
+)
+}
+
+export default ItemUpdateProject;
