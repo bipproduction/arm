@@ -2,6 +2,7 @@
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { ActionIcon, Box, Button, Center, Grid, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 
 
@@ -68,6 +69,7 @@ const dataProjectReport = [
     },
 ];
 export function ListProjectReport() {
+    const router = useRouter();
     return (
         <>
             <Stack>
@@ -128,7 +130,7 @@ export function ListProjectReport() {
                                                     <td>{item.price}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/project-report/1293849">
+                                                            <ActionIcon color="dark" onClick={() => router.push('/dashboard/project-report/1293849')}>
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>

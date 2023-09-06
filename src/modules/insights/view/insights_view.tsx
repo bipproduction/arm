@@ -1,6 +1,7 @@
 'use client'
 import { COLOR, PageTitle } from "@/modules/_global";
 import { Button, Grid, Group, Paper, Text, ThemeIcon, createStyles, rem } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { MdOutlineAreaChart, MdOutlineAutoGraph, MdOutlineFolderCopy, MdOutlineHomeWork, MdOutlineInventory2 } from "react-icons/md";
 
 const ICON_SIZE = rem(60);
@@ -26,6 +27,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function InsightsView() {
+    const router = useRouter();
     const { classes } = useStyles();
     return (
         <>
@@ -42,7 +44,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/outlet">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} onClick={()=>router.push("/dashboard/outlet")}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -56,7 +58,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/logistic-report">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} onClick={()=>router.push("/dashboard/logistic-report")}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -70,7 +72,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/project-report">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} onClick={()=>router.push("/dashboard/project-report")}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -84,7 +86,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/spending-analytic">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} onClick={()=>router.push("/dashboard/spending-analytic")}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col span={4}>
@@ -98,7 +100,7 @@ export function InsightsView() {
                         </Text>
 
 
-                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} component="a" href="/dashboard/activities-analytic">VIEW DETAIL</Button>
+                        <Button fullWidth variant="filled" bg={COLOR.AbuMuda} mt={30} onClick={()=>router.push("/dashboard/activities-analytic")}>VIEW DETAIL</Button>
                     </Paper>
                 </Grid.Col>
             </Grid>

@@ -2,6 +2,7 @@
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
 import { ActionIcon, Box, Center, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 
 const dataLogisticReport = [
@@ -78,6 +79,7 @@ const dataLogisticReport = [
 ];
 
 export function ListLogisticReport() {
+    const router = useRouter();
     return (
         <>
             <Stack>
@@ -123,7 +125,7 @@ export function ListLogisticReport() {
                                                     <td>{item.status}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/logistic-report/1293849">
+                                                            <ActionIcon color="dark" onClick={() => router.push('/dashboard/logistic-report/1293849')}>
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>
