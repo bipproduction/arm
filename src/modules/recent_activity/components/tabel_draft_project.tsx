@@ -1,5 +1,6 @@
 "use client";
 import { ActionIcon, Box, Center, Divider, Group, Table, Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { HiOutlineChevronRight } from "react-icons/hi";
@@ -32,6 +33,7 @@ const dataDraft = [
 ];
 
 function TabelDraftProject() {
+  const router = useRouter()
   const draftTable = dataDraft.map((datatab) => (
     <tr key={datatab.id}>
       <td>{datatab.id}</td>
@@ -40,7 +42,7 @@ function TabelDraftProject() {
       <td>{datatab.date}</td>
       <td>
         <Center>
-        <ActionIcon component="a" href="#" color="dark">
+        <ActionIcon onClick={() => router.push("/dashboard/detail-draft-project/2982372998732")} color="dark">
         <BiSolidUserDetail size="25"/>
         </ActionIcon>
         </Center>
@@ -54,7 +56,7 @@ function TabelDraftProject() {
           <Box>
             <Text fw={700}>DRAFT PROJECTS</Text>
           </Box>
-          <ActionIcon component="a" href="#" color="dark">
+          <ActionIcon onClick={() => router.push("/dashboard/detail-draft-project")} color="dark">
             <HiOutlineChevronRight size="25" />
           </ActionIcon>
         </Group>
