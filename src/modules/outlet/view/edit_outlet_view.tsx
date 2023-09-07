@@ -1,25 +1,23 @@
 'use client'
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
-import { Box, Button, Divider, Grid, Group, Modal, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
+import { Box, Button, Divider, Grid, Modal, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
+import { ModalKonfirmasiOutlet } from "../component/modal_konfirmasi_outlet"
 import { useFocusTrap } from "@mantine/hooks";
-import { useRouter } from "next/navigation";
-import { ModalKonfirmasiReimbursement } from "../component/modal_konfirmasi_reimbursement";
 import { useAtom } from "jotai";
-import { isModalReimbursement } from "../val/isModalReimbursement";
+import { isModalOutlet } from "../val/isModalOutlet";
 
-export function AddReimbursement() {
-    const [valOpenModal, setOpenModal] = useAtom(isModalReimbursement);
+export function EditOutlet() {
     const focusTrapRef = useFocusTrap();
-    const router = useRouter();
-    function validasiReimbursement() {
-        // validasi input dulu 
+    const [valOpenModal, setOpenModal] = useAtom(isModalOutlet)
+
+    function validasiOutlet() {
         setOpenModal(true);
     }
     return (
         <>
             <ButtonBack />
-            <PageSubTitle text="ADD REIMBURSEMENT" />
+            <PageSubTitle text="EDIT OUTLET" />
             <Box pt={20}>
                 <Box
                     sx={{
@@ -33,7 +31,7 @@ export function AddReimbursement() {
                             my="xs"
                             label={
                                 <Text fw={700} fz={14} color="dark.9">
-                                    FORM REIMBURSEMENT
+                                    FORM OUTLET
                                 </Text>
                             }
                             size="md"
@@ -83,10 +81,9 @@ export function AddReimbursement() {
             </Box>
             <Grid pt={20}>
                 <Grid.Col md={3} sm={12}>
-                    <Button fullWidth radius={10} color="gray.7" onClick={validasiReimbursement}>SUBMIT</Button>
+                    <Button fullWidth radius={10} color="gray.7" onClick={validasiOutlet}>SUBMIT</Button>
                 </Grid.Col>
             </Grid>
-            {/* <ModalKonfirmasiReimbursement valOpenModal={valOpenModal} /> */}
             <Modal
                 size={"md"}
                 opened={valOpenModal}
@@ -95,7 +92,7 @@ export function AddReimbursement() {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalKonfirmasiReimbursement />
+                <ModalKonfirmasiOutlet />
             </Modal>
         </>
     )

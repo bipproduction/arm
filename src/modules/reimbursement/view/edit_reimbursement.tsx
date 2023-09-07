@@ -1,17 +1,15 @@
 'use client'
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
-import { Box, Button, Divider, Grid, Group, Modal, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
+import { Box, Button, Divider, Grid, Modal, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
 import { useFocusTrap } from "@mantine/hooks";
-import { useRouter } from "next/navigation";
 import { ModalKonfirmasiReimbursement } from "../component/modal_konfirmasi_reimbursement";
-import { useAtom } from "jotai";
 import { isModalReimbursement } from "../val/isModalReimbursement";
+import { useAtom } from "jotai";
 
-export function AddReimbursement() {
+export function EditReimbursement() {
     const [valOpenModal, setOpenModal] = useAtom(isModalReimbursement);
     const focusTrapRef = useFocusTrap();
-    const router = useRouter();
     function validasiReimbursement() {
         // validasi input dulu 
         setOpenModal(true);
@@ -19,7 +17,7 @@ export function AddReimbursement() {
     return (
         <>
             <ButtonBack />
-            <PageSubTitle text="ADD REIMBURSEMENT" />
+            <PageSubTitle text="EDIT REIMBURSEMENT" />
             <Box pt={20}>
                 <Box
                     sx={{
