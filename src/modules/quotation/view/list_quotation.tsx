@@ -1,13 +1,15 @@
 "use client";
-import { COLOR } from "@/modules/_global";
+import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import {
   ActionIcon,
   Box,
+  Button,
   Center,
   Group,
   Pagination,
   ScrollArea,
   SimpleGrid,
+  Stack,
   Table,
   Text,
 } from "@mantine/core";
@@ -15,84 +17,86 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { BiSolidUserDetail } from "react-icons/bi";
 
-const budget = [
+const quotation = [
   {
     id: 1,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 2,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 3,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 4,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 5,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 6,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 7,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 8,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 9,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
   {
     id: 10,
-    brand: "The Macallan",
-    activity: "Bar Take Over",
-    date: "23 February 2023",
+    name: "Judul Quotation",
+    role: "Requestor",
     price: "25.000.000.000, IDR",
   },
 ];
 
-export default function Budget() {
+export function ListQuotation() {
   const router = useRouter();
   return (
     <>
-      <Box pt={10}>
+      <Stack>
+        <ButtonBack />
+        <PageSubTitle text="LIST QUOTATION" />
+      </Stack>
+      <Group pt={20} position="right">
+        <Button
+          color="gray.7"
+          onClick={() => router.push(`/dashboard/quotation/27392973927`)}
+        >
+          CREATE QUOTATION
+        </Button>
+      </Group>
+      <Box pt={20}>
         <Box
           sx={{
             backgroundColor: COLOR.AbuMuda,
@@ -110,9 +114,8 @@ export default function Budget() {
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>BRAND</th>
-                    <th>ACTIVITY</th>
-                    <th>DATE</th>
+                    <th>NAME</th>
+                    <th>ROLE</th>
                     <th>PRICE</th>
                     <th>
                       <Center>
@@ -122,12 +125,11 @@ export default function Budget() {
                   </tr>
                 </thead>
                 <tbody>
-                  {budget.map((item) => (
+                  {quotation.map((item) => (
                     <tr key={item.id}>
                       <td>{item.id}</td>
-                      <td>{item.brand}</td>
-                      <td>{item.activity}</td>
-                      <td>{item.date}</td>
+                      <td>{item.name}</td>
+                      <td>{item.role}</td>
                       <td>{item.price}</td>
                       <td>
                         <Group position="center">
@@ -135,7 +137,7 @@ export default function Budget() {
                             <ActionIcon
                               color="dark"
                               onClick={() =>
-                                router.push("/dashboard/archive/3232323232")
+                                router.push("/dashboard/quotation/3232323232")
                               }
                             >
                               <BiSolidUserDetail size="25" />

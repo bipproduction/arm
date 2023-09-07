@@ -213,7 +213,7 @@ export function ModalRevoked () {
       <Modal
         size={"md"}
         opened={openRevoked}
-        onClose={() => setOpenRevoked(false)}
+        onClose={() => openRevoked}
         centered
         withCloseButton={false}
       >

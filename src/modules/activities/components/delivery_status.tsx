@@ -10,9 +10,11 @@ import {
   SimpleGrid,
   Text,
 } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 export function DeliveryStatus() {
+  const router = useRouter()
   return (
     <Box pt={30}>
       <Box
@@ -39,8 +41,8 @@ export function DeliveryStatus() {
                   80
                 </Text>
               </Box>
-              <Box style={{ cursor: "pointer" }}>
-                <Group position="right" pt={22} pb={10} pr={20}>
+              <Group position="right" >
+                <Group position="right" pt={22} pb={10} style={{ cursor: "pointer" }} pr={20} onClick={() => router.push("/dashboard/delivery-status")}>
                   <Text fz={10} color="dark">
                     Detail Delivery Status
                   </Text>
@@ -48,7 +50,7 @@ export function DeliveryStatus() {
                     <BsFillArrowRightCircleFill />
                   </ActionIcon>
                 </Group>
-              </Box>
+              </Group>
             </Box>
           </Grid.Col>
           <Grid.Col md={3} lg={3}>
