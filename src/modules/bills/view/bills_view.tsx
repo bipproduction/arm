@@ -9,9 +9,7 @@ import { ReimbursementLayout } from "../component/reimbursement_layout"
 export function BillsView() {
     return (
         <>
-            <Box pt={20}>
-                <PageTitle text="Bills & Reimbursements" />
-            </Box>
+            <PageTitle text="BILLS & REIMBURSEMENTS" />
             <Grid>
                 <Grid.Col md={6}>
                     <InvoiceLayout />
