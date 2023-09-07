@@ -15,11 +15,13 @@ import {
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { MdOutlineNoteAlt } from "react-icons/md";
 
 function ItemCheckout() {
   const [opened, { toggle }] = useDisclosure(false);
+  const router = useRouter()
   return (
     <>
       <Box pt={30}>
@@ -124,7 +126,7 @@ function ItemCheckout() {
         </Box>
         <Grid pt={20}>
         <Grid.Col md={3} sm={12}>
-          <Button fullWidth radius={10} color="gray.7" component="a" href="/dashboard/create-project">
+          <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/create-project")}>
             CHECKOUT
           </Button>
         </Grid.Col>

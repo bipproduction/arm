@@ -1,9 +1,9 @@
 'use client'
 
-import { Box, Text } from "@mantine/core"
+import { Box, Group, Text } from "@mantine/core"
 import { COLOR } from ".."
 
-export const PageHeader = ({ title, number, date }: { title?: string, number?: string, date?: string }) => {
+export const PageHeader = ({ title, number, date, status }: { title?: string, number?: string, date?: string, status?: string }) => {
     return (
         <>
             <Box
@@ -25,6 +25,11 @@ export const PageHeader = ({ title, number, date }: { title?: string, number?: s
                 <Text color="white" mb={5}>
                     {date}
                 </Text>
+                <Group position="right" pt={10}>
+                <Text color="white" mb={5} pr={20} fw={700}>
+                    {status}
+                </Text>
+                </Group>
             </Box>
         </>
     )

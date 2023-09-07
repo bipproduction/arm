@@ -8,12 +8,14 @@ import {
   Group,
   Image,
   Paper,
+  ScrollArea,
   SimpleGrid,
   Stack,
   Text,
 } from "@mantine/core";
 import React from "react";
 import ImageData from "./image";
+import { useRouter } from "next/navigation";
 
 const img = [
   {
@@ -39,26 +41,27 @@ const img = [
 ];
 
 function ItemAssets() {
+  const router = useRouter()
   return (
     <>
       <Box pt={30}>
-        <Grid>
-          <Grid.Col md={6} lg={3}>
+        <Grid grow  >
+          <Grid.Col md={3} lg={3} sm={3} xs={3} xl={3}>
             <Button color="gray" fullWidth>
               Mobile Bar
             </Button>
           </Grid.Col>
-          <Grid.Col md={6} lg={3}>
+          <Grid.Col md={3} lg={3} sm={3} xs={3} xl={3}>
             <Button color="gray" fullWidth>
               Display
             </Button>
           </Grid.Col>
-          <Grid.Col md={6} lg={3}>
+          <Grid.Col md={3} lg={3} sm={3} xs={3} xl={3}>
             <Button color="gray" fullWidth>
               Lightbox
             </Button>
           </Grid.Col>
-          <Grid.Col md={6} lg={3}>
+          <Grid.Col md={3} lg={3} sm={3} xs={3} xl={3}>
             <Button color="gray" fullWidth>
               Bottle
             </Button>
@@ -77,8 +80,8 @@ function ItemAssets() {
                 p={20}
                 key={item.id}
                 shadow="xl"
-                component="a"
-                href={item.link}
+                onClick={() => router.push(item.link)}
+                style={{cursor: "pointer"}}
                 w={318}
                 h={360}
               >

@@ -3,6 +3,7 @@ import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import {
   ActionIcon,
   Box,
+  Button,
   Center,
   Group,
   Image,
@@ -13,6 +14,7 @@ import {
   Table,
   Text,
 } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
@@ -81,6 +83,7 @@ const dataClient = [
 ];
 
 function TabelListClient() {
+  const router = useRouter();
   const client = dataClient.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -91,8 +94,11 @@ function TabelListClient() {
       <td>{item.Role}</td>
       <td>
         <Center>
-          <ActionIcon color="dark" component="a" href="/dashboard/create-project">
-            <MdOutlineCreateNewFolder size="25"/>
+          <ActionIcon
+            color="dark"
+            onClick={() => router.push(`/dashboard/create-project`)}
+          >
+            <MdOutlineCreateNewFolder size="25" />
           </ActionIcon>
         </Center>
       </td>
@@ -101,47 +107,47 @@ function TabelListClient() {
 
   return (
     <>
-    <Stack>
-      <ButtonBack link="/dashboard"/>
-      <PageSubTitle text="List Client"/>
-      <Box pt={20}>
-        <Box
-          sx={{
-            backgroundColor: COLOR.AbuMuda,
-            padding: 10,
-            borderRadius: 5,
-          }}
-        >
-          <SimpleGrid
-            cols={1}
-            spacing="lg"
-            breakpoints={[{ maxWidth: "36rem", cols: 1, spacing: "sm" }]}
+      <Stack>
+        <ButtonBack link="/dashboard"/>
+        <PageSubTitle text="List Client" />
+        <Box pt={20}>
+          <Box
+            sx={{
+              backgroundColor: COLOR.AbuMuda,
+              padding: 10,
+              borderRadius: 5,
+            }}
           >
-            <ScrollArea>
-              <Table highlightOnHover horizontalSpacing={"lg"}>
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>IMAGE</th>
-                    <th>NAME</th>
-                    <th>ROLE</th>
-                    <th>
-                      <Center>
-                        <Text>ACTIONS</Text>
-                      </Center>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>{client}</tbody>
-              </Table>
-            </ScrollArea>
-          </SimpleGrid>
+            <SimpleGrid
+              cols={1}
+              spacing="lg"
+              breakpoints={[{ maxWidth: "36rem", cols: 1, spacing: "sm" }]}
+            >
+              <ScrollArea>
+                <Table highlightOnHover horizontalSpacing={"lg"}>
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>IMAGE</th>
+                      <th>NAME</th>
+                      <th>ROLE</th>
+                      <th>
+                        <Center>
+                          <Text>ACTIONS</Text>
+                        </Center>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>{client}</tbody>
+                </Table>
+              </ScrollArea>
+            </SimpleGrid>
+          </Box>
         </Box>
-      </Box>
-      <Group position="right" pt={10}>
-        <Pagination total={10} />
-      </Group>
-    </Stack>
+        <Group position="right" pt={10}>
+          <Pagination total={10} />
+        </Group>
+      </Stack>
     </>
   );
 }

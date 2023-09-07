@@ -12,9 +12,11 @@ import {
   rem,
 } from "@mantine/core";
 import { useFocusTrap } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function NonFormNormal() {
+  const router = useRouter()
   return (
     <>
       <Box pt={20}>
@@ -45,7 +47,7 @@ function NonFormNormal() {
 
       <Grid pt={20}>
         <Grid.Col md={3} sm={12}>
-          <Button fullWidth radius={10} color="gray.7" component="a" href="/dashboard/recent-activity">
+          <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/recent-activity")}>
             SUBMIT
           </Button>
         </Grid.Col>

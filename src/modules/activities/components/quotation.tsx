@@ -6,7 +6,7 @@ export function Quotation() {
   return (
     <>
       <Button fullWidth color="gray.0">
-        <Text color="dark">ARCHIVE</Text>
+        <Text color="dark">QUOTATION</Text>
       </Button>
     </>
   );

@@ -23,10 +23,12 @@ import React from "react";
 import { MdOutlineNoteAlt } from "react-icons/md";
 import { QuantityInput } from "./quantity_button";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 function ListCart() {
   const [opened, { toggle }] = useDisclosure(false);
   const [count, handlers] = useCounter(0, { min: 0, max: 10 });
+  const router = useRouter()
   return (
     <>
       <Box pt={30}>
@@ -91,7 +93,7 @@ function ListCart() {
           </Box>
           <Grid pt={20}>
             <Grid.Col md={3} sm={12}>
-              <Button fullWidth radius={10} color="gray.7" component="a" href="/dashboard/checkout">
+              <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/checkout")}>
                 SUBMIT
               </Button>
             </Grid.Col>
