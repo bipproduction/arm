@@ -1,0 +1,1 @@
+export { BillsView } from './view/bills_view'
