@@ -1,10 +1,12 @@
 'use client'
 
 import { COLOR } from "@/modules/_global"
-import { ActionIcon, Box, Group, Text } from "@mantine/core"
+import { ActionIcon, Box, Flex, Group, Text } from "@mantine/core"
+import { useRouter } from "next/navigation"
 import { BsFillArrowRightCircleFill } from "react-icons/bs"
 
 export function BillLayout() {
+    const router = useRouter();
     return (
         <>
             <Box
@@ -36,14 +38,16 @@ export function BillLayout() {
                         </Box>
                     </Group>
                 </Box>
-                <Box style={{ cursor: "pointer", textDecoration: "none" }} component="a" href="/dashboard/billing">
+                <Box>
                     <Group position="right" pt={10} pb={10}>
-                        <Text fz={10} color="white">
-                            Detail Billing
-                        </Text>
-                        <ActionIcon color="gray.0">
-                            <BsFillArrowRightCircleFill />
-                        </ActionIcon>
+                        <Flex style={{ cursor: "pointer" }} onClick={() => router.push('/dashboard/billing')}>
+                            <Text fz={10} color="white" pt={5}>
+                                Detail Billing
+                            </Text>
+                            <ActionIcon color="gray.0">
+                                <BsFillArrowRightCircleFill />
+                            </ActionIcon>
+                        </Flex>
                     </Group>
                 </Box>
             </Box>

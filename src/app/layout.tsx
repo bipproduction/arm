@@ -1,4 +1,3 @@
-import { Pengaman } from '@/modules/_global';
 import RootStyleRegistry from './emotion';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -8,9 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body suppressHydrationWarning={true}>
         <RootStyleRegistry>
-          <Pengaman>
-            {children}
-          </Pengaman>
+          {children}
         </RootStyleRegistry>
       </body>
     </html>

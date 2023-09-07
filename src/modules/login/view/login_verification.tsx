@@ -5,7 +5,9 @@ import {
   Button,
   Flex,
   Group,
+  MediaQuery,
   PinInput,
+  Stack,
   Text,
 } from "@mantine/core";
 import React, { useState } from "react";
@@ -15,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { OtpView, RandomNew, phoneLogin } from "..";
 import { MdArrowBackIosNew, MdArrowCircleLeft } from "react-icons/md";
-import { ButtonBack, isMobile } from "@/modules/_global";
+import { ButtonBack } from "@/modules/_global";
 
 export function LoginVerification() {
   const focusTrapRef = useFocusTrap();
@@ -24,7 +26,6 @@ export function LoginVerification() {
   const [otp, setotp] = useAtom(OtpView);
   const [ranOTP, setRanOTP] = useAtom(RandomNew)
   const [valPhoneLogin, setPhoneLogin] = useAtom(phoneLogin)
-  const [valMobile, setMobile] = useAtom(isMobile)
 
   async function getverification() {
     if (otp == ranOTP) {
@@ -52,7 +53,13 @@ export function LoginVerification() {
 
   return (
     <>
-      {valMobile && <ButtonBack link="/" />}
+      {/* {valMobile && <ButtonBack link="/" />} */}
+      <MediaQuery largerThan={"sm"} styles={{ display: 'none' }}>
+
+        <Flex>
+          <ButtonBack link="/" />
+        </Flex>
+      </MediaQuery>
       <Flex
         justify={"center"}
         align={"center"}

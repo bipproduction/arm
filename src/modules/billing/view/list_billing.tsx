@@ -2,6 +2,7 @@
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { ActionIcon, Box, Center, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 
 
@@ -70,6 +71,7 @@ const dataBilling = [
 
 
 export function ListBilling() {
+    const router = useRouter();
     return (
         <>
             <Stack>
@@ -113,7 +115,7 @@ export function ListBilling() {
                                                     <td>{item.price}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/billing/271837199">
+                                                            <ActionIcon color="dark" onClick={() => router.push('/dashboard/billing/271837199')}>
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>
