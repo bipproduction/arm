@@ -1,1 +1,0 @@
-export { AssetsView } from './view/assets_view'
