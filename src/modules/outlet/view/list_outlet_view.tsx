@@ -2,6 +2,7 @@
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
 import { ActionIcon, Box, Button, Center, Group, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core"
+import { useRouter } from "next/navigation";
 import { MdAdd, MdOutlineCreateNewFolder } from "react-icons/md"
 
 const dataOutlet = [
@@ -68,17 +69,20 @@ const dataOutlet = [
 ];
 
 export function ListOutlet() {
+    const router = useRouter();
     return (
         <>
             <Stack>
                 <ButtonBack link="/dashboard/insights" />
                 <PageSubTitle text="OUTLET DATABASE" />
 
-                <Group position="right" mt={30}>
-                    <Button leftIcon={<MdAdd size="1rem" />} variant="filled">
-                        Add Outlet
-                    </Button>
-                </Group>
+                <Box pt={20}>
+                    <Group position="right">
+                        <Button style={{ backgroundColor: COLOR.AbuAbu }} leftIcon={<MdAdd size="1rem" />} onClick={() => router.push('outlet/add')}>
+                            Add Outlet
+                        </Button>
+                    </Group>
+                </Box>
 
                 <Box pt={20}>
                     <Box
@@ -118,7 +122,7 @@ export function ListOutlet() {
                                                     <td>{item.location}</td>
                                                     <td>
                                                         <Center>
-                                                            <ActionIcon color="dark" component="a" href="/dashboard/create-project">
+                                                            <ActionIcon color="dark" onClick={()=>router.push('outlet/1123243')}>
                                                                 <MdOutlineCreateNewFolder size="25" />
                                                             </ActionIcon>
                                                         </Center>
