@@ -42,7 +42,7 @@ function TabelDraftProject() {
       <td>{datatab.date}</td>
       <td>
         <Center>
-        <ActionIcon onClick={() => router.push("/dashboard/detail-draft-project/2982372998732")} color="dark">
+        <ActionIcon onClick={() => router.push("/dashboard/project/444")} color="dark">
         <BiSolidUserDetail size="25"/>
         </ActionIcon>
         </Center>
@@ -56,7 +56,7 @@ function TabelDraftProject() {
           <Box>
             <Text fw={700}>DRAFT PROJECTS</Text>
           </Box>
-          <ActionIcon onClick={() => router.push("/dashboard/detail-draft-project")} color="dark">
+          <ActionIcon onClick={() => router.push("/dashboard/project/draft")} color="dark">
             <HiOutlineChevronRight size="25" />
           </ActionIcon>
         </Group>

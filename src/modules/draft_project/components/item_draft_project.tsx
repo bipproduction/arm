@@ -77,7 +77,7 @@ function ItemDraftProject() {
       <td>{datatab.date}</td>
       <td>
         <Center>
-          <ActionIcon onClick={() => router.push(`/dashboard/detail-draft-project/2982372998732`)} color="dark">
+          <ActionIcon onClick={() => router.push(`/dashboard/project/444`)} color="dark">
             <BiSolidUserDetail size="25" />
           </ActionIcon>
         </Center>

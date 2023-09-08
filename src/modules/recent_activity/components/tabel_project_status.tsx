@@ -51,7 +51,7 @@ function TabelProjectStatus() {
       <td>{datatab.status}</td>
       <td>
         <Center>
-          <ActionIcon onClick={() => router.push(`/dashboard/project-status/`+datatab.no)} color="dark">
+          <ActionIcon onClick={() => router.push(`/dashboard/project/`+datatab.no)} color="dark">
             <BiSolidUserDetail size="25" />
           </ActionIcon>
         </Center>
@@ -65,7 +65,7 @@ function TabelProjectStatus() {
           <Box>
             <Text fw={700}>PROJECTS STATUS</Text>
           </Box>
-          <ActionIcon onClick={() => router.push("/dashboard/project-status")} color="dark">
+          <ActionIcon onClick={() => router.push("/dashboard/project/status")} color="dark">
             <HiOutlineChevronRight size="25" />
           </ActionIcon>
         </Group>

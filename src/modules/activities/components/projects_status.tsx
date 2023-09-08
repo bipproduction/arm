@@ -49,7 +49,7 @@ export function ProjectsStatus() {
                     pb={10}
                     pr={20}
                     style={{ cursor: "pointer" }}
-                    onClick={() => router.push("/dashboard/project-status")}
+                    onClick={() => router.push("/dashboard/project/status")}
                   >
                     <Text fz={10} color="dark">
                       Detail Project Status
