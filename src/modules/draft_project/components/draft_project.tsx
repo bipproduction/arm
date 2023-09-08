@@ -9,7 +9,7 @@ function DraftProject() {
     <>
       <Stack>
         <ButtonBack link="/dashboard/recent-activity" />
-        <PageSubTitle text="DETAIL DRAFT PROJECTS" />
+        <PageSubTitle text="LIST DRAFT PROJECTS" />
       </Stack>
       <Box>
         <ItemDraftProject />

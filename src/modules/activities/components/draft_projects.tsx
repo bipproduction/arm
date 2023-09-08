@@ -44,7 +44,7 @@ export function DraftProjects() {
             pt={10}
             pb={10}
             style={{ cursor: "pointer" }}
-            onClick={() => router.push("/dashboard/detail-draft-project")}
+            onClick={() => router.push("/dashboard/project/draft")}
           >
             <Text fz={10} color="white">
               Detail Draft Project
