@@ -27,16 +27,8 @@ export function DetailProjectStatus({ id }: { id: string }) {
       <PageHeader title={title} date="23 February 2023" number={id} />
       <Box mt={20}>
         <Group position="right">
-          {id == "111" &&
-            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />}>
-              EDIT
-            </Button>}
-          {id == "222" &&
-            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />}>
-              EDIT
-            </Button>}
-          {id == "333" &&
-            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />}>
+          {(id == "111" || id=="222" || id=="333") &&
+            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />} onClick={()=>router.push(`/dashboard/project/${id}/edit`)}>
               EDIT
             </Button>}
           {id == "444" &&

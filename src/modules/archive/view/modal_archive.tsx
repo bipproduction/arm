@@ -14,7 +14,7 @@ export default function ModalArchiveView() {
   const router = useRouter()
   function archiveCreate() {
     toast("Success", {theme: "dark"})
-    router.push('/dashboard/create-project')
+    router.push('/dashboard/project/create')
     setOpenArchive(false)
   }
   return (
