@@ -3,6 +3,7 @@ import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import {
   ActionIcon,
   Box,
+  Button,
   Card,
   Checkbox,
   Flex,
@@ -89,7 +90,10 @@ export default function DetailAssets() {
         <PageSubTitle text="DETAIL ASSETS" />
       </Stack>
       <Box pt={20}>
+        <Group position="apart">
       <Checkbox label="All"/>
+      <Button color="gray.7" onClick={() => router.push("/dashboard/assets/detail-assets/37923729")}>VIEW BARCODE</Button>
+        </Group>
       </Box>
       <Box pt={20}>
         <Box
@@ -138,8 +142,8 @@ export default function DetailAssets() {
                     </Text>
                     <Card.Section className={classes.footer}>
                       <Group position="apart">
-                        <Group spacing={30}>
-                          <ActionIcon>
+                        <Group spacing={30} style={{cursor: "pointer"}}>
+                          <ActionIcon onClick={() => router.push("/dashboard/assets/detail-assets/37923729")}>
                             <MdOutlinePrint
                               size="25"
                               color={theme.colors.yellow[6]}
