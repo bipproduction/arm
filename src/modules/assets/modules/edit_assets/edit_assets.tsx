@@ -14,20 +14,18 @@ import {
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useAtom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import ModalCreateAdd from "./modal_create_add";
-import { isModalAssetsView } from "../val/idModalAssets";
+import { isModalAssetsEdit } from "../val/isModalAssetsEdit";
+import { ModalEditAssets } from "..";
 
-export function CreateAssets() {
+export default function EditAssets() {
   const [files, setFiles] = useState<File[]>([]);
-  const [valOpenCreateAdd, setOpenCreateAdd] = useAtom(isModalAssetsView);
+  const [valOpenEditAssets, setOpenEditAssets] = useAtom(isModalAssetsEdit);
   return (
     <>
       <Stack>
         <ButtonBack />
-        <PageSubTitle text="ADD ASSETS" />
+        <PageSubTitle text="EDIT ASSETS" />
       </Stack>
       <Box pt={20}>
         <Box
@@ -85,7 +83,7 @@ export function CreateAssets() {
               <Button
                 fullWidth
                 color="gray.7"
-                onClick={() => setOpenCreateAdd(true)}
+                onClick={() => setOpenEditAssets(true)}
               >
                 SUBMIT
               </Button>
@@ -95,16 +93,14 @@ export function CreateAssets() {
       </Box>
       <Modal
         size={"md"}
-        opened={valOpenCreateAdd}
-        onClose={() => setOpenCreateAdd(false)}
+        opened={valOpenEditAssets}
+        onClose={() => setOpenEditAssets(false)}
         centered
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalCreateAdd />
+        <ModalEditAssets />
       </Modal>
     </>
   );
 }
-
-export default CreateAssets;

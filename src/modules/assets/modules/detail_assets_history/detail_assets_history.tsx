@@ -3,9 +3,11 @@ import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import {
   Box,
   Button,
+  Card,
   Center,
   Checkbox,
   Collapse,
+  Container,
   Flex,
   Grid,
   Group,
@@ -13,13 +15,34 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  createStyles,
+  rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import { HiCheckCircle } from "react-icons/hi";
+const useStyles = createStyles((theme) => ({
+  card: {
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+  },
+
+  title: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  },
+
+  footer: {
+    padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
+    marginTop: theme.spacing.md,
+    borderTop: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+    }`,
+  },
+}));
 
 export default function DetailAssetsHistory() {
   const [opened, { toggle }] = useDisclosure(false);
+  const { classes, theme } = useStyles();
   return (
     <>
       <Stack>
@@ -33,53 +56,60 @@ export default function DetailAssetsHistory() {
           borderRadius: 5,
         }}
       >
-        <Grid gutter="xs">
-          <Grid.Col md={5} lg={5}>
+        <Box pt={30} pb={30}>
+          <Container>
             <Group position="center">
-              <Box pt={25} pb={25}>
-                <Image
-                  src={"../../img/meja.jpeg"}
-                  alt="history"
-                  maw={300}
-                  radius={10}
-                />
-              </Box>
-            </Group>
-          </Grid.Col>
-          <Grid.Col md={7} lg={7}>
-            <Box p={30}>
-              <Box>
-                <Text fw={700} fz={30}>
-                  MEJA KAYU
-                </Text>
-              </Box>
-              <Group pt={10}>
-                <HiCheckCircle size="30" />
-                <Box>
-                  <Text fz={8} fw={700}>
-                    CONDITIONS
-                  </Text>
-                  <Text fz={8} fw={700} color="red">
-                    GOOD CONDITION
-                  </Text>
-                </Box>
-              </Group>
-              <Box>
-                <Box pt={25}>
-                  <Button onClick={toggle} color="gray.7" radius={20} w={130}>
-                    HISTORY
-                  </Button>
+              <Card
+                withBorder
+                padding="lg"
+                radius="md"
+                className={classes.card}
+                w={400}
+              >
+                <Card.Section mb="sm" pt={20} >
+                  <Image
+                    src="../../../img/meja.jpeg"
+                    alt="Meja portable"
+                    maw={200}
+                    mx="auto"
+                  />
+                </Card.Section>
+                <Card.Section className={classes.footer}>
+                  <Group position="apart" pt={10}>
+                    <Group fw={700}>
+                      <Text>THE MACALLAN</Text>
+                    </Group>
+                    <Group>
+                      <HiCheckCircle size="30" />
+                      <Box>
+                        <Text fz={8} fw={700}>
+                          CONDITIONS
+                        </Text>
+                        <Text fz={8} fw={700} color="red">
+                          GOOD CONDITION
+                        </Text>
+                      </Box>
+                    </Group>
+                  </Group>
+                  <Box pt={20}>
+                    <Button
+                      fullWidth
+                      radius={10}
+                      color="gray.7"
+                      onClick={toggle}
+                    >
+                      HISTORY
+                    </Button>
 
-                  <Collapse in={opened} pt={10}>
-                    <Box>
-                      <Box
-                        sx={{
-                          backgroundColor: "white",
-                          padding: 20,
-                          borderRadius: 20,
-                        }}
-                      >
-                        <Stack>
+                    <Box pt={10}>
+                      <Collapse in={opened}>
+                        <Box
+                          sx={{
+                            backgroundColor: COLOR.AbuMuda,
+                            borderRadius: 10,
+                            padding: 20,
+                          }}
+                        >
                           <Text>Event : We The Fest</Text>
                           <Text>Location : Jakarta Selatan</Text>
                           <Text>Date : 23 May 2023</Text>
@@ -104,15 +134,15 @@ export default function DetailAssetsHistory() {
                             .......... : ........... ......... ...........
                             ...........
                           </Text>
-                        </Stack>
-                      </Box>
+                        </Box>
+                      </Collapse>
                     </Box>
-                  </Collapse>
-                </Box>
-              </Box>
-            </Box>
-          </Grid.Col>
-        </Grid>
+                  </Box>
+                </Card.Section>
+              </Card>
+            </Group>
+          </Container>
+        </Box>
       </Box>
     </>
   );
