@@ -5,6 +5,7 @@ import {
   Box,
   Center,
   Group,
+  Pagination,
   ScrollArea,
   SimpleGrid,
   Table,
@@ -22,7 +23,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmarkFill",
+    icon: <BsBookmarkFill />,
   },
   {
     id: 2,
@@ -30,7 +31,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmarkFill",
+    icon: <BsBookmarkFill />,
   },
   {
     id: 3,
@@ -38,7 +39,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
   {
     id: 4,
@@ -46,7 +47,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
   {
     id: 5,
@@ -54,7 +55,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
   {
     id: 6,
@@ -62,6 +63,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
+    icon: <BsBookmark />,
   },
   {
     id: 7,
@@ -69,7 +71,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
   {
     id: 8,
@@ -77,7 +79,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
   {
     id: 9,
@@ -85,7 +87,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
   {
     id: 10,
@@ -93,7 +95,7 @@ const projectBrief = [
     activity: "Bar Take Over",
     date: "23 February 2023",
     status: "Approval Project",
-    icon: "BsBookmark",
+    icon: <BsBookmark />,
   },
 ];
 
@@ -140,23 +142,16 @@ export default function ProjectBrief() {
                       <td>{item.date}</td>
                       <td>{item.status}</td>
                       <td>
-                        <Group>
-                         <Box>
-                         <ActionIcon
-                            color="dark"
-                            onClick={() => router.push("#")}
-                          >
-                            <BiSolidUserDetail size="25" />
-                          </ActionIcon>
-                         </Box>
-                         <Box>
-                         <ActionIcon
-                            color="dark"
-                            onClick={() => router.push("#")}
-                          >
-                            {/* < size="25" /> */}
-                          </ActionIcon>
-                         </Box>
+                        <Group position="center">
+                          <Box style={{cursor: "pointer"}}>{item.icon}</Box>
+                          <Box>
+                            <ActionIcon
+                              color="dark"
+                              onClick={() => router.push("/dashboard/archive/3232323232")}
+                            >
+                              <BiSolidUserDetail size="25" />
+                            </ActionIcon>
+                          </Box>
                         </Group>
                       </td>
                     </tr>
@@ -166,6 +161,9 @@ export default function ProjectBrief() {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10} pb={60}>
+          <Pagination total={10} />
+        </Group>
       </Box>
     </>
   );

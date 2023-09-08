@@ -8,6 +8,7 @@ import { IoMdNotifications } from "react-icons/io"
 import { menuDashboard } from "../val/data_menu"
 import { usePathname, useRouter } from "next/navigation"
 import { useMediaQuery, useViewportSize } from "@mantine/hooks"
+import Notification from "./notification"
 
 const data = menuDashboard
 const useStyles = createStyles((theme) => ({
@@ -108,7 +109,7 @@ export function HeaderDashboard2() {
                             <ActionIcon component="a" color="dark" href="/dashboard/cart">
                                 <BsFillCartFill size="20" />
                             </ActionIcon>
-                            <IoMdNotifications size="20" />
+                            <Notification/>
                             <FaUserCircle size="20" />
                         </Group>
                     </Group>

@@ -1,21 +1,24 @@
 'use client'
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
-import { Box, Button, Divider, Grid, Group, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
+import { Box, Button, Divider, Grid, Group, Modal, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
 import { useFocusTrap } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
-import toast from "react-simple-toasts";
+import { ModalKonfirmasiReimbursement } from "../component/modal_konfirmasi_reimbursement";
+import { useAtom } from "jotai";
+import { isModalReimbursement } from "../val/isModalReimbursement";
 
 export function AddReimbursement() {
+    const [valOpenModal, setOpenModal] = useAtom(isModalReimbursement);
     const focusTrapRef = useFocusTrap();
     const router = useRouter();
-    function createReimbursement(){
-        toast("Success", { theme: "dark" });
-        router.push('/dashboard/reimbursement')
+    function validasiReimbursement() {
+        // validasi input dulu 
+        setOpenModal(true);
     }
     return (
         <>
-            <ButtonBack link="fdsf" />
+            <ButtonBack />
             <PageSubTitle text="ADD REIMBURSEMENT" />
             <Box pt={20}>
                 <Box
@@ -80,9 +83,20 @@ export function AddReimbursement() {
             </Box>
             <Grid pt={20}>
                 <Grid.Col md={3} sm={12}>
-                    <Button fullWidth radius={10} color="gray.7" onClick={createReimbursement}>SUBMIT</Button>
+                    <Button fullWidth radius={10} color="gray.7" onClick={validasiReimbursement}>SUBMIT</Button>
                 </Grid.Col>
             </Grid>
+            {/* <ModalKonfirmasiReimbursement valOpenModal={valOpenModal} /> */}
+            <Modal
+                size={"md"}
+                opened={valOpenModal}
+                onClose={() => setOpenModal(false)}
+                centered
+                withCloseButton={false}
+                closeOnClickOutside={false}
+            >
+                <ModalKonfirmasiReimbursement />
+            </Modal>
         </>
     )
 }

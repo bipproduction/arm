@@ -1,34 +1,50 @@
 "use client";
 import { ButtonBack, COLOR, PageHeader } from "@/modules/_global";
-import { ActionIcon, Box, Button, Collapse, Divider, Grid, Group, Image, Text, TextInput, Textarea } from "@mantine/core";
+import ModalCloseRevoked from "@/modules/draft_project/components/modal_close_revoked";
+import { ActionIcon, Box, Button, Collapse, Divider, Grid, Group, Image, Modal, Text, TextInput, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { atomWithStorage } from "jotai/utils";
+import { useAtom } from "jotai";
 import React from "react";
-import { MdModeEditOutline, MdOutlineNoteAlt } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
+import { MdEditDocument, MdModeEditOutline, MdOutlineNoteAlt } from "react-icons/md";
+import { useRouter } from "next/navigation";
+
+const val_open_revoked = atomWithStorage("val_open_revoked", false)
 
 export function DetailProjectStatus({ id }: { id: string }) {
   let title = "APPROVAL";
   if (id == "111") title = "DECLINED";
   if (id == "222") title = "CANCELED";
   if (id == "333") title = "JOB ORDER";
+  if (id == "444") title = "DRAFT ORDER";
   const [opened, { toggle }] = useDisclosure(false);
+  const [openRevoked, setOpenRevoked] = useAtom(val_open_revoked)
+  const router = useRouter();
   return (
     <>
       <ButtonBack link="/dashboard/project-status" />
       <PageHeader title={title} date="23 February 2023" number={id} />
       <Box mt={20}>
         <Group position="right">
-          {id == "111" && 
-            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />}>
+          {(id == "111" || id=="222" || id=="333") &&
+            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />} onClick={()=>router.push(`/dashboard/project/${id}/edit`)}>
               EDIT
             </Button>}
-          {id == "222" && 
-            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />}>
-              EDIT
-            </Button>}
-          {id == "333" && 
-            <Button w={150} color="gray" leftIcon={<MdModeEditOutline size="1rem" />}>
-              EDIT
-            </Button>}
+          {id == "444" &&
+            <Group position="right">
+              <Button leftIcon={<IoIosCloseCircle size="20" />} color="gray.7" onClick={(() => setOpenRevoked(true))}>
+                REVOKE
+              </Button>
+              <Button
+                leftIcon={<MdEditDocument size="20" />}
+                color="gray.7"
+                onClick={()=> router.push('/dashboard/project/444/update')}
+              >
+                UPDATE
+              </Button>
+            </Group>
+          }
         </Group>
       </Box>
       <Box pt={20}>
@@ -186,8 +202,26 @@ export function DetailProjectStatus({ id }: { id: string }) {
             </Box>
           </Box>
         </Box>
-      
       </Box>
+      <ModalRevoked />
+    </>
+  );
+}
+
+
+export function ModalRevoked() {
+  const [openRevoked, setOpenRevoked] = useAtom(val_open_revoked)
+  return (
+    <>
+      <Modal
+        size={"md"}
+        opened={openRevoked}
+        onClose={() => openRevoked}
+        centered
+        withCloseButton={false}
+      >
+        <ModalCloseRevoked closeRevoked={(() => setOpenRevoked(false))} />
+      </Modal>
     </>
   );
 }

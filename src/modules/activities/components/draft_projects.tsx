@@ -1,10 +1,12 @@
 "use client";
 import { COLOR } from "@/modules/_global";
 import { ActionIcon, Box, Group, Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 export function DraftProjects() {
+  const router = useRouter();
   return (
     <>
       <Box
@@ -25,19 +27,25 @@ export function DraftProjects() {
         >
           <Group position="apart">
             <Box pl={30}>
-            <Text fw={700} fz={25}>
-              DRAFT PROJECTS
-            </Text>
+              <Text fw={700} fz={25}>
+                DRAFT PROJECTS
+              </Text>
             </Box>
-            <Box pr={30} pl={{base: 100}}>
-            <Text fz={40} fw={700}>
-              50
-            </Text>
+            <Box pr={30} pl={{ base: 100 }}>
+              <Text fz={40} fw={700}>
+                50
+              </Text>
             </Box>
           </Group>
         </Box>
-        <Box style={{cursor: "pointer"}}>
-          <Group position="right" pt={10} pb={10}>
+        <Group position="right">
+          <Group
+            position="right"
+            pt={10}
+            pb={10}
+            style={{ cursor: "pointer" }}
+            onClick={() => router.push("/dashboard/project/draft")}
+          >
             <Text fz={10} color="white">
               Detail Draft Project
             </Text>
@@ -45,7 +53,7 @@ export function DraftProjects() {
               <BsFillArrowRightCircleFill />
             </ActionIcon>
           </Group>
-        </Box>
+        </Group>
       </Box>
     </>
   );

@@ -126,7 +126,7 @@ function ItemCheckout() {
         </Box>
         <Grid pt={20}>
         <Grid.Col md={3} sm={12}>
-          <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/create-project")}>
+          <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/project/create")}>
             CHECKOUT
           </Button>
         </Grid.Col>

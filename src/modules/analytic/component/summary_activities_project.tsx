@@ -1,9 +1,12 @@
 'use client'
 
 import { COLOR } from "@/modules/_global"
-import { Box, Grid, Text } from "@mantine/core"
+import { ActionIcon, Box, Grid, Group, Text } from "@mantine/core"
+import { useRouter } from "next/navigation"
+import { HiOutlineChevronRight } from "react-icons/hi";
 
 export function SummaryProject() {
+    const router = useRouter();
     return (
         <>
             <Box
@@ -15,9 +18,14 @@ export function SummaryProject() {
                 px={20}
                 my={10}
             >
-                <Text color="white" fw={700} fz={15}>
-                    PROJECTS
-                </Text>
+                <Group position="apart">
+                    <Text color="white" fw={700} fz={15}>
+                        PROJECTS
+                    </Text>
+                    <ActionIcon onClick={() => router.push("/dashboard/activities-analytic/project")} color="dark">
+                        <HiOutlineChevronRight size="25" />
+                    </ActionIcon>
+                </Group>
             </Box>
             <Box pb={10}>
                 <Grid>

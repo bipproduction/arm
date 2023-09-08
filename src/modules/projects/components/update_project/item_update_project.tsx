@@ -32,47 +32,76 @@ function ItemUpdateProject() {
   return (
     <>
       <Box pt={20}>
-        <Box
+      <Box
           sx={{
             backgroundColor: COLOR.AbuMuda,
-            padding: 15,
+            padding: 5,
             borderRadius: 5,
           }}
+          px={20}
+          mb={10}
+          py={20}
         >
-          <Box ref={focusTrapRef}>
-            <Divider
-              my="xs"
-              label={
-                <Text fw={700} fz={14} color="dark.9">
-                  DETAIL PROJECT
-                </Text>
-              }
-              size="md"
-              color="dark"
-            />
-            <Box pt={10}>
-              <Stack>
-                <Text color="gray.0">Event : We The Fest</Text>
-                <Text color="gray.0">Location : Jakarta Selatan</Text>
-                <Text color="gray.0">Date : 23 May 2023</Text>
-                <Text color="gray.0">Name : PT. Mekar Jaya</Text>
-                <Text color="gray.0">
-                  .......... : ........... ......... ........... ...........
-                </Text>
-                <Text color="gray.0">
-                  .......... : ........... ......... ........... ...........
-                </Text>
-                <Text color="gray.0">
-                  .......... : ........... ......... ........... ...........
-                </Text>
-                <Text color="gray.0">
-                  .......... : ........... ......... ........... ...........
-                </Text>
-                <Text color="gray.0">
-                  .......... : ........... ......... ........... ...........
-                </Text>
-              </Stack>
-            </Box>
+          <Divider
+            mb={5}
+            label={
+              <Text fw={700} fz={17} color="dark.9">
+                Detail Project
+              </Text>
+            }
+            size="md"
+            color="dark"
+          />
+          <Box pt={10}>
+            <Text>Event : We The Fest</Text>
+            <Text>Location : Jakarta Selatan</Text>
+            <Text>Date : 23 May 2023</Text>
+            <Text>Name : PT. Mekar Jaya</Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
+            <Text>
+              .......... : ........... ......... ........... ...........
+            </Text>
           </Box>
         </Box>
       </Box>
@@ -109,7 +138,7 @@ function ItemUpdateProject() {
                 <Group>
                   <Box>
                     <Image
-                      src={"../../img/meja.jpeg"}
+                      src={"/img/meja.jpeg"}
                       radius={10}
                       maw={{ base: 100, sm: 200 }}
                       mx="auto"
@@ -168,6 +197,7 @@ function ItemUpdateProject() {
           px={20}
           mb={10}
           py={20}
+          ref={focusTrapRef}
         >
           <Divider
             mb={5}

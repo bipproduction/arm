@@ -1,10 +1,20 @@
 "use client";
 import { COLOR } from "@/modules/_global";
-import { ActionIcon, Box, Center, Grid, Group, SimpleGrid, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Center,
+  Grid,
+  Group,
+  SimpleGrid,
+  Text,
+} from "@mantine/core";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 export function ProjectsStatus() {
+  const router = useRouter();
   return (
     <>
       <Box pt={30}>
@@ -32,8 +42,15 @@ export function ProjectsStatus() {
                     80
                   </Text>
                 </Box>
-                <Box style={{ cursor: "pointer" }}>
-                  <Group position="right" pt={22} pb={10} pr={20}>
+                <Group position="right">
+                  <Group
+                    position="right"
+                    pt={22}
+                    pb={10}
+                    pr={20}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => router.push("/dashboard/project/status")}
+                  >
                     <Text fz={10} color="dark">
                       Detail Project Status
                     </Text>
@@ -41,7 +58,7 @@ export function ProjectsStatus() {
                       <BsFillArrowRightCircleFill />
                     </ActionIcon>
                   </Group>
-                </Box>
+                </Group>
               </Box>
             </Grid.Col>
             <Grid.Col md={3} lg={3}>
