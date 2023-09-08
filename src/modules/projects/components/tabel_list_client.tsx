@@ -96,7 +96,7 @@ function TabelListClient() {
         <Center>
           <ActionIcon
             color="dark"
-            onClick={() => router.push(`/dashboard/create-project`)}
+            onClick={() => router.push(`/dashboard/project/create`)}
           >
             <MdOutlineCreateNewFolder size="25" />
           </ActionIcon>

@@ -9,7 +9,7 @@ function AddAssets () {
   return (
     <>
       <Stack>
-        <ButtonBack link="/dashboard/create-project"/>
+        <ButtonBack link="/dashboard/project/create"/>
         <PageSubTitle text="ADD ASSETS"/>
       </Stack>
       <Box>
