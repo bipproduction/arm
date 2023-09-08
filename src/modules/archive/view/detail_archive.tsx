@@ -22,13 +22,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { MdOutlineNoteAlt } from "react-icons/md";
 import ModalArchiveView from "./modal_archive";
-
-const val_archive = atomWithStorage("val_archive", false)
+import { isArchiveTamplate } from "../val/idModalArchive";
 
 export function DetailArchive({ id }: { id: string }) {
   const [opened, { toggle }] = useDisclosure(false);
+
   const router = useRouter();
-  const [openArchive, setOpenArchive] = useAtom(val_archive)
+  const [valOpenArchive, setOpenArchive] = useAtom(isArchiveTamplate);
   return (
     <>
       <Stack>
@@ -40,10 +40,7 @@ export function DetailArchive({ id }: { id: string }) {
         />
       </Stack>
       <Group position="right" pt={20}>
-        <Button
-          color={"gray.7"}
-          onClick={() => setOpenArchive(true)}
-        >
+        <Button color={"gray.7"} onClick={() => setOpenArchive(true)}>
           USE TEMPLATE
         </Button>
       </Group>
@@ -173,22 +170,15 @@ export function DetailArchive({ id }: { id: string }) {
           </Box>
         </Box>
       </Box>
-      <ModalArchive/>
-    </>
-  );
-}
-export function ModalArchive() {
-  const [openArchive, setOpenArchive] = useAtom(val_archive)
-  const router = useRouter();
-  return (
-    <>
       <Modal
-        opened={openArchive}
-        onClose={() => openArchive}
+        size={"md"}
+        opened={valOpenArchive}
+        onClose={() => setOpenArchive(false)}
         centered
         withCloseButton={false}
+        closeOnClickOutside={false}
       >
-        <ModalArchiveView closeArchive={() => setOpenArchive(false)} />
+<ModalArchiveView/>
       </Modal>
     </>
   );

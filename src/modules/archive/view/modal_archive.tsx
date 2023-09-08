@@ -1,9 +1,22 @@
 import { Alert, Box, Button, Grid, Text } from '@mantine/core';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import toast from 'react-simple-toasts';
+import "react-simple-toasts/dist/theme/dark.css"
+import { isArchiveTamplate } from '../val/idModalArchive';
+const val_archive = atomWithStorage("val_archive", false)
 
-export default function ModalArchiveView({closeArchive}: any) {
+
+export default function ModalArchiveView() {
+  const [openArchive, setOpenArchive] = useAtom(isArchiveTamplate)
   const router = useRouter()
+  function archiveCreate() {
+    toast("Success", {theme: "dark"})
+    router.push('/dashboard/create-project')
+    setOpenArchive(false)
+  }
   return (
    <>
          <Box>
@@ -17,7 +30,7 @@ export default function ModalArchiveView({closeArchive}: any) {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={() => closeArchive(false)}
+                onClick={() => setOpenArchive(false)}
               >
                 NO
               </Button>
@@ -27,7 +40,7 @@ export default function ModalArchiveView({closeArchive}: any) {
                 radius={10}
                 color="gray.7"
                fullWidth
-               onClick={() => router.push(`/dashboard/create-project`)}
+               onClick={archiveCreate}
               >
                 YES
               </Button>
