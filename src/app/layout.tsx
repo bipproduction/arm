@@ -1,5 +1,10 @@
 import RootStyleRegistry from './emotion';
 
+export const metadata = {
+  title: 'A.R.M - Login',
+  description: 'Activation Resources Management',
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (

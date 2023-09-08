@@ -9,7 +9,7 @@
     - Bills & Reimbursements : /dashboard/bills
     - Insight : /dashboard/insight
     - Help & Support : /dashboard/help
-    - Create project : /dashboard/create-project
+    - Create project : /dashboard/project/create
     - Recent activities : /dashboard/recent-activity
     - List draft projects : /dashboard/project/draft
     - List project status : /dashboard/project/status
