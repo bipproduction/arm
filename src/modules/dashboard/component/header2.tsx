@@ -9,6 +9,7 @@ import { menuDashboard } from "../val/data_menu"
 import { usePathname, useRouter } from "next/navigation"
 import { useMediaQuery, useViewportSize } from "@mantine/hooks"
 import Notification from "./notification"
+import ProfileHeader from "./profile"
 
 const data = menuDashboard
 const useStyles = createStyles((theme) => ({
@@ -110,7 +111,7 @@ export function HeaderDashboard2() {
                                 <BsFillCartFill size="20" />
                             </ActionIcon>
                             <Notification/>
-                            <FaUserCircle size="20" />
+                            <ProfileHeader/>
                         </Group>
                     </Group>
                 </Box>
