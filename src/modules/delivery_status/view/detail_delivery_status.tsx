@@ -1,18 +1,32 @@
-"use client"
-import { ButtonBack, COLOR, PageHeader } from '@/modules/_global';
-import { ActionIcon, Box, Collapse, Divider, Group, Image, Text, Textarea } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import React from 'react';
-import { MdOutlineNoteAlt } from 'react-icons/md';
+"use client";
+import { ButtonBack, COLOR, PageHeader } from "@/modules/_global";
+import {
+  ActionIcon,
+  Box,
+  Collapse,
+  Divider,
+  Group,
+  Image,
+  Text,
+  Textarea,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import React from "react";
+import { MdOutlineNoteAlt } from "react-icons/md";
 
-export function DetailDeliveryStatus({id} : {id: string}) {
-  let status = "ON PROCESS" 
-  if (id == "222") status = "DELIVERED"
+export function DetailDeliveryStatus({ id }: { id: string }) {
+  let status = "ON PROCESS";
+  if (id == "222") status = "DELIVERED";
   const [opened, { toggle }] = useDisclosure(false);
   return (
     <>
-    <ButtonBack link="/dashboard/delivery-status" />
-      <PageHeader title={"DELIVERY STATUS"} date="23 February 2023" number={id} status={status} />
+      <ButtonBack link="/dashboard/delivery-status" />
+      <PageHeader
+        title={"DELIVERY STATUS"}
+        date="23 February 2023"
+        number={id}
+        status={status}
+      />
       <Box pt={20}>
         <Box
           sx={{
@@ -172,4 +186,3 @@ export function DetailDeliveryStatus({id} : {id: string}) {
     </>
   );
 }
-
