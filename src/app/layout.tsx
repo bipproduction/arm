@@ -1,7 +1,7 @@
 import RootStyleRegistry from './emotion';
 
 export const metadata = {
-  title: 'A.R.M - Login',
+  title: 'ARM - Login',
   description: 'Activation Resources Management',
 }
 

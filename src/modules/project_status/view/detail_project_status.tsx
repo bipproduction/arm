@@ -162,7 +162,7 @@ export function DetailProjectStatus({ id }: { id: string }) {
                     </Box>
                     <Box>
                       <Text fw={700} color="white" fz={{ sm: 20, base: 10 }}>
-                        THE MACALLAN
+                        Item
                       </Text>
                       <Text color="gray.5" fz={{ sm: 13, base: 9 }}>
                         Harmony 2

@@ -63,7 +63,7 @@ function ListCart() {
               <Grid.Col span={4}>
                 <Box>
                   <Text fw={700} fz={{ sm: 20, base: 10 }}>
-                    THE MACALLAN
+                    Item
                   </Text>
                   <Text color="dark.3" fz={{ sm: 13, base: 9 }}>
                     Harmony 2

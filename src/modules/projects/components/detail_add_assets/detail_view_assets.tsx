@@ -18,7 +18,7 @@ function DetailViewAssets() {
         <Box >
         <Group position="apart" pt={20}>
           <Box>
-            <Text fw={700}>THE MACALLAN</Text>
+            <Text fw={700}>Item</Text>
           </Box>
           <Group>
             <HiXCircle size="30" />

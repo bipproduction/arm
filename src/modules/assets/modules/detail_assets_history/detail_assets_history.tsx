@@ -77,7 +77,7 @@ export default function DetailAssetsHistory() {
                 <Card.Section className={classes.footer}>
                   <Group position="apart" pt={10}>
                     <Group fw={700}>
-                      <Text>THE MACALLAN</Text>
+                      <Text>Item</Text>
                     </Group>
                     <Group>
                       <HiCheckCircle size="30" />

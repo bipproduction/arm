@@ -98,7 +98,7 @@ export function HeaderDashboard2() {
                             <Box>
                                 <Box>
                                     <Text fz={25} fw={700}>
-                                        A.R.M
+                                        ARM
                                     </Text>
                                 </Box>
                             </Box>

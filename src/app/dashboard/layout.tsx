@@ -4,7 +4,7 @@ import Loading from "./loading";
 
 
 export const metadata = {
-    title: 'A.R.M - Dashboard',
+    title: 'ARM - Dashboard',
     description: 'Activation Resources Management',
 }
 

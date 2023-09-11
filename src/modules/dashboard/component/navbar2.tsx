@@ -1,6 +1,6 @@
 'use client'
 
-import { NavLink, Navbar, ScrollArea, createStyles, getStylesRef } from "@mantine/core"
+import { NavLink, Navbar, ScrollArea, Text, Title, createStyles, getStylesRef } from "@mantine/core"
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { MdSettings } from "react-icons/md";
@@ -97,6 +97,9 @@ export function NavbarDashboard2() {
                             />
                         );
                     })}
+                </Navbar.Section>
+                <Navbar.Section>
+                    <Text>©2023 PT Mega Wira Mandiri & PT Bali Interaktif Perkasa</Text>
                 </Navbar.Section>
             </Navbar>
         </>
