@@ -1,5 +1,4 @@
 export { Pengaman } from './lib/pengaman'
-export { prisma } from './lib/prisma'
 
 export { isMobile } from './val/isMobile'
 
