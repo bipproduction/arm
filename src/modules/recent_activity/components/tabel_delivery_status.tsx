@@ -49,7 +49,7 @@ const dataDeliveryStatus = [
 ];
 
 function TabelDeliveryStatus() {
-  const router = useRouter()
+  const router = useRouter();
   const deliveryTable = dataDeliveryStatus.map((datatab) => (
     <tr key={datatab.id}>
       <td>{datatab.id}</td>
@@ -59,7 +59,12 @@ function TabelDeliveryStatus() {
       <td>{datatab.status}</td>
       <td>
         <Center>
-          <ActionIcon onClick={() => router.push(`/dashboard/delivery-status/` + datatab.no)} color="dark">
+          <ActionIcon
+            onClick={() =>
+              router.push(`/dashboard/delivery-status/` + datatab.no)
+            }
+            color="dark"
+          >
             <BiSolidUserDetail size="25" />
           </ActionIcon>
         </Center>
