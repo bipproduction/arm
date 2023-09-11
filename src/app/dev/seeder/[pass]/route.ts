@@ -1,4 +1,5 @@
-import { prisma, seederProjectStatus, seederUserDev, seederUserRole } from "@/modules/_global"
+import { seederProjectStatus, seederUserDev, seederUserRole } from "@/modules/_global"
+import prisma from "@/modules/_global/lib/prisma"
 import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
@@ -40,80 +41,42 @@ export async function GET(request: Request, { params }: { params: { pass: string
         })
     }
 
-    for (let e of seederUserDev) {
-        await prisma.user.upsert({
-            where: {
-                id: "adminWibuDeveloperARM"
-            },
-            create: {
-                id: "adminWibuDeveloperARM",
-                idUserRole: 3,
-            },
-            update: {
-                id: "adminWibuDeveloperARM",
-                idUserRole: 3,
-            }
-        });
-
-        await prisma.profile.upsert({
-                where: {
-                    id: "adminWibuDeveloperARM"
-                },
-                create: {
-                    id: "adminWibuDeveloperARM",
-                    idUser: "adminWibuDeveloperARM",
-                    name: "Lukman",
-                    phone: "6287701790942",
-                    email: "liukman@gmail.com",
-                    address: "Denpasar"
-                },
-                update: {
-                    id: "adminWibuDeveloperARM",
-                    idUser: "adminWibuDeveloperARM",
-                    name: "Lukman",
-                    phone: "6287701790942",
-                    email: "liukman@gmail.com",
-                    address: "Denpasar"
-                }
-            })
+    await prisma.user.upsert({
+        where: {
+            id: "adminWibuDeveloperARM"
+        },
+        create: {
+            id: "adminWibuDeveloperARM",
+            idUserRole: 3,
+        },
+        update: {
+            id: "adminWibuDeveloperARM",
+            idUserRole: 3,
         }
+    });
 
-    // const userDev = await prisma.user.upsert({
-    //     where: {
-    //         id: "adminWibuDeveloperARM"
-    //     },
-    //     create: {
-    //         id: "adminWibuDeveloperARM",
-    //         idUserRole: 3,
-    //     },
-    //     update: {
-    //         id: "adminWibuDeveloperARM",
-    //         idUserRole: 3,
-    //     }
-    // })
-
-    // const profileDev = await prisma.profile.upsert({
-    //     where: {
-    //         id: "adminWibuDeveloperARM"
-    //     },
-    //     create: {
-    //         id: "adminWibuDeveloperARM",
-    //         idUser: "adminWibuDeveloperARM",
-    //         name: "Lukman",
-    //         phone: "6287701790942",
-    //         email: "liukman@gmail.com",
-    //         address: "Denpasar"
-    //     },
-    //     update: {
-    //         id: "adminWibuDeveloperARM",
-    //         idUser: "adminWibuDeveloperARM",
-    //         name: "Lukman",
-    //         phone: "6287701790942",
-    //         email: "liukman@gmail.com",
-    //         address: "Denpasar"
-    //     }
-    // })
+    await prisma.profile.upsert({
+        where: {
+            id: "adminWibuDeveloperARM"
+        },
+        create: {
+            id: "adminWibuDeveloperARM",
+            idUser: "adminWibuDeveloperARM",
+            name: "Lukman",
+            phone: "6287701790942",
+            email: "liukman@gmail.com",
+            address: "Denpasar"
+        },
+        update: {
+            id: "adminWibuDeveloperARM",
+            idUser: "adminWibuDeveloperARM",
+            name: "Lukman",
+            phone: "6287701790942",
+            email: "liukman@gmail.com",
+            address: "Denpasar"
+        }
+    })
 
 
     return NextResponse.json({ success: true })
-    }
+}
