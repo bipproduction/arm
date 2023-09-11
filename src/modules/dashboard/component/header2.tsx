@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionIcon, Box, Burger, Drawer, Flex, Group, Header, MediaQuery, NavLink, Text, TextInput, Title, createStyles, getStylesRef } from "@mantine/core"
+import { ActionIcon, Box, Burger, Drawer, Flex, Group, Header, Image, MediaQuery, NavLink, Text, TextInput, Title, createStyles, getStylesRef } from "@mantine/core"
 import { useState } from "react"
 import { BsFillCartFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
@@ -97,9 +97,10 @@ export function HeaderDashboard2() {
                             </MediaQuery> */}
                             <Box>
                                 <Box>
-                                    <Text fz={25} fw={700}>
+                                    {/* <Text fz={25} fw={700}>
                                         ARM
-                                    </Text>
+                                    </Text> */}
+                                    <Image width={100} src={"/img/logo.png"} alt="" />
                                 </Box>
                             </Box>
                         </Group>
