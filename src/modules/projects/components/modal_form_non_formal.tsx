@@ -1,35 +1,26 @@
 "use client";
-import {
-  Alert,
-  Box,
-  Button,
-  Center,
-  Grid,
-  Group,
-  Text,
-  Textarea,
-} from "@mantine/core";
+import { Alert, Box, Button, Grid, Text, Textarea } from "@mantine/core";
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { isModalUpdateDraft } from "../../val/isModalUpdateDraft";
 import toast from "react-simple-toasts";
+import { useRouter } from "next/navigation";
+import "react-simple-toasts/dist/theme/dark.css";
+import { isModalFormNonFormal } from "../val/idModalFormNonFormal";
 
-function ModalNote() {
+function ModalFormNonFormal() {
   const router = useRouter();
-  const [openUPdateDraft, setOpenUpdateDraft] = useAtom(isModalUpdateDraft)
-  function updateDraft() {
-    toast("Success", {theme: "dark"})
-    router.push("/dashboard/project/444")
-    setOpenUpdateDraft(false)
+  const [openNonFormal, setOpenNonFormal] = useAtom(isModalFormNonFormal);
+  function createNonFOrmal() {
+    toast("Success", { theme: "dark" });
+    router.push(`/dashboard/recent-activity`);
+    setOpenNonFormal(false);
   }
-
   return (
     <>
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO UPDATE STATUS THIS DRAFT?
+            ARE YOU SURE TO CREATE THIS PROJECT?
           </Text>
           <Textarea mb={20} placeholder="NOTE" />
           <Grid>
@@ -38,7 +29,7 @@ function ModalNote() {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={() => setOpenUpdateDraft(false)}
+                onClick={() => setOpenNonFormal(false)}
               >
                 NO
               </Button>
@@ -48,7 +39,7 @@ function ModalNote() {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={updateDraft}
+                onClick={createNonFOrmal}
               >
                 YES
               </Button>
@@ -60,4 +51,4 @@ function ModalNote() {
   );
 }
 
-export default ModalNote;
+export default ModalFormNonFormal;

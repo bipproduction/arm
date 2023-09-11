@@ -15,6 +15,7 @@ import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import DetailViewAssets from "./detail_view_assets";
+import { useRouter } from "next/navigation";
 
 const img = [
   {
@@ -68,27 +69,31 @@ const img = [
 ];
 
 function AllItemAssets() {
-  const [opened, { open, close }] = useDisclosure(false);
+  const router = useRouter();
   return (
     <>
-     <Modal opened={opened} onClose={close} centered size={"md"}>
-        <DetailViewAssets/>
-      </Modal>
       <Box pt={30}>
         <Box pb={20}>
-        <Checkbox label="All"/>
+          <Checkbox label="All" />
         </Box>
         <Flex
           gap={{ base: "sm", sm: "lg" }}
-          justify={{  base: "center" }}
+          justify={{ base: "center" }}
           wrap="wrap"
         >
           {img.map((item) => (
-            <Box key={item.id} >
-              <Paper shadow="xl" p={20} radius={10} w={318} h={320} >
+            <Box key={item.id}>
+              <Paper shadow="xl" p={20} radius={10} w={318} h={320}>
                 <Checkbox />
-                <Box onClick={open} style={{cursor: "pointer"}}>
-                <Image src={item.image} maw={200} mx="auto" alt="a" />
+                <Box
+                  onClick={() =>
+                    router.push(
+                      "/dashboard/detail-add-assets/detail-view-assets"
+                    )
+                  }
+                  style={{ cursor: "pointer" }}
+                >
+                  <Image src={item.image} maw={200} mx="auto" alt="a" />
                 </Box>
                 <Box pt={20}>
                   <Text fw={700} fz={25}>

@@ -11,7 +11,7 @@ function DetailAddAssets() {
         <ButtonBack link="/dashboard/add-assets" />
         <PageSubTitle text="ADD ASSETS" />
         <Box>
-          <AllItemAssets/>
+          <AllItemAssets />
         </Box>
       </Stack>
     </>

@@ -41,11 +41,11 @@ const img = [
 ];
 
 function ItemAssets() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <>
       <Box pt={30}>
-        <Grid grow  >
+        <Grid grow>
           <Grid.Col md={3} lg={3} sm={3} xs={3} xl={3}>
             <Button color="gray" fullWidth>
               Mobile Bar
@@ -81,7 +81,7 @@ function ItemAssets() {
                 key={item.id}
                 shadow="xl"
                 onClick={() => router.push(item.link)}
-                style={{cursor: "pointer"}}
+                style={{ cursor: "pointer" }}
                 w={318}
                 h={360}
               >
