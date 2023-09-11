@@ -58,77 +58,82 @@ export default function HistoryScan() {
           borderRadius: 5,
         }}
       >
-      <Box pt={30} pb={30}>
-        <Container>
-          <Group position="center">
-            <Card
-              withBorder
-              padding="lg"
-              radius="md"
-              className={classes.card}
-              w={400}
-            >
-              <Card.Section mb="sm" pt={20}>
-                <Image
-                  src="../../../img/meja.jpeg"
-                  alt="Meja portable"
-                  maw={200}
-                  mx="auto"
-                />
-              </Card.Section>
-              <Card.Section className={classes.footer}>
-                <Group position="apart" pt={10}>
-                  <Group fw={700}>
-                    <Text>THE MACALLAN</Text>
+        <Box pt={30} pb={30}>
+          <Container>
+            <Group position="center">
+              <Card
+                withBorder
+                padding="lg"
+                radius="md"
+                className={classes.card}
+                w={400}
+              >
+                <Card.Section mb="sm" pt={20}>
+                  <Image
+                    src="../../../img/meja.jpeg"
+                    alt="Meja portable"
+                    maw={200}
+                    mx="auto"
+                  />
+                </Card.Section>
+                <Card.Section className={classes.footer}>
+                  <Group position="apart" pt={10}>
+                    <Group fw={700}>
+                      <Text>THE MACALLAN</Text>
+                    </Group>
                   </Group>
-                </Group>
-                <Box pt={20}>
-                  <Button fullWidth radius={10} color="gray.7" onClick={toggle}>
-                    HISTORY
-                  </Button>
+                  <Box pt={20}>
+                    <Button
+                      fullWidth
+                      radius={10}
+                      color="gray.7"
+                      onClick={toggle}
+                    >
+                      HISTORY
+                    </Button>
 
-                  <Box pt={10}>
-                    <Collapse in={opened}>
-                      <Box
-                        sx={{
-                          backgroundColor: COLOR.AbuMuda,
-                          borderRadius: 10,
-                          padding: 20,
-                        }}
-                      >
-                        <Text>Event : We The Fest</Text>
-                        <Text>Location : Jakarta Selatan</Text>
-                        <Text>Date : 23 May 2023</Text>
-                        <Text>Name : PT. Mekar Jaya</Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                      </Box>
-                    </Collapse>
+                    <Box pt={10}>
+                      <Collapse in={opened}>
+                        <Box
+                          sx={{
+                            backgroundColor: COLOR.AbuMuda,
+                            borderRadius: 10,
+                            padding: 20,
+                          }}
+                        >
+                          <Text>Event : We The Fest</Text>
+                          <Text>Location : Jakarta Selatan</Text>
+                          <Text>Date : 23 May 2023</Text>
+                          <Text>Name : PT. Mekar Jaya</Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                        </Box>
+                      </Collapse>
+                    </Box>
                   </Box>
-                </Box>
-              </Card.Section>
-            </Card>
-          </Group>
-        </Container>
-      </Box>
+                </Card.Section>
+              </Card>
+            </Group>
+          </Container>
+        </Box>
       </Box>
     </>
   );

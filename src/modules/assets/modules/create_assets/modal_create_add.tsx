@@ -4,7 +4,7 @@ import React from "react";
 import { isModalAssetsView } from "../val/idModalAssets";
 import { useAtom } from "jotai";
 import toast from "react-simple-toasts";
-import "react-simple-toasts/dist/theme/dark.css"
+import "react-simple-toasts/dist/theme/dark.css";
 function ModalCreateAdd() {
   const [openCreateAdd, setOpenCreateAdd] = useAtom(isModalAssetsView);
   const router = useRouter();

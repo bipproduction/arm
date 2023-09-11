@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import { useAtom } from "jotai";
 import React from "react";

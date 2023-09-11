@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function ScanBarcode() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <>
       <Stack>
@@ -37,7 +37,16 @@ export default function ScanBarcode() {
                 />
               </Box>
               <Box pt={10}>
-                <Button radius={10} fullWidth color="gray.7" onClick={() => router.push("/dashboard/assets/scan/history-scan")}>SCAN</Button>
+                <Button
+                  radius={10}
+                  fullWidth
+                  color="gray.7"
+                  onClick={() =>
+                    router.push("/dashboard/assets/scan/history-scan")
+                  }
+                >
+                  SCAN
+                </Button>
               </Box>
             </Box>
           </Container>

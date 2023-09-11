@@ -5,7 +5,7 @@ import { isModalBarcode } from "../../val/isModalBarcode";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
-import "react-simple-toasts/dist/theme/dark.css"
+import "react-simple-toasts/dist/theme/dark.css";
 
 export default function ModalViewBarcode() {
   const [openBarcode, setOpenBarcode] = useAtom(isModalBarcode);
@@ -34,7 +34,12 @@ export default function ModalViewBarcode() {
               </Button>
             </Grid.Col>
             <Grid.Col span={6}>
-              <Button radius={10} color="gray.7" fullWidth onClick={viewBarcode}>
+              <Button
+                radius={10}
+                color="gray.7"
+                fullWidth
+                onClick={viewBarcode}
+              >
                 YES
               </Button>
             </Grid.Col>
