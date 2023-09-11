@@ -20,7 +20,7 @@ function RecentActivity() {
         <TabelProjectStatus />
       </Box>
       <Box pt={20}>
-        <TabelDeliveryStatus/>
+        <TabelDeliveryStatus />
       </Box>
     </>
   );
