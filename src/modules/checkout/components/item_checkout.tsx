@@ -9,19 +9,24 @@ import {
   Grid,
   Group,
   Image,
+  Modal,
   Select,
   Text,
   Textarea,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { MdOutlineNoteAlt } from "react-icons/md";
+import { isModalCheckout } from "../val/isModalCheckout";
+import ModalCheckout from "./modal_checkout";
 
 function ItemCheckout() {
   const [opened, { toggle }] = useDisclosure(false);
-  const router = useRouter()
+  const router = useRouter();
+  const [valOpenCheckout, setOpenCheckout] = useAtom(isModalCheckout);
   return (
     <>
       <Box pt={30}>
@@ -102,7 +107,12 @@ function ItemCheckout() {
                 </Group>
                 <Group>
                   <Box>
-                    <Text fw={700} fz={{sm: 40, base: 20}} pr={40} color="white">
+                    <Text
+                      fw={700}
+                      fz={{ sm: 40, base: 20 }}
+                      pr={40}
+                      color="white"
+                    >
                       x2
                     </Text>
                   </Box>
@@ -124,14 +134,29 @@ function ItemCheckout() {
             </Box>
           </Box>
         </Box>
-        <Grid pt={20}>
-        <Grid.Col md={3} sm={12}>
-          <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/project/create")}>
-            CHECKOUT
-          </Button>
-        </Grid.Col>
-      </Grid>
+        <Grid pt={20} pb={60}>
+          <Grid.Col md={3} sm={12}>
+            <Button
+              fullWidth
+              radius={10}
+              color="gray.7"
+              onClick={() => setOpenCheckout(true)}
+            >
+              CHECKOUT
+            </Button>
+          </Grid.Col>
+        </Grid>
       </Box>
+      <Modal
+        size={"md"}
+        opened={valOpenCheckout}
+        onClose={() => setOpenCheckout(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalCheckout />
+      </Modal>
     </>
   );
 }
