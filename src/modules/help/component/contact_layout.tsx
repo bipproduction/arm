@@ -20,9 +20,14 @@ import { useRouter } from "next/navigation";
 import { BsFillTelephoneFill, BsTelephone } from "react-icons/bs";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdAlternateEmail, MdLocationOn } from "react-icons/md";
+import toast from "react-simple-toasts";
+import "react-simple-toasts/dist/theme/dark.css";
 
 export function ContactLayout() {
-  const router = useRouter()
+  const router = useRouter();
+  function sendemail() {
+    toast("Success", {theme: "dark"})
+  }
   return (
     <>
       <Box pt={20}>
@@ -62,7 +67,7 @@ export function ContactLayout() {
                   />
 
                   <Group position="right" mt="md">
-                    <Button color="gray.7">Send message</Button>
+                    <Button color="gray.7" onClick={sendemail}>Send message</Button>
                   </Group>
                 </Box>
               </Box>
@@ -126,7 +131,10 @@ export function ContactLayout() {
                   </UnstyledButton>
                 </Flex>
                 <Group pt={30} position="right">
-                  <Box style={{ cursor: "pointer" }} onClick={() => router.push("https://wa.me/6287701790942") }>
+                  <Box
+                    style={{ cursor: "pointer" }}
+                    onClick={() => router.push("https://wa.me/6287701790942")}
+                  >
                     <Image maw={60} src="../../img/wa.png" alt="wa" />
                   </Box>
                 </Group>
