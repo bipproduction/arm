@@ -77,11 +77,10 @@ function ListCart() {
                       </Text>
                       <MdOutlineNoteAlt />
                     </Group>
-                    </Box>
-                    <Collapse in={opened}>
-                      <Textarea />
-                    </Collapse>
                   </Box>
+                  <Collapse in={opened}>
+                    <Textarea />
+                  </Collapse>
                 </Box>
               </Flex>
             </Grid.Col>
@@ -117,19 +116,19 @@ function ListCart() {
             </Grid.Col>
           </Grid>
         </Box>
-      </Box>
+      </Box >
       <Grid pt={20} pb={60}>
-          <Grid.Col md={3} sm={12}>
-            <Button
-              fullWidth
-              radius={10}
-              color="gray.7"
-              onClick={() => router.push("/dashboard/checkout")}
-            >
-              SUBMIT
-            </Button>
-          </Grid.Col>
-        </Grid>
+        <Grid.Col md={3} sm={12}>
+          <Button
+            fullWidth
+            radius={10}
+            color="gray.7"
+            onClick={() => router.push("/dashboard/checkout")}
+          >
+            SUBMIT
+          </Button>
+        </Grid.Col>
+      </Grid>
     </>
   );
 }

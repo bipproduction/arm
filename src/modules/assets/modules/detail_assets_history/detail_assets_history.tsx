@@ -34,9 +34,8 @@ const useStyles = createStyles((theme) => ({
   footer: {
     padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
     marginTop: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 }));
 
@@ -121,28 +120,27 @@ export default function DetailAssetsHistory() {
                           <Text>
                             .......... : ........... ......... ...........
                             ...........
-                            </Text>
-                            <Text>
-                              .......... : ........... ......... ...........
-                              ...........
-                            </Text>
-                            <Text>
-                              .......... : ........... ......... ...........
-                              ...........
-                            </Text>
-                            <Text>
-                              .......... : ........... ......... ...........
-                              ...........
-                            </Text>
-                          </Box>
-                        </Collapse>
-                      </Box>
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                        </Box>
+                      </Collapse>
                     </Box>
-                  </Card.Section>
-                </Card>
-              </Group>
-            </Container>
-          </Box>
+                  </Box>
+                </Card.Section>
+              </Card>
+            </Group>
+          </Container>
         </Box>
       </Box>
     </>
