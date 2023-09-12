@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 export function DeliveryStatus() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Box pt={30}>
       <Box
@@ -41,8 +41,15 @@ export function DeliveryStatus() {
                   80
                 </Text>
               </Box>
-              <Group position="right" >
-                <Group position="right" pt={22} pb={10} style={{ cursor: "pointer" }} pr={20} onClick={() => router.push("/dashboard/delivery-status")}>
+              <Group position="right">
+                <Group
+                  position="right"
+                  pt={22}
+                  pb={10}
+                  style={{ cursor: "pointer" }}
+                  pr={20}
+                  onClick={() => router.push("/dashboard/delivery-status")}
+                >
                   <Text fz={10} color="dark">
                     Detail Delivery Status
                   </Text>
@@ -54,7 +61,7 @@ export function DeliveryStatus() {
             </Box>
           </Grid.Col>
           <Grid.Col md={3} lg={3}>
-            <Flex justify="center" align="center" h={"100%"} >
+            <Flex justify="center" align="center" h={"100%"}>
               <Box
                 sx={{
                   backgroundColor: "white",
@@ -64,7 +71,7 @@ export function DeliveryStatus() {
                 w={"100%"}
               >
                 <Text ta={"center"} fz={13} fw={700}>
-                ON PROCESS
+                  ON PROCESS
                 </Text>
                 <Text ta={"center"} fz={25} fw={700}>
                   10

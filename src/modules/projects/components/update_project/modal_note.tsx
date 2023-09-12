@@ -1,21 +1,60 @@
 "use client";
-import { Box, Button, Center, Group, Text, Textarea } from "@mantine/core";
+import {
+  Alert,
+  Box,
+  Button,
+  Center,
+  Grid,
+  Group,
+  Text,
+  Textarea,
+} from "@mantine/core";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { isModalUpdateDraft } from "../../val/isModalUpdateDraft";
+import toast from "react-simple-toasts";
 
-function ModalNote({closeMedia }: any) {
+function ModalNote() {
   const router = useRouter();
+  const [openUPdateDraft, setOpenUpdateDraft] = useAtom(isModalUpdateDraft)
+  function updateDraft() {
+    toast("Success", {theme: "dark"})
+    router.push("/dashboard/project/444")
+    setOpenUpdateDraft(false)
+  }
+
   return (
     <>
       <Box>
-        <Center>
-          <Text fw={700}>ARE YOU SURE TO UPDATE STATUS THIS DRAFT</Text>
-        </Center>
-          <Textarea mt={10} placeholder="Note"/>
-          <Group position="apart" pt={10}>
-            <Button radius={10} color="gray.7" w={150} onClick={() => closeMedia(false)}>NO</Button>
-            <Button radius={10}  color="gray.7" w={150} onClick={()=> router.push('/dashboard/project/444')}>YES</Button>
-          </Group>
+        <Alert color="gray" variant="outline">
+          <Text fw={700} ta={"center"} mb={20} mt={20}>
+            ARE YOU SURE TO UPDATE STATUS THIS DRAFT?
+          </Text>
+          <Textarea mb={20} placeholder="NOTE" />
+          <Grid>
+            <Grid.Col span={6}>
+              <Button
+                radius={10}
+                color="gray.7"
+                fullWidth
+                onClick={() => setOpenUpdateDraft(false)}
+              >
+                NO
+              </Button>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Button
+                radius={10}
+                color="gray.7"
+                fullWidth
+                onClick={updateDraft}
+              >
+                YES
+              </Button>
+            </Grid.Col>
+          </Grid>
+        </Alert>
       </Box>
     </>
   );

@@ -1,9 +1,47 @@
 "use client";
-import { Box, Button, Group, Image, Text } from "@mantine/core";
+import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
+import {
+  Box,
+  Button,
+  Card,
+  Center,
+  Checkbox,
+  Collapse,
+  Container,
+  Flex,
+  Grid,
+  Group,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+  createStyles,
+  rem,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import React from "react";
-import { HiXCircle } from "react-icons/hi";
+import { HiCheckCircle, HiXCircle } from "react-icons/hi";
+const useStyles = createStyles((theme) => ({
+  card: {
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+  },
 
-function DetailViewAssets() {
+  title: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  },
+
+  footer: {
+    padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
+    marginTop: theme.spacing.md,
+    borderTop: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+    }`,
+  },
+}));
+
+export default function DetailViewAssets() {
+  const { classes, theme } = useStyles();
   return (
     <>
       <Box p={30}>
@@ -19,28 +57,65 @@ function DetailViewAssets() {
         <Group position="apart" pt={20}>
           <Box>
             <Text fw={700}>Item</Text>
+      <Stack>
+        <ButtonBack />
+        <PageSubTitle text="DETAIL VIEW ASSETS" />
+      </Stack>
+      <Box pt={30}>
+        <Box
+          sx={{
+            border: "1px solid #CED4DA",
+            padding: 20,
+            borderRadius: 10,
+          }}
+        >
+          <Box p={30}>
+            <Container>
+              <Group position="center">
+                <Card
+                  withBorder
+                  padding="lg"
+                  radius="md"
+                  className={classes.card}
+                  w={400}
+                >
+                  <Card.Section mb="sm" pt={20}>
+                    <Image
+                      src="../../../img/meja.jpeg"
+                      alt="Meja portable"
+                      maw={200}
+                      mx="auto"
+                    />
+                  </Card.Section>
+                  <Card.Section className={classes.footer}>
+                    <Group position="apart" pt={10}>
+                      <Group fw={700}>
+                        <Text>THE MACALLAN</Text>
+                      </Group>
+                      <Group>
+                        <HiCheckCircle size="30" />
+                        <Box>
+                          <Text fz={8} fw={700}>
+                            CONDITIONS
+                          </Text>
+                          <Text fz={8} fw={700} color="red">
+                            GOOD CONDITION
+                          </Text>
+                        </Box>
+                      </Group>
+                    </Group>
+                  </Card.Section>
+                  <Group position="center" pt={20} pb={20}>
+                    <Button w={300} color="gray.6" radius={"lg"}>
+                      + Add To Cart
+                    </Button>
+                  </Group>
+                </Card>
+              </Group>
+            </Container>
           </Box>
-          <Group>
-            <HiXCircle size="30" />
-            <Box>
-              <Text fz={8} fw={700}>
-                CONDITIONS
-              </Text>
-              <Text fz={8} fw={700} color="red">
-                NEED REPARATIONS
-              </Text>
-            </Box>
-          </Group>
-        </Group>
         </Box>
-        <Group position="center" pt={50}>
-          <Button w={300} color="gray.6" radius={"lg"}>
-            + Add To Cart
-          </Button>
-        </Group>
       </Box>
     </>
   );
 }
-
-export default DetailViewAssets;

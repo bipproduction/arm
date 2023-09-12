@@ -23,16 +23,16 @@ import { atomWithStorage } from "jotai/utils";
 import React from "react";
 import { MdOutlineNoteAlt } from "react-icons/md";
 import ModalNote from "./modal_note";
-const val_open_modal = atomWithStorage("val_open_modal", false)
+import { isModalUpdateDraft } from "../../val/isModalUpdateDraft";
 
-function ItemUpdateProject() {
+export default function ItemUpdateProject() {
   const focusTrapRef = useFocusTrap();
   const [opened, { toggle }] = useDisclosure(false);
-  const [openModal, setOpenModal] = useAtom(val_open_modal)
+  const [valOpenUpdateDraft, setOpenUpdateDraft] = useAtom(isModalUpdateDraft)
   return (
     <>
       <Box pt={20}>
-      <Box
+        <Box
           sx={{
             backgroundColor: COLOR.AbuMuda,
             padding: 5,
@@ -216,36 +216,21 @@ function ItemUpdateProject() {
       </Box>
       <Grid pt={20}>
         <Grid.Col md={3} sm={12}>
-          <Button
-            fullWidth
-            radius={10}
-            color="gray.7"
-            onClick={() => setOpenModal(true)}
-          >
+          <Button fullWidth radius={10} color="gray.7" onClick={() => setOpenUpdateDraft(true)}>
             SUBMIT
           </Button>
         </Grid.Col>
       </Grid>
-      <ModalNoteStatus/>
+      <Modal 
+      size={"md"}
+      opened={valOpenUpdateDraft}
+      onClose={() => setOpenUpdateDraft(false)}
+      centered
+      withCloseButton={false}
+      closeOnClickOutside={false}
+      >
+        <ModalNote/>
+      </Modal>
     </>
   );
 }
-
-export function ModalNoteStatus() {
-  const [openModal, setOpenModal] = useAtom(val_open_modal)
-return(
-  <>
-  <Modal 
-  size={"md"}
-  opened={openModal}
-  onClose={() => setOpenModal(false)}
-  centered
-  withCloseButton={false}
-  >
-    <ModalNote closeMedia={() => setOpenModal(false)}/>
-  </Modal>
-  </>
-)
-}
-
-export default ItemUpdateProject;

@@ -1,5 +1,13 @@
 "use client";
-import { ActionIcon, Box, Center, Divider, Group, Table, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Center,
+  Divider,
+  Group,
+  Table,
+  Text,
+} from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { BiSolidUserDetail } from "react-icons/bi";
@@ -41,7 +49,7 @@ const dataProjectStatus = [
 ];
 
 function TabelProjectStatus() {
-  const router = useRouter()
+  const router = useRouter();
   const projectTable = dataProjectStatus.map((datatab) => (
     <tr key={datatab.id}>
       <td>{datatab.id}</td>
@@ -51,7 +59,10 @@ function TabelProjectStatus() {
       <td>{datatab.status}</td>
       <td>
         <Center>
-          <ActionIcon onClick={() => router.push(`/dashboard/project/`+datatab.no)} color="dark">
+          <ActionIcon
+            onClick={() => router.push(`/dashboard/project/` + datatab.no)}
+            color="dark"
+          >
             <BiSolidUserDetail size="25" />
           </ActionIcon>
         </Center>
@@ -65,7 +76,10 @@ function TabelProjectStatus() {
           <Box>
             <Text fw={700}>PROJECTS STATUS</Text>
           </Box>
-          <ActionIcon onClick={() => router.push("/dashboard/project/status")} color="dark">
+          <ActionIcon
+            onClick={() => router.push("/dashboard/project/status")}
+            color="dark"
+          >
             <HiOutlineChevronRight size="25" />
           </ActionIcon>
         </Group>

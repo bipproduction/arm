@@ -6,6 +6,7 @@ import {
   Divider,
   Grid,
   Group,
+  Modal,
   SimpleGrid,
   Stack,
   Text,
@@ -14,12 +15,16 @@ import {
   rem,
 } from "@mantine/core";
 import { useFocusTrap } from "@mantine/hooks";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { isModalFormFormal } from "../val/isModalFormFormal";
+import ModalFormFormal from "./modal_form_formal";
 
 function FormNormal() {
   const focusTrapRef = useFocusTrap();
   const router = useRouter();
+  const [valOpenFormal, setOpenFormal] = useAtom(isModalFormFormal);
   return (
     <>
       <Box pt={20}>
@@ -119,12 +124,22 @@ function FormNormal() {
             fullWidth
             radius={10}
             color="gray.7"
-            onClick={() => router.push("/dashboard/recent-activity")}
+            onClick={() => setOpenFormal(true)}
           >
             SUBMIT
           </Button>
         </Grid.Col>
       </Grid>
+      <Modal
+        size={"md"}
+        opened={valOpenFormal}
+        onClose={() => setOpenFormal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalFormFormal />
+      </Modal>
     </>
   );
 }

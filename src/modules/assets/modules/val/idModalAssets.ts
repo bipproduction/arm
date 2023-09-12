@@ -1,5 +1,4 @@
-"use client"
+"use client";
 import { atom } from "jotai";
 
-
-export const isModalAssetsView = atom(false)
+export const isModalAssetsView = atom(false);

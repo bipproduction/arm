@@ -178,7 +178,7 @@ export function DetailArchive({ id }: { id: string }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-<ModalArchiveView/>
+        <ModalArchiveView />
       </Modal>
     </>
   );

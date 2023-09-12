@@ -5,18 +5,18 @@ import React from "react";
 import { BiArrowBack } from "react-icons/bi";
 import ItemAssets from "./item_assets";
 
-function AddAssets () {
+function AddAssets() {
   return (
     <>
       <Stack>
-        <ButtonBack link="/dashboard/project/create"/>
-        <PageSubTitle text="ADD ASSETS"/>
+        <ButtonBack link="/dashboard/project/create" />
+        <PageSubTitle text="ADD ASSETS" />
       </Stack>
       <Box>
-        <ItemAssets/>
+        <ItemAssets />
       </Box>
     </>
   );
 }
 
-export default AddAssets
+export default AddAssets;

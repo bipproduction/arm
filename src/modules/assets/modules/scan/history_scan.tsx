@@ -81,54 +81,58 @@ export default function HistoryScan() {
                   <Group fw={700}>
                     <Text>Item</Text>
                   </Group>
-                </Group>
-                <Box pt={20}>
-                  <Button fullWidth radius={10} color="gray.7" onClick={toggle}>
-                    HISTORY
-                  </Button>
+                  <Box pt={20}>
+                    <Button
+                      fullWidth
+                      radius={10}
+                      color="gray.7"
+                      onClick={toggle}
+                    >
+                      HISTORY
+                    </Button>
 
-                  <Box pt={10}>
-                    <Collapse in={opened}>
-                      <Box
-                        sx={{
-                          backgroundColor: COLOR.AbuMuda,
-                          borderRadius: 10,
-                          padding: 20,
-                        }}
-                      >
-                        <Text>Event : We The Fest</Text>
-                        <Text>Location : Jakarta Selatan</Text>
-                        <Text>Date : 23 May 2023</Text>
-                        <Text>Name : PT. Mekar Jaya</Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                        <Text>
-                          .......... : ........... ......... ...........
-                          ...........
-                        </Text>
-                      </Box>
-                    </Collapse>
+                    <Box pt={10}>
+                      <Collapse in={opened}>
+                        <Box
+                          sx={{
+                            backgroundColor: COLOR.AbuMuda,
+                            borderRadius: 10,
+                            padding: 20,
+                          }}
+                        >
+                          <Text>Event : We The Fest</Text>
+                          <Text>Location : Jakarta Selatan</Text>
+                          <Text>Date : 23 May 2023</Text>
+                          <Text>Name : PT. Mekar Jaya</Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                          <Text>
+                            .......... : ........... ......... ...........
+                            ...........
+                          </Text>
+                        </Box>
+                      </Collapse>
+                    </Box>
                   </Box>
-                </Box>
-              </Card.Section>
-            </Card>
-          </Group>
-        </Container>
-      </Box>
+                </Card.Section>
+              </Card>
+            </Group>
+          </Container>
+        </Box>
       </Box>
     </>
   );

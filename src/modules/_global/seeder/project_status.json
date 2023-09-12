@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Draft",
+        "alias": "Draft"
+    },
+    {
+        "id": 2,
+        "name": "Final Draft",
+        "alias": "Draft"
+    },
+    {
+        "id": 3,
+        "name": "JO",
+        "alias": "Job Order"
+    },
+    {
+        "id": 4,
+        "name": "Revoked",
+        "alias": "Revoked"
+    },
+    {
+        "id": 5,
+        "name": "Canceled",
+        "alias": "Canceled"
+    },
+    {
+        "id": 6,
+        "name": "Approval",
+        "alias": "Waiting for Approval"
+    },
+    {
+        "id": 7,
+        "name": "Approved",
+        "alias": "Approved"
+    },
+    {
+        "id": 8,
+        "name": "Declined",
+        "alias": "Declined"
+    }
+]

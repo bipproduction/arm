@@ -143,11 +143,13 @@ export default function ProjectBrief() {
                       <td>{item.status}</td>
                       <td>
                         <Group position="center">
-                          <Box style={{cursor: "pointer"}}>{item.icon}</Box>
+                          <Box style={{ cursor: "pointer" }}>{item.icon}</Box>
                           <Box>
                             <ActionIcon
                               color="dark"
-                              onClick={() => router.push("/dashboard/archive/3232323232")}
+                              onClick={() =>
+                                router.push("/dashboard/archive/3232323232")
+                              }
                             >
                               <BiSolidUserDetail size="25" />
                             </ActionIcon>

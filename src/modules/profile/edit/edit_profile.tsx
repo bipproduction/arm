@@ -6,21 +6,20 @@ import {
   Button,
   Center,
   Grid,
+  Modal,
   Stack,
   Text,
   TextInput,
 } from "@mantine/core";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
-import toast from "react-simple-toasts";
-import "react-simple-toasts/dist/theme/dark.css"
+import { isModalProfile } from "../val/isModalProfile";
+import ModalProfile from "./modal_profile";
 
 export default function EditProfile() {
-  const router = useRouter()
-  function save () {
-    toast("Edit Profile Success", {theme: "dark"})
-    router.push("/dashboard/profile")
-  }
+  const [valOpenProfile, setOpenProfile] = useAtom(isModalProfile);
+  const router = useRouter();
   return (
     <>
       <Box pt={20}>
@@ -92,17 +91,40 @@ export default function EditProfile() {
             </Grid>
             <Grid pt={30}>
               <Grid.Col md={6} lg={6}>
-                <Button fullWidth variant="outline"
-                color="gray"
-                radius="xl" onClick={() => router.push("/dashboard/profile")}>CANCEL</Button>
+                <Button
+                  fullWidth
+                  variant="outline"
+                  color="gray"
+                  radius="xl"
+                  onClick={() => router.push("/dashboard/profile")}
+                >
+                  CANCEL
+                </Button>
               </Grid.Col>
               <Grid.Col md={6} lg={6}>
-                <Button radius={"xl"} color="gray.7" onClick={save} fullWidth>SAVE</Button>
+                <Button
+                  radius={"xl"}
+                  color="gray.7"
+                  onClick={() => setOpenProfile(true)}
+                  fullWidth
+                >
+                  SAVE
+                </Button>
               </Grid.Col>
             </Grid>
           </Box>
         </Box>
       </Box>
+      <Modal
+        size={"md"}
+        opened={valOpenProfile}
+        onClose={() => setOpenProfile(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalProfile />
+      </Modal>
     </>
   );
 }

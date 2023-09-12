@@ -1,5 +1,12 @@
 import { COLOR } from "@/modules/_global";
-import { ActionIcon, Box, Center, Group, Pagination, Table } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Center,
+  Group,
+  Pagination,
+  Table,
+} from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { BiSolidUserDetail } from "react-icons/bi";
@@ -68,7 +75,7 @@ const dataDraft = [
 ];
 
 function ItemDraftProject() {
-  const router = useRouter()
+  const router = useRouter();
   const draftTable = dataDraft.map((datatab) => (
     <tr key={datatab.id}>
       <td>{datatab.id}</td>
@@ -77,7 +84,10 @@ function ItemDraftProject() {
       <td>{datatab.date}</td>
       <td>
         <Center>
-          <ActionIcon onClick={() => router.push(`/dashboard/project/444`)} color="dark">
+          <ActionIcon
+            onClick={() => router.push(`/dashboard/project/444`)}
+            color="dark"
+          >
             <BiSolidUserDetail size="25" />
           </ActionIcon>
         </Center>
@@ -86,35 +96,35 @@ function ItemDraftProject() {
   ));
   return (
     <>
-    <Box pt={30}>
-      <Box
-        sx={{
-          backgroundColor: COLOR.AbuMuda,
-          padding: 10,
-          borderRadius: 10,
-        }}
-      >
-        <Box pt={10}>
-          <Table highlightOnHover horizontalSpacing={"lg"}>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>BRAND</th>
-                <th>ACTIVITY</th>
-                <th>DATE</th>
-                <th>
-                  <Center>ACTION</Center>
-                </th>
-              </tr>
-            </thead>
-            <tbody>{draftTable}</tbody>
-          </Table>
+      <Box pt={30}>
+        <Box
+          sx={{
+            backgroundColor: COLOR.AbuMuda,
+            padding: 10,
+            borderRadius: 10,
+          }}
+        >
+          <Box pt={10}>
+            <Table highlightOnHover horizontalSpacing={"lg"}>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>BRAND</th>
+                  <th>ACTIVITY</th>
+                  <th>DATE</th>
+                  <th>
+                    <Center>ACTION</Center>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>{draftTable}</tbody>
+            </Table>
+          </Box>
         </Box>
-      </Box>
         <Group position="right" pt={10}>
-        <Pagination total={10} />
-      </Group>
-    </Box>
+          <Pagination total={10} />
+        </Group>
+      </Box>
     </>
   );
 }
