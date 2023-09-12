@@ -56,7 +56,7 @@ export default function EditProfile() {
                     <Text fw={700} fz={14}>
                       NAME
                     </Text>
-                    <TextInput placeholder="A.R.M INDONESIA" radius={20} />
+                    <TextInput placeholder="ARM INDONESIA" radius={20} />
                   </Box>
                   <Box pt={10}>
                     <Text fw={700} fz={14}>

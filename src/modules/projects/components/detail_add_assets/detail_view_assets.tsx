@@ -44,6 +44,19 @@ export default function DetailViewAssets() {
   const { classes, theme } = useStyles();
   return (
     <>
+      <Box p={30}>
+        <Group position="center">
+          <Image
+            src={"../img/meja.jpeg"}
+            maw={300}
+            mx="auto"
+            alt="detail_image"
+          />
+        </Group>
+        <Box >
+        <Group position="apart" pt={20}>
+          <Box>
+            <Text fw={700}>Item</Text>
       <Stack>
         <ButtonBack />
         <PageSubTitle text="DETAIL VIEW ASSETS" />

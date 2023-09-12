@@ -37,9 +37,8 @@ const useStyles = createStyles((theme) => ({
   footer: {
     padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
     marginTop: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 }));
 
@@ -160,7 +159,7 @@ export function AssetsView() {
                   </Card.Section>
 
                   <Text fw={700} className={classes.title} mt="xs">
-                    MEJA KAYU
+                    Mobile Bar
                   </Text>
                   <Card.Section className={classes.footer}>
                     <Group position="apart">

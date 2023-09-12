@@ -58,29 +58,28 @@ export default function HistoryScan() {
           borderRadius: 5,
         }}
       >
-        <Box pt={30} pb={30}>
-          <Container>
-            <Group position="center">
-              <Card
-                withBorder
-                padding="lg"
-                radius="md"
-                className={classes.card}
-                w={400}
-              >
-                <Card.Section mb="sm" pt={20}>
-                  <Image
-                    src="../../../img/meja.jpeg"
-                    alt="Meja portable"
-                    maw={200}
-                    mx="auto"
-                  />
-                </Card.Section>
-                <Card.Section className={classes.footer}>
-                  <Group position="apart" pt={10}>
-                    <Group fw={700}>
-                      <Text>THE MACALLAN</Text>
-                    </Group>
+      <Box pt={30} pb={30}>
+        <Container>
+          <Group position="center">
+            <Card
+              withBorder
+              padding="lg"
+              radius="md"
+              className={classes.card}
+              w={400}
+            >
+              <Card.Section mb="sm" pt={20}>
+                <Image
+                  src="../../../img/meja.jpeg"
+                  alt="Meja portable"
+                  maw={200}
+                  mx="auto"
+                />
+              </Card.Section>
+              <Card.Section className={classes.footer}>
+                <Group position="apart" pt={10}>
+                  <Group fw={700}>
+                    <Text>Item</Text>
                   </Group>
                   <Box pt={20}>
                     <Button

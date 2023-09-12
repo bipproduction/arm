@@ -28,7 +28,7 @@ export function HeaderDashboard() {
           <Group position="apart" pt={5} pr={5}>
             <Box>
               <Text fz={25} fw={700}>
-                A.R.M
+                ARM
               </Text>
             </Box>
             <Group>
@@ -62,7 +62,7 @@ export function HeaderDashboard() {
                   <Box pt={{ sm: 15, base: 5 }}>
                     <Box>
                       <Text fz={25} fw={700}>
-                        A.R.M
+                        ARM
                       </Text>
                     </Box>
                   </Box>

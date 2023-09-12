@@ -61,23 +61,22 @@ function ListCart() {
                   />
                 </Box>
                 <Box>
-                  <Box>
-                    <Text fw={700} fz={{ sm: 20, base: 10 }}>
-                      THE MACALLAN
-                    </Text>
-                    <Text color="dark.3" fz={{ sm: 13, base: 9 }}>
-                      Harmony 2
-                    </Text>
-                    <Text color="dark.3" fz={{ sm: 13, base: 9 }}>
-                      Display
-                    </Text>
-                    <Box pt={10}>
-                      <Group style={{ cursor: "pointer" }} onClick={toggle}>
-                        <Text fz={{ sm: 13, base: 9 }} fw={700}>
-                          NOTE
-                        </Text>
-                        <MdOutlineNoteAlt />
-                      </Group>
+                  <Text fw={700} fz={{ sm: 20, base: 10 }}>
+                    Item
+                  </Text>
+                  <Text color="dark.3" fz={{ sm: 13, base: 9 }}>
+                    Harmony 2
+                  </Text>
+                  <Text color="dark.3" fz={{ sm: 13, base: 9 }}>
+                    Display
+                  </Text>
+                  <Box pt={10}>
+                    <Group style={{ cursor: "pointer" }} onClick={toggle}>
+                      <Text fz={{ sm: 13, base: 9 }} fw={700}>
+                        NOTE
+                      </Text>
+                      <MdOutlineNoteAlt />
+                    </Group>
                     </Box>
                     <Collapse in={opened}>
                       <Textarea />
