@@ -34,9 +34,8 @@ const useStyles = createStyles((theme) => ({
   footer: {
     padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
     marginTop: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 }));
 
@@ -54,66 +53,70 @@ export default function DetailViewAssets() {
           />
         </Group>
         <Box >
-        <Group position="apart" pt={20}>
-          <Box>
-            <Text fw={700}>Item</Text>
-      <Stack>
-        <ButtonBack />
-        <PageSubTitle text="DETAIL VIEW ASSETS" />
-      </Stack>
-      <Box pt={30}>
-        <Box
-          sx={{
-            border: "1px solid #CED4DA",
-            padding: 20,
-            borderRadius: 10,
-          }}
-        >
-          <Box p={30}>
-            <Container>
-              <Group position="center">
-                <Card
-                  withBorder
-                  padding="lg"
-                  radius="md"
-                  className={classes.card}
-                  w={400}
+          <Group position="apart" pt={20}>
+            <Box>
+              <Text fw={700}>Item</Text>
+              <Stack>
+                <ButtonBack />
+                <PageSubTitle text="DETAIL VIEW ASSETS" />
+              </Stack>
+              <Box pt={30}>
+                <Box
+                  sx={{
+                    border: "1px solid #CED4DA",
+                    padding: 20,
+                    borderRadius: 10,
+                  }}
                 >
-                  <Card.Section mb="sm" pt={20}>
-                    <Image
-                      src="../../../img/meja.jpeg"
-                      alt="Meja portable"
-                      maw={200}
-                      mx="auto"
-                    />
-                  </Card.Section>
-                  <Card.Section className={classes.footer}>
-                    <Group position="apart" pt={10}>
-                      <Group fw={700}>
-                        <Text>THE MACALLAN</Text>
+                  <Box p={30}>
+                    <Container>
+                      <Group position="center">
+                        <Card
+                          withBorder
+                          padding="lg"
+                          radius="md"
+                          className={classes.card}
+                          w={400}
+                        >
+                          <Card.Section mb="sm" pt={20}>
+                            <Image
+                              src="../../../img/meja.jpeg"
+                              alt="Meja portable"
+                              maw={200}
+                              mx="auto"
+                            />
+                          </Card.Section>
+                          <Card.Section className={classes.footer}>
+                            <Group position="apart" pt={10}>
+                              <Group fw={700}>
+                                <Text>THE MACALLAN</Text>
+                              </Group>
+                              <Group>
+                                <HiCheckCircle size="30" />
+                                <Box>
+                                  <Text fz={8} fw={700}>
+                                    CONDITIONS
+                                  </Text>
+                                  <Text fz={8} fw={700} color="red">
+                                    GOOD CONDITION
+                                  </Text>
+                                </Box>
+                              </Group>
+                            </Group>
+                          </Card.Section>
+                          <Group position="center" pt={20} pb={20}>
+                            <Button w={300} color="gray.6" radius={"lg"}>
+                              + Add To Cart
+                            </Button>
+                          </Group>
+                        </Card>
                       </Group>
-                      <Group>
-                        <HiCheckCircle size="30" />
-                        <Box>
-                          <Text fz={8} fw={700}>
-                            CONDITIONS
-                          </Text>
-                          <Text fz={8} fw={700} color="red">
-                            GOOD CONDITION
-                          </Text>
-                        </Box>
-                      </Group>
-                    </Group>
-                  </Card.Section>
-                  <Group position="center" pt={20} pb={20}>
-                    <Button w={300} color="gray.6" radius={"lg"}>
-                      + Add To Cart
-                    </Button>
-                  </Group>
-                </Card>
-              </Group>
-            </Container>
-          </Box>
+                    </Container>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Group>
         </Box>
       </Box>
     </>
