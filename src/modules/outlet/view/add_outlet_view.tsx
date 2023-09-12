@@ -4,7 +4,7 @@ import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
 import { Box, Button, Divider, Grid, Modal, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
 import { useFocusTrap } from "@mantine/hooks";
 import { useAtom } from "jotai";
-import { isModalOutlet } from "../val/isModalOutlet";
+import { isModalOutlet } from "../val/valOutlet";
 import { ModalKonfirmasiOutlet } from "../component/modal_konfirmasi_outlet";
 
 export function AddOutlet() {

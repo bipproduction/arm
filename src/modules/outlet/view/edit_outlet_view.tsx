@@ -5,7 +5,7 @@ import { Box, Button, Divider, Grid, Modal, SimpleGrid, Stack, Text, TextInput }
 import { ModalKonfirmasiOutlet } from "../component/modal_konfirmasi_outlet"
 import { useFocusTrap } from "@mantine/hooks";
 import { useAtom } from "jotai";
-import { isModalOutlet } from "../val/isModalOutlet";
+import { isModalOutlet } from "../val/valOutlet";
 
 export function EditOutlet() {
     const focusTrapRef = useFocusTrap();
