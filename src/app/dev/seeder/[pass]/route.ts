@@ -41,41 +41,41 @@ export async function GET(request: Request, { params }: { params: { pass: string
         })
     }
 
-    await prisma.user.upsert({
-        where: {
-            id: "adminWibuDeveloperARM"
-        },
-        create: {
-            id: "adminWibuDeveloperARM",
-            idUserRole: 3,
-        },
-        update: {
-            id: "adminWibuDeveloperARM",
-            idUserRole: 3,
-        }
-    });
-
     await prisma.profile.upsert({
         where: {
-            id: "adminWibuDeveloperARM"
+            id: "adminProfileWibuDeveloperARM"
         },
         create: {
-            id: "adminWibuDeveloperARM",
-            idUser: "adminWibuDeveloperARM",
+            id: "adminProfileWibuDeveloperARM",
             name: "Lukman",
             phone: "6287701790942",
-            email: "liukman@gmail.com",
+            email: "lukman@gmail.com",
             address: "Denpasar"
         },
         update: {
-            id: "adminWibuDeveloperARM",
-            idUser: "adminWibuDeveloperARM",
+            id: "adminProfileWibuDeveloperARM",
             name: "Lukman",
             phone: "6287701790942",
-            email: "liukman@gmail.com",
+            email: "lukman@gmail.com",
             address: "Denpasar"
         }
     })
+
+    await prisma.user.upsert({
+        where: {
+            id: "adminUserWibuDeveloperARM"
+        },
+        create: {
+            id: "adminUserWibuDeveloperARM",
+            idUserRole: 3,
+            idProfile: "adminProfileWibuDeveloperARM"
+        },
+        update: {
+            id: "adminUserWibuDeveloperARM",
+            idUserRole: 3,
+            idProfile: "adminProfileWibuDeveloperARM"
+        }
+    });
 
 
     return NextResponse.json({ success: true })
