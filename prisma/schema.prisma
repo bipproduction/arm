@@ -14,21 +14,24 @@ model User {
   id                     String                   @id @default(cuid())
   UseRole                UserRole                 @relation(fields: [idUserRole], references: [id])
   idUserRole             Int
+  Profile                Profile?                 @relation(fields: [idProfile], references: [id])
+  idProfile              String?
   verificationCode       String?
   expiresTime            DateTime?
   password               String?
   isActive               Boolean                  @default(true)
   createdAt              DateTime                 @default(now())
   updatedAt              DateTime                 @updatedAt
-  Profile                Profile?
   UserLog                UserLog[]
   Notification           Notification[]
   Reimbursement          Reimbursement[]
   AssetsHistoryCondition AssetsHistoryCondition[]
   AssetsHistoryTracking  AssetsHistoryTracking[]
   Delivery               Delivery[]
-  Project                Project[]
-  ProjectHistory         ProjectHistory[]
+  ClientProjectHistory   ProjectHistory[]         @relation("ClientHistoryToUser")
+  UserProjectHistory     ProjectHistory[]         @relation("ByUserHistoryToUser")
+  ClientProject          Project[]                @relation("ClientToUser")
+  UserProject            Project[]                @relation("ByUserToUser")
 }
 
 model UserRole {
@@ -43,8 +46,6 @@ model UserRole {
 
 model Profile {
   id        String   @id @default(cuid())
-  User      User     @relation(fields: [idUser], references: [id])
-  idUser    String   @unique
   Image     Image?   @relation(fields: [idImage], references: [id])
   idImage   String?
   Company   Company? @relation(fields: [idCompany], references: [id])
@@ -56,17 +57,19 @@ model Profile {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  User      User[]
 }
 
 model Image {
-  id            String          @id @default(cuid())
-  name          String
-  extension     String
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  Profile       Profile[]
-  Reimbursement Reimbursement[]
-  Assets        Assets[]
+  id                  String          @id @default(cuid())
+  name                String
+  extension           String
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  Profile             Profile[]
+  Reimbursement       Reimbursement[] @relation("ReimbursementToImage")
+  PaymentReimursement Reimbursement[] @relation("PaymentToImage")
+  Assets              Assets[]
 }
 
 model Company {
@@ -92,12 +95,12 @@ model Reimbursement {
   idUser             String
   Company            Company   @relation(fields: [idCompany], references: [id])
   idCompany          String
-  ImageReimbursement Image     @relation(fields: [idImgReimbursement], references: [id])
-  idImgReimbursement String
+  ImageReimbursement Image?    @relation("ReimbursementToImage", fields: [idImgReimbursement], references: [id], map: "RembursementImg")
+  idImgReimbursement String?
   Invoice            Invoice?  @relation(fields: [idInvoice], references: [id])
   idInvoice          String?
-  // ImagePayment       Image     @relation(fields: [idImgPayment], references: [id])
-  // idImgPayment       String
+  ImagePayment       Image?    @relation("PaymentToImage", fields: [idImgPayment], references: [id], map: "PaymentImg")
+  idImgPayment       String?
   dateReimbursement  DateTime  @db.Date
   datePayment        DateTime? @db.Date
   price              BigInt
@@ -291,9 +294,10 @@ model Project {
   idStatus        Int
   Company         Company          @relation(fields: [idCompany], references: [id])
   idCompany       String
-  User            User             @relation(fields: [idUserClients], references: [id])
-  idUserClients   String
-  idUserBy        String //??
+  UserClients     User?            @relation("ClientToUser", fields: [idUserClient], references: [id], map: "ClientUser")
+  idUserClient    String?
+  UserBy          User?            @relation("ByUserToUser", fields: [idUserBy], references: [id], map: "ByUser")
+  idUserBy        String?
   title           String
   projectNumber   String
   dateEvent       DateTime         @db.Date
@@ -316,9 +320,10 @@ model ProjectHistory {
   idStatus        Int
   Company         Company          @relation(fields: [idCompany], references: [id])
   idCompany       String
-  User            User             @relation(fields: [idUserClients], references: [id])
-  idUserClients   String
-  idUserBy        String //??
+  UserClients     User?            @relation("ClientHistoryToUser", fields: [idUserClient], references: [id], map: "ClientUserHistory")
+  idUserClient    String?
+  UserBy          User?            @relation("ByUserHistoryToUser", fields: [idUserBy], references: [id], map: "ByUserHistory")
+  idUserBy        String?
   title           String
   projectNumber   String
   dateEvent       DateTime         @db.Date
