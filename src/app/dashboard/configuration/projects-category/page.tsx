@@ -1,11 +1,11 @@
+import { TableProjectsCategory } from '@/modules/configuration/projects_category';
+import { funGetProjectsCategory } from '@/modules/configuration/projects_category/fun/projects_category_get';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const data = await funGetProjectsCategory()
   return (
-    <div>
-      Page
-    </div>
+    <TableProjectsCategory data={data}/>
   );
 }
 
-export default Page;

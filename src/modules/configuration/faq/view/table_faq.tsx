@@ -6,20 +6,26 @@ import {
   Button,
   Center,
   Group,
+  Modal,
   ScrollArea,
   SimpleGrid,
   Stack,
   Table,
   Text,
 } from "@mantine/core";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
+import { isModalFAQ } from "../val/isModalCreateFaq";
+import ModalKonfirmasiDeleteFaq from "../components/modal_konfirmasi_delete_faq";
 
 export default function TableFaq({ data }: { data: any }) {
   const router = useRouter();
   const [lisaData, setListData] = useState<any[]>(data);
+  const [valOpenModal, setOpenModal] = useAtom(isModalFAQ);
+  const [dataDelete, setDataDelete] = useState(String);
   return (
     <>
       <Stack>
@@ -69,14 +75,27 @@ export default function TableFaq({ data }: { data: any }) {
                       <td>{v.question}</td>
                       <td>{v.answer}</td>
                       <td>
-                        <Group position="center" >
+                        <Group position="center">
                           <Box>
-                            <ActionIcon color="red.9">
+                            <ActionIcon
+                              color="red.9"
+                              onClick={() => {
+                                setDataDelete(v.id);
+                                setOpenModal(true);
+                              }}
+                            >
                               <MdDelete size="23" />
                             </ActionIcon>
                           </Box>
                           <Box>
-                            <ActionIcon color="yellow.9"  onClick={() => router.push(`/dashboard/configuration/faq/edit/${v.id}`)}>
+                            <ActionIcon
+                              color="yellow.9"
+                              onClick={() =>
+                                router.push(
+                                  `/dashboard/configuration/faq/edit/${v.id}`
+                                )
+                              }
+                            >
                               <MdOutlineModeEdit size="23" />
                             </ActionIcon>
                           </Box>
@@ -90,6 +109,16 @@ export default function TableFaq({ data }: { data: any }) {
           </SimpleGrid>
         </Box>
       </Box>
+      <Modal
+        size={"md"}
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalKonfirmasiDeleteFaq id={dataDelete} />
+      </Modal>
     </>
   );
 }
