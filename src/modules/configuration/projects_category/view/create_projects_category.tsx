@@ -1,40 +1,51 @@
-"use client"
+"use client";
 
-import { useAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import { isModalCreateProjectsCategory } from '../val/isModalCreateProjectsCategory';
-import { funProjectsCategoryCreate } from '../fun/projects_category_create';
-import toast from 'react-simple-toasts';
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { isModalCreateProjectsCategory } from "../val/isModalCreateProjectsCategory";
+import { funProjectsCategoryCreate } from "../fun/projects_category_create";
+import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
-import { Alert, Box, Button, Grid, Modal, Stack, Text, TextInput } from '@mantine/core';
-import { ButtonBack, COLOR } from '@/modules/_global';
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Modal,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import { ButtonBack, COLOR } from "@/modules/_global";
 
 export default function CreateProjectsCategory() {
-  const router = useRouter()
-  const [valOpenCreateProjectsCategory, setOpenCreateProjectscategory] = useAtom(isModalCreateProjectsCategory)
-  const [loading, setLoading] = useState(false)
+  const router = useRouter();
+  const [valOpenCreateProjectsCategory, setOpenCreateProjectscategory] =
+    useAtom(isModalCreateProjectsCategory);
+  const [loading, setLoading] = useState(false);
   const [dataProjectCategory, setDataProjectCategory] = useState({
     name: "",
-  })
-  
+  });
+
   async function onProjectCategory() {
-    setLoading(true)
-    const res = await funProjectsCategoryCreate({data: dataProjectCategory})
-    if (!res.success) return setLoading(false), toast(res.message)
-    toast("success")
-  router.push("/dashboard/configuration/projects-category")
-  setOpenCreateProjectscategory(false)
+    setLoading(true);
+    const res = await funProjectsCategoryCreate({ data: dataProjectCategory });
+    if (!res.success) return setLoading(false), toast(res.message);
+    toast("success", { theme: "dark" });
+    router.push("/dashboard/configuration/projects-category");
+    setOpenCreateProjectscategory(false);
   }
 
   function validasiCreateProjectCat() {
-    if(Object.values(dataProjectCategory).includes("")) return toast("The form cannor be empty", {theme: "dark"})
-    setOpenCreateProjectscategory(true)
+    if (Object.values(dataProjectCategory).includes(""))
+      return toast("The form cannor be empty", { theme: "dark" });
+    setOpenCreateProjectscategory(true);
   }
 
   return (
     <>
-    <Stack>
+      <Stack>
         <ButtonBack />
       </Stack>
       <Box pt={20}>
@@ -52,8 +63,7 @@ export default function CreateProjectsCategory() {
               onChange={(val) =>
                 setDataProjectCategory({
                   ...dataProjectCategory,
-                  name : val.target.value
-                  
+                  name: val.target.value,
                 })
               }
             />
@@ -88,7 +98,12 @@ export default function CreateProjectsCategory() {
                 </Button>
               </Grid.Col>
               <Grid.Col span={6}>
-                <Button radius={10} color="gray.7" fullWidth onClick={onProjectCategory}>
+                <Button
+                  radius={10}
+                  color="gray.7"
+                  fullWidth
+                  onClick={onProjectCategory}
+                >
                   YES
                 </Button>
               </Grid.Col>
