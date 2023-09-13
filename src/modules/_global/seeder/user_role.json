@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "position": "CLIENT",
+        "role": "Requestor"
+    },
+    {
+        "id": 2,
+        "position": "CLIENT",
+        "role": "Approver"
+    },
+    {
+        "id": 3,
+        "position": "AGENCY",
+        "role": "Admin"
+    },
+    {
+        "id": 4,
+        "position": "AGENCY",
+        "role": "Executor"
+    },
+    {
+        "id": 5,
+        "position": "AGENCY",
+        "role": "Super Admin"
+    }
+]

@@ -1,0 +1,52 @@
+"use client";
+import { useAtom } from "jotai";
+import React from "react";
+
+import { useRouter } from "next/navigation";
+import toast from "react-simple-toasts";
+import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import "react-simple-toasts/dist/theme/dark.css";
+import { isLogout } from "../val/isLogout";
+
+export default function ModalLogout() {
+  const [openLogout, setOpenLogout] = useAtom(isLogout);
+  const router = useRouter();
+  function viewBarcode() {
+    toast("Logout Success", { theme: "dark" });
+    router.push("/");
+    setOpenLogout(false);
+  }
+  return (
+    <>
+      <Box>
+        <Alert color="gray" variant="outline">
+          <Text fw={700} ta={"center"} mb={20} mt={20}>
+            ARE YOU SURE TO LOG OUT?
+          </Text>
+          <Grid>
+            <Grid.Col span={6}>
+              <Button
+                radius={10}
+                color="gray.7"
+                fullWidth
+                onClick={() => setOpenLogout(false)}
+              >
+                NO
+              </Button>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Button
+                radius={10}
+                color="gray.7"
+                fullWidth
+                onClick={viewBarcode}
+              >
+                YES
+              </Button>
+            </Grid.Col>
+          </Grid>
+        </Alert>
+      </Box>
+    </>
+  );
+}

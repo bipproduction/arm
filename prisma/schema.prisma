@@ -10,7 +10,415 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test {
-  id    String  @id @default(cuid())
-  title String?
+model User {
+  id                     String                   @id @default(cuid())
+  UseRole                UserRole                 @relation(fields: [idUserRole], references: [id])
+  idUserRole             Int
+  Profile                Profile?                 @relation(fields: [idProfile], references: [id])
+  idProfile              String?
+  verificationCode       String?
+  expiresTime            DateTime?
+  password               String?
+  isActive               Boolean                  @default(true)
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  UserLog                UserLog[]
+  Notification           Notification[]
+  Reimbursement          Reimbursement[]
+  AssetsHistoryCondition AssetsHistoryCondition[]
+  AssetsHistoryTracking  AssetsHistoryTracking[]
+  Delivery               Delivery[]
+  ClientProjectHistory   ProjectHistory[]         @relation("ClientHistoryToUser")
+  UserProjectHistory     ProjectHistory[]         @relation("ByUserHistoryToUser")
+  ClientProject          Project[]                @relation("ClientToUser")
+  UserProject            Project[]                @relation("ByUserToUser")
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  position  String
+  role      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User[]
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  Image     Image?   @relation(fields: [idImage], references: [id])
+  idImage   String?
+  Company   Company? @relation(fields: [idCompany], references: [id])
+  idCompany String?
+  name      String
+  email     String   @unique
+  phone     String   @unique
+  address   String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User[]
+}
+
+model Image {
+  id                  String          @id @default(cuid())
+  name                String
+  extension           String
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  Profile             Profile[]
+  Reimbursement       Reimbursement[] @relation("ReimbursementToImage")
+  PaymentReimursement Reimbursement[] @relation("PaymentToImage")
+  Assets              Assets[]
+}
+
+model Company {
+  id             String           @id @default(cuid())
+  name           String
+  phone          String
+  address        String
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  Reimbursement  Reimbursement[]
+  Outlet         Outlet[]
+  Bill           Bill[]
+  Assets         Assets[]
+  Project        Project[]
+  ProjectHistory ProjectHistory[]
+  Profile        Profile[]
+}
+
+model Reimbursement {
+  id                 String    @id @default(cuid())
+  User               User      @relation(fields: [idUser], references: [id])
+  idUser             String
+  Company            Company   @relation(fields: [idCompany], references: [id])
+  idCompany          String
+  ImageReimbursement Image?    @relation("ReimbursementToImage", fields: [idImgReimbursement], references: [id], map: "RembursementImg")
+  idImgReimbursement String?
+  Invoice            Invoice?  @relation(fields: [idInvoice], references: [id])
+  idInvoice          String?
+  ImagePayment       Image?    @relation("PaymentToImage", fields: [idImgPayment], references: [id], map: "PaymentImg")
+  idImgPayment       String?
+  dateReimbursement  DateTime  @db.Date
+  datePayment        DateTime? @db.Date
+  price              BigInt
+  title              String
+  description        String
+  status             Int //0 = waiting approval, 1= approved, 2= paid
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Outlet {
+  id             String          @id @default(cuid())
+  Company        Company         @relation(fields: [idCompany], references: [id])
+  idCompany      String
+  OutletLocation OutletLocation? @relation(fields: [idLocation], references: [id])
+  idLocation     Int?
+  OutletType     OutletType?     @relation(fields: [idType], references: [id])
+  idType         Int?
+  OutletCategory OutletCategory? @relation(fields: [idCategory], references: [id])
+  idCategory     Int?
+  name           String
+  address        String
+  affiliation    String
+  pic            String
+  isActive       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  ProjectAssets  ProjectAssets[]
+}
+
+model OutletType {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Outlet    Outlet[]
+}
+
+model OutletCategory {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Outlet    Outlet[]
+}
+
+model OutletLocation {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Outlet    Outlet[]
+}
+
+model Bill {
+  id        String    @id @default(cuid())
+  Company   Company   @relation(fields: [idCompany], references: [id])
+  idCompany String
+  dateBill  DateTime  @db.Date
+  total     BigInt
+  status    Int // 0 = unpaid, 1 = paid
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Invoice   Invoice[]
+}
+
+model Invoice {
+  id            String          @id @default(cuid())
+  Bill          Bill?           @relation(fields: [idBill], references: [id])
+  idBill        String?
+  category      String
+  dateInvoice   DateTime        @db.Date
+  price         BigInt
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  Reimbursement Reimbursement[]
+}
+
+model Assets {
+  id                     String                   @id @default(cuid())
+  AssetsCondition        AssetsCondition?         @relation(fields: [idCondition], references: [id])
+  idCondition            Int?
+  idType                 Int // 1= 1 kategori, 2 = per pcs
+  AssetsLocation         AssetsLocation?          @relation(fields: [idLocation], references: [id])
+  idLocation             Int?
+  AssetsCategory         AssetsCategory?          @relation(fields: [idCategory], references: [id])
+  idCategory             Int?
+  Image                  Image?                   @relation(fields: [idImage], references: [id])
+  idImage                String?
+  Company                Company                  @relation(fields: [idCompany], references: [id])
+  idCompany              String
+  numberAssets           String
+  name                   String
+  description            String
+  isCondition            Boolean                  @default(false)
+  isActive               Boolean                  @default(true)
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  AssetsHistoryCondition AssetsHistoryCondition[]
+  AssetsHistoryTracking  AssetsHistoryTracking[]
+  ProjectListAssets      ProjectListAssets[]
+}
+
+model AssetsCategory {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Assets    Assets[]
+}
+
+model AssetsCondition {
+  id                     Int                      @id @default(autoincrement())
+  name                   String
+  isActive               Boolean                  @default(true)
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  Assets                 Assets[]
+  AssetsHistoryCondition AssetsHistoryCondition[]
+}
+
+model AssetsLocation {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Assets    Assets[]
+}
+
+model AssetsHistoryCondition {
+  id              String          @id @default(cuid())
+  User            User            @relation(fields: [idUser], references: [id])
+  idUser          String
+  AssetsCondition AssetsCondition @relation(fields: [idCondition], references: [id])
+  idCondition     Int
+  Assets          Assets          @relation(fields: [idAssets], references: [id])
+  idAssets        String
+  description     String
+  isActive        Boolean         @default(true)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model AssetsHistoryTracking {
+  id        String   @id @default(cuid())
+  User      User     @relation(fields: [idUser], references: [id])
+  idUser    String
+  Assets    Assets   @relation(fields: [idAssets], references: [id])
+  idAssets  String
+  location  String
+  amount    Int
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectStatus {
+  id             Int              @id @default(autoincrement())
+  name           String
+  alias          String
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  Project        Project[]
+  ProjectHistory ProjectHistory[]
+}
+
+model ProjectCategory {
+  id             Int              @id @default(autoincrement())
+  name           String
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  Project        Project[]
+  ProjectHistory ProjectHistory[]
+}
+
+model Project {
+  id              String           @id @default(cuid())
+  ProjectCategory ProjectCategory? @relation(fields: [idCategory], references: [id])
+  idCategory      Int?
+  ProjectStatus   ProjectStatus    @relation(fields: [idStatus], references: [id])
+  idStatus        Int
+  Company         Company          @relation(fields: [idCompany], references: [id])
+  idCompany       String
+  UserClients     User?            @relation("ClientToUser", fields: [idUserClient], references: [id], map: "ClientUser")
+  idUserClient    String?
+  UserBy          User?            @relation("ByUserToUser", fields: [idUserBy], references: [id], map: "ByUser")
+  idUserBy        String?
+  title           String
+  projectNumber   String
+  dateEvent       DateTime         @db.Date
+  estimatesBudget BigInt
+  description     String
+  isMadeByAgency  Boolean          @default(false)
+  isFormal        Boolean          @default(true)
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  Delivery        Delivery[]
+  ProjectAssets   ProjectAssets[]
+}
+
+model ProjectHistory {
+  id              String           @id @default(cuid())
+  ProjectCategory ProjectCategory? @relation(fields: [idCategory], references: [id])
+  idCategory      Int?
+  ProjectStatus   ProjectStatus    @relation(fields: [idStatus], references: [id])
+  idStatus        Int
+  Company         Company          @relation(fields: [idCompany], references: [id])
+  idCompany       String
+  UserClients     User?            @relation("ClientHistoryToUser", fields: [idUserClient], references: [id], map: "ClientUserHistory")
+  idUserClient    String?
+  UserBy          User?            @relation("ByUserHistoryToUser", fields: [idUserBy], references: [id], map: "ByUserHistory")
+  idUserBy        String?
+  title           String
+  projectNumber   String
+  dateEvent       DateTime         @db.Date
+  estimatesBudget BigInt
+  description     String
+  isMadeByAgency  Boolean          @default(false)
+  isFormal        Boolean          @default(true)
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ProjectAssets {
+  id                String              @id @default(cuid())
+  Project           Project             @relation(fields: [idProject], references: [id])
+  idProject         String
+  Outlet            Outlet              @relation(fields: [idOutlet], references: [id])
+  idOutlet          String
+  note              String
+  address           String
+  dateDeliveryPlan  DateTime            @db.Date
+  isActive          Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  ProjectListAssets ProjectListAssets[]
+}
+
+model ProjectListAssets {
+  id              String        @id @default(cuid())
+  ProjectAssets   ProjectAssets @relation(fields: [idProjectAssets], references: [id])
+  idProjectAssets String
+  Assets          Assets        @relation(fields: [idAssets], references: [id])
+  idAssets        String
+  amount          Int
+  note            String
+  isActive        Boolean       @default(true)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Delivery {
+  id              String    @id @default(cuid())
+  User            User      @relation(fields: [idUser], references: [id])
+  idUser          String
+  Project         Project   @relation(fields: [idProject], references: [id])
+  idProject       String
+  status          Int
+  recipientsName  String?
+  recipientsPhone String?
+  dateProcess     DateTime? @db.Date
+  dateDelivery    DateTime? @db.Date
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Cart {
+  id        String   @id @default(cuid())
+  idAssets  String
+  amount    Int
+  note      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  User      User     @relation(fields: [idUser], references: [id])
+  idUser    String
+  kategori  String
+  parameter String
+  message   String
+  isRead    Boolean  @default(false)
+  isACTived Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserLog {
+  id          String   @id @default(cuid())
+  User        User     @relation(fields: [idUser], references: [id])
+  idUser      String
+  activity    String
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
