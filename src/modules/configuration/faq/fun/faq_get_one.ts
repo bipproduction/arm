@@ -2,7 +2,7 @@
 
 import prisma from "@/modules/_global/lib/prisma"
 
-export async function funGetOneFaq(id : string) {
+export async function funGetOneFaq(id : any) {
   const data = await prisma.fAQ.findUnique({
     where: {
       isActive: true,

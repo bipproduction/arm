@@ -34,86 +34,65 @@ const dataConfiguration = [
   },
   {
     id: 2,
-    title: "ASSETS HISTORY CONDITION",
-    icon: MdWorkHistory,
-    color: "indigo",
-   link: "#"
-  },
-  {
-    id: 3,
     title: "ASSETS CONDITION",
     icon: FaDollyFlatbed,
     color: "blue",
-   link: "#"
+   link: "/dashboard/configuration/assets-condition"
   },
   {
-    id: 4,
+    id: 3,
     title: "ASSETS",
     icon: HiBuildingStorefront,
     color: "green",
    link: "#"
   },
   {
-    id: 5,
+    id: 4,
     title: "PROJECT CATEGORY",
     icon: GoProjectRoadmap,
     color: "teal",
-   link: "#"
+   link: "/dashboard/configuration/projects-category"
   },
   {
-    id: 6,
+    id: 5,
     title: "OUTLET LOCATION",
     icon: ImLocation2,
     color: "cyan",
    link: "#"
   },
   {
-    id: 7,
-    title: "OUTLET",
-    icon: RiHomeSmile2Line,
-    color: "pink",
-   link: "#"
-  },
-  {
-    id: 8,
+    id: 6,
     title: "OUTLET TYPE",
     icon: MdOutlineMapsHomeWork,
     color: "red",
-   link: "#"
+   link: "/dashboard/configuration/outlet-type"
   },
   {
-    id: 9,
-    title: "OUTLET CATEGORY",
-    icon: RiHomeOfficeLine,
-    color: "orange",
-   link: "#"
-  },
-  {
-    id: 10,
+    id: 7,
     title: "COMPANY",
     icon: MdLocationCity,
     color: "teal",
    link: "#"
   },
   {
-    id: 11,
+    id: 8,
     title: "ASSETS CATEGORY",
     icon: HiFolderOpen,
     color: "cyan",
-   link: "#"
-  },
-  {
-    id: 12,
-    title: "ASSETS LOCATION",
-    icon: BiSolidEditLocation,
-    color: "pink",
-   link: "#"
+   link: "/dashboard/configuration/assets-category"
   },
 ];
 
 const dataConfiguration2 = [
   {
-    id: 13,
+    id: 9,
+    title: "ASSETS LOCATION",
+    icon: BiSolidEditLocation,
+    color: "pink",
+   link: "/dashboard/configuration/assets-location"
+  },
+  {
+    id: 10,
     title: "USER",
     icon: FaHouseUser,
     color: "violet",
@@ -194,7 +173,7 @@ export default function ConfigurationView() {
           {items}
         </SimpleGrid>
         <SimpleGrid
-          cols={1}
+          cols={2}
           spacing="lg"
           breakpoints={[
             { maxWidth: "xs", cols: 1, spacing: "sm" },

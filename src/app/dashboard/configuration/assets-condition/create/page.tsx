@@ -1,11 +1,11 @@
-"use client"
 import React from 'react';
 
-export default function DetailFaq() {
+function Page() {
   return (
     <div>
-      DetailFaq
+      Page
     </div>
   );
 }
 
+export default Page;

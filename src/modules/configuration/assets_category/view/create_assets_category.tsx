@@ -1,46 +1,34 @@
 "use client";
-
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { isModalCreateProjectsCategory } from "../val/isModalCreateProjectsCategory";
-import { funProjectsCategoryCreate } from "../fun/projects_category_create";
+import { isModalCreateAssetsCategory } from "../val/isModalAssetsCategory";
+import { funCreateAssetsCategory } from "../fun/assets_category_create";
 import toast from "react-simple-toasts";
-import "react-simple-toasts/dist/theme/dark.css";
-import {
-  Alert,
-  Box,
-  Button,
-  Grid,
-  Modal,
-  Stack,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { Alert, Box, Button, Grid, Modal, Stack, Text, TextInput } from "@mantine/core";
 import { ButtonBack, COLOR } from "@/modules/_global";
+import "react-simple-toasts/dist/theme/dark.css";
 
-export default function CreateProjectsCategory() {
+export default function CreateAssetsCategory() {
   const router = useRouter();
-  const [valOpenCreateProjectsCategory, setOpenCreateProjectscategory] =
-    useAtom(isModalCreateProjectsCategory);
+  const [valOpenAssets, setOpenAssets] = useAtom(isModalCreateAssetsCategory);
   const [loading, setLoading] = useState(false);
-  const [dataProjectCategory, setDataProjectCategory] = useState({
+  const [dataAssetsCategory, setDataAssetsCategory] = useState({
     name: "",
   });
 
-  async function onProjectCategory() {
+  async function onAssetscategory() {
     setLoading(true);
-    const res = await funProjectsCategoryCreate({ data: dataProjectCategory });
-    if (!res.success) return setLoading(false), toast(res.message);
-    toast("success", { theme: "dark" });
-    router.push("/dashboard/configuration/projects-category");
-    setOpenCreateProjectscategory(false);
+    const res = await funCreateAssetsCategory({ data: dataAssetsCategory });
+    if (!res.success) return setLoading(false), toast(res.message, {theme: "dark"});
+    router.push("/dashboard/configuration/assets-category");
+    setOpenAssets(false);
   }
 
-  function validasiCreateProjectCat() {
-    if (Object.values(dataProjectCategory).includes(""))
-      return toast("The form cannor be empty", { theme: "dark" });
-    setOpenCreateProjectscategory(true);
+  function validasiCreateAssets() {
+    if (Object.values(dataAssetsCategory).includes(""))
+    return  toast("The form cannor be empty", {theme: "dark"})
+  setOpenAssets(true)
   }
 
   return (
@@ -57,17 +45,17 @@ export default function CreateProjectsCategory() {
           }}
         >
           <Stack>
-            <Text>Create Project Category</Text>
+            <Text>Create Assets Category</Text>
             <TextInput
               placeholder="Name"
               onChange={(val) =>
-                setDataProjectCategory({
-                  ...dataProjectCategory,
+                setDataAssetsCategory({
+                  ...dataAssetsCategory,
                   name: val.target.value,
                 })
               }
             />
-            <Button color="gray.7" onClick={validasiCreateProjectCat}>
+            <Button color="gray.7" onClick={validasiCreateAssets}>
               SUBMIT
             </Button>
           </Stack>
@@ -75,8 +63,8 @@ export default function CreateProjectsCategory() {
       </Box>
       <Modal
         size={"md"}
-        opened={valOpenCreateProjectsCategory}
-        onClose={() => setOpenCreateProjectscategory(false)}
+        opened={valOpenAssets}
+        onClose={() => setOpenAssets(false)}
         centered
         withCloseButton={false}
         closeOnClickOutside={false}
@@ -84,7 +72,7 @@ export default function CreateProjectsCategory() {
         <Box>
           <Alert color="gray" variant="outline">
             <Text fw={700} ta={"center"} mb={20} mt={20}>
-              ARE YOU SURE TO CREATE PROJECTS CATEGORY?
+              ARE YOU SURE TO CREATE ASSETS CATEGORY?
             </Text>
             <Grid>
               <Grid.Col span={6}>
@@ -92,7 +80,7 @@ export default function CreateProjectsCategory() {
                   radius={10}
                   color="gray.7"
                   fullWidth
-                  onClick={() => setOpenCreateProjectscategory(false)}
+                  onClick={() => setOpenAssets(false)}
                 >
                   NO
                 </Button>
@@ -102,7 +90,7 @@ export default function CreateProjectsCategory() {
                   radius={10}
                   color="gray.7"
                   fullWidth
-                  onClick={onProjectCategory}
+                  onClick={onAssetscategory}
                 >
                   YES
                 </Button>
