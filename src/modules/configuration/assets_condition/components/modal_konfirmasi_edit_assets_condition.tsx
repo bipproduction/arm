@@ -1,30 +1,31 @@
-"use client";
 import { useAtom } from "jotai";
 import React from "react";
-import { isModalAssetsCondition } from "../val/isModalAssetsCondition";
+import { isModalEditAssetsCondition } from "../val/isModalAssetsCondition";
 import { useRouter } from "next/navigation";
-import { funDeleteAssetsCondition } from "../fun/assets_condition_delete";
+import { funUpdateAssetsCondition } from "../fun/assets_condition_update";
 import toast from "react-simple-toasts";
+import "react-simple-toasts/dist/theme/dark.css";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 
-export default function ModalKonfirmasiDeleteAssetsCondition(id: any) {
-  const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCondition);
-  const router = useRouter();
+export default function ModalKonfirmasiEditAssetsCondition({data}: {data: any}) {
+  const [valOpenModal, setOpenModal] =useAtom(isModalEditAssetsCondition)
+  const router = useRouter()
 
-  async function deleteAssetsCondition() {
-    const edit = await funDeleteAssetsCondition(id);
-    if (!edit.success) return toast(edit.message, { theme: "dark" });
-    toast("Success", { theme: "dark" });
+  async function  updAssetsCondition() {
+    const create = await funUpdateAssetsCondition(data)
+    if (!create.success) return toast(create.message, {theme: "dark"})
+    toast("Success", {theme: "dark"})
+    router.push("/dashboard/configuration/assets-condition");
     setOpenModal(false);
-    router.refresh();
+    
   }
 
   return (
     <>
-      <Box>
+     <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO DELETE THIS ASSET CONDITION?
+            ARE YOU SURE TO EDIT THIS ASSET CONDITION?
           </Text>
           <Grid>
             <Grid.Col span={6}>
@@ -42,7 +43,7 @@ export default function ModalKonfirmasiDeleteAssetsCondition(id: any) {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={deleteAssetsCondition}
+                onClick={updAssetsCondition}
               >
                 YES
               </Button>
@@ -51,5 +52,5 @@ export default function ModalKonfirmasiDeleteAssetsCondition(id: any) {
         </Alert>
       </Box>
     </>
-  );
+  )
 }

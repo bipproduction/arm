@@ -3,10 +3,23 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { isModalAssetsCondition } from "../val/isModalAssetsCondition";
-import { ActionIcon, Box, Button, Center, Group, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Center,
+  Group,
+  Modal,
+  ScrollArea,
+  SimpleGrid,
+  Stack,
+  Table,
+  Text,
+} from "@mantine/core";
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
+import ModalKonfirmasiDeleteAssetsCondition from "../components/modal_konfirmasi_delete_assets_condition";
 
 export default function TableAssetsCondition({ data }: { data: any }) {
   const router = useRouter();
@@ -97,6 +110,16 @@ export default function TableAssetsCondition({ data }: { data: any }) {
           </SimpleGrid>
         </Box>
       </Box>
+      <Modal
+        size={"md"}
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalKonfirmasiDeleteAssetsCondition id={dataDelete} />
+      </Modal>
     </>
   );
 }

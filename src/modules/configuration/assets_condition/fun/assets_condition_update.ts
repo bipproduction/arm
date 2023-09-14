@@ -1,10 +1,14 @@
 "use server";
 
 import prisma from "@/modules/_global/lib/prisma";
+import { AssetsCondition } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-export async function funCreateAssetsCondition({ data }: { data: any }) {
-  await prisma.assetsCondition.create({
+export async function funUpdateAssetsCondition(data: AssetsCondition) {
+  await prisma.assetsCondition.update({
+    where: {
+      id: Number(data.id),
+    },
     data: {
       name: data.name,
     },
@@ -14,6 +18,6 @@ export async function funCreateAssetsCondition({ data }: { data: any }) {
 
   return {
     success: true,
-    message: "success",
+    message: "Success",
   };
 }
