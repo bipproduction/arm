@@ -58,7 +58,7 @@ const dataConfiguration = [
     title: "OUTLET LOCATION",
     icon: ImLocation2,
     color: "cyan",
-   link: "#"
+   link: "/dashboard/configuration/outlet-location"
   },
   {
     id: 6,
