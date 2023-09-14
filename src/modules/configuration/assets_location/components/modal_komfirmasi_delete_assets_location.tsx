@@ -21,7 +21,7 @@ export default function ModalKomfirmasiDeleteAssetsLocation(id: any) {
 
   return (
     <>
-          <Box>
+      <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
             ARE YOU SURE TO DELETE THIS ASSET LOCATION?
@@ -51,5 +51,5 @@ export default function ModalKomfirmasiDeleteAssetsLocation(id: any) {
         </Alert>
       </Box>
     </>
-  )
+  );
 }

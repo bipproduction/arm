@@ -1,10 +1,10 @@
 "use client";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { isModalCreateAssetsLocation } from "../val/isModalAssetsLocation";
-import { funCreateAssetsLocation } from "../fun/assets_location_create";
+import { isModalCreateOutletLocation } from "../val/idModalOutletLocation";
+import { funCreateOutletLocation } from "..";
 import toast from "react-simple-toasts";
-import "react-simple-toasts/dist/theme/dark.css";
 import {
   Alert,
   Box,
@@ -16,30 +16,29 @@ import {
   TextInput,
 } from "@mantine/core";
 import { ButtonBack, COLOR } from "@/modules/_global";
-import { useAtom } from "jotai";
 
-export default function CreateAssetsLocation() {
+export default function CreateOutletLocation() {
   const router = useRouter();
-  const [valOpenAssets, setOpenAssets] = useAtom(isModalCreateAssetsLocation);
+  const [valOpenModal, setOpenModal] = useAtom(isModalCreateOutletLocation);
   const [loading, setLoading] = useState(false);
-  const [dataAssetsLoocation, setDataAssetsLocation] = useState({
+  const [dataOutletLocation, setDataOutletLocation] = useState({
     name: "",
   });
 
-  async function onAssetsLocation() {
+  async function onOutletLocation() {
     setLoading(true);
-    const res = await funCreateAssetsLocation({ data: dataAssetsLoocation });
+    const res = await funCreateOutletLocation({ data: dataOutletLocation });
     if (!res.success)
       return setLoading(false), toast(res.message, { theme: "dark" });
     toast("Success", { theme: "dark" });
-    router.push("/dashboard/configuration/assets-location");
-    setOpenAssets(false);
+    router.push("/dashboard/configuration/outlet-location");
+    setOpenModal(false);
   }
 
-  function validasiCreateAssets() {
-    if (Object.values(dataAssetsLoocation).includes(""))
+  function validasiOutletLocation() {
+    if (Object.values(dataOutletLocation).includes(""))
       return toast("The form cannor be empty", { theme: "dark" });
-    setOpenAssets(true);
+    setOpenModal(true);
   }
 
   return (
@@ -56,17 +55,17 @@ export default function CreateAssetsLocation() {
           }}
         >
           <Stack>
-            <Text>Create Assets Location</Text>
+            <Text>Create Outlet Location</Text>
             <TextInput
               placeholder="Name"
               onChange={(val) =>
-                setDataAssetsLocation({
-                  ...dataAssetsLoocation,
+                setDataOutletLocation({
+                  ...dataOutletLocation,
                   name: val.target.value,
                 })
               }
             />
-            <Button color="gray.7" onClick={validasiCreateAssets}>
+            <Button color="gray.7" onClick={validasiOutletLocation}>
               SUBMIT
             </Button>
           </Stack>
@@ -74,8 +73,8 @@ export default function CreateAssetsLocation() {
       </Box>
       <Modal
         size={"md"}
-        opened={valOpenAssets}
-        onClose={() => setOpenAssets(false)}
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
         centered
         withCloseButton={false}
         closeOnClickOutside={false}
@@ -83,7 +82,7 @@ export default function CreateAssetsLocation() {
         <Box>
           <Alert color="gray" variant="outline">
             <Text fw={700} ta={"center"} mb={20} mt={20}>
-              ARE YOU SURE TO CREATE ASSETS LOCATION?
+              ARE YOU SURE TO CREATE OUTLET LOCATION?
             </Text>
             <Grid>
               <Grid.Col span={6}>
@@ -91,7 +90,7 @@ export default function CreateAssetsLocation() {
                   radius={10}
                   color="gray.7"
                   fullWidth
-                  onClick={() => setOpenAssets(false)}
+                  onClick={() => setOpenModal(false)}
                 >
                   NO
                 </Button>
@@ -101,7 +100,7 @@ export default function CreateAssetsLocation() {
                   radius={10}
                   color="gray.7"
                   fullWidth
-                  onClick={onAssetsLocation}
+                  onClick={onOutletLocation}
                 >
                   YES
                 </Button>

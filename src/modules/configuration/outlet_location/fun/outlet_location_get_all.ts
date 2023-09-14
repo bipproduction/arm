@@ -2,8 +2,8 @@
 
 import prisma from "@/modules/_global/lib/prisma";
 
-export async function funGetProjectsCategory() {
-  const data = await prisma.projectCategory.findMany({
+export async function funGetAllOutletLocation() {
+  const data = await prisma.outletLocation.findMany({
     where: {
       isActive: true,
     },
@@ -12,6 +12,5 @@ export async function funGetProjectsCategory() {
       name: true,
     },
   });
-
   return data;
 }

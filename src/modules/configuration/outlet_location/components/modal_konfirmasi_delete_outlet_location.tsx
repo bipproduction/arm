@@ -1,18 +1,18 @@
-"use client";
+import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import { useAtom } from "jotai";
 import React from "react";
-import { isModalAssetsCondition } from "../val/isModalAssetsCondition";
+import { isModalOutletLocation } from "../val/idModalOutletLocation";
 import { useRouter } from "next/navigation";
-import { funDeleteAssetsCondition } from "../fun/assets_condition_delete";
+import { funDeleteOutletLocation } from "../fun/outlet_location_delete";
 import toast from "react-simple-toasts";
-import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import "react-simple-toasts/dist/theme/dark.css";
 
-export default function ModalKonfirmasiDeleteAssetsCondition(id: any) {
-  const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCondition);
+export default function ModalKonfirmasiDeleteOutletLocation(id: any) {
+  const [valOpenModal, setOpenModal] = useAtom(isModalOutletLocation);
   const router = useRouter();
 
-  async function deleteAssetsCondition() {
-    const edit = await funDeleteAssetsCondition(id);
+  async function deleteOutletLocation() {
+    const edit = await funDeleteOutletLocation(id);
     if (!edit.success) return toast(edit.message, { theme: "dark" });
     toast("Success", { theme: "dark" });
     setOpenModal(false);
@@ -24,7 +24,7 @@ export default function ModalKonfirmasiDeleteAssetsCondition(id: any) {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO DELETE THIS ASSET CONDITION?
+            ARE YOU SURE TO DELETE THIS OUTLET LOCATION?
           </Text>
           <Grid>
             <Grid.Col span={6}>
@@ -42,7 +42,7 @@ export default function ModalKonfirmasiDeleteAssetsCondition(id: any) {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={deleteAssetsCondition}
+                onClick={deleteOutletLocation}
               >
                 YES
               </Button>

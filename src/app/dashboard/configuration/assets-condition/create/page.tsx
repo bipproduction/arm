@@ -1,11 +1,8 @@
-import React from 'react';
+import { CreateAssetsCondition } from "@/modules/configuration/assets_condition";
+import React from "react";
 
 function Page() {
-  return (
-    <div>
-      Page
-    </div>
-  );
+  return <CreateAssetsCondition />;
 }
 
 export default Page;

@@ -1,8 +1,5 @@
 "use client";
-import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { isModalAssetsCondition } from "../val/isModalAssetsCondition";
+import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import {
   ActionIcon,
   Box,
@@ -16,32 +13,34 @@ import {
   Table,
   Text,
 } from "@mantine/core";
-import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
-import ModalKonfirmasiDeleteAssetsCondition from "../components/modal_konfirmasi_delete_assets_condition";
+import { isModalOutletLocation } from "../val/idModalOutletLocation";
+import ModalKonfirmasiDeleteOutletLocation from "../components/modal_konfirmasi_delete_outlet_location";
 
-export default function TableAssetsCondition({ data }: { data: any }) {
+export default function TableOutletLocation({ data }: { data: any }) {
   const router = useRouter();
-  const [listCondition, setListCondition] = useState<any[]>(data);
-  const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCondition);
+  const [listOutlet, setListOutlet] = useState<any[]>(data);
+  const [valOpenModal, setOpenModal] = useAtom(isModalOutletLocation);
   const [dataDelete, setDataDelete] = useState(Number);
-
   return (
     <>
       <Stack>
         <ButtonBack />
-        <PageSubTitle text="TABLE ASSETS CONDITION" />
+        <PageSubTitle text="TABLE OUTLET LOCATION" />
       </Stack>
       <Group pt={20} position="right">
         <Button
           color="green.9"
           onClick={() =>
-            router.push(`/dashboard/configuration/assets-condition/create`)
+            router.push(`/dashboard/configuration/outlet-location/create`)
           }
           leftIcon={<AiOutlineFileAdd size={"20"} />}
         >
-          ADD ASSETS CONDITION
+          ADD OUTLET LOCATION
         </Button>
       </Group>
       <Box pt={20}>
@@ -71,7 +70,7 @@ export default function TableAssetsCondition({ data }: { data: any }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {listCondition.map((v, i) => (
+                  {listOutlet.map((v, i) => (
                     <tr key={i}>
                       <td>{i + 1}</td>
                       <td>{v.name}</td>
@@ -93,7 +92,7 @@ export default function TableAssetsCondition({ data }: { data: any }) {
                               color="yellow.9"
                               onClick={() =>
                                 router.push(
-                                  `/dashboard/configuration/assets-condition/edit/${v.id}`
+                                  `/dashboard/configuration/outlet-location/edit/${v.id}`
                                 )
                               }
                             >
@@ -118,7 +117,7 @@ export default function TableAssetsCondition({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDeleteAssetsCondition id={dataDelete} />
+        <ModalKonfirmasiDeleteOutletLocation id={dataDelete}/>
       </Modal>
     </>
   );
