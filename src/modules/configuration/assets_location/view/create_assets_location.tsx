@@ -5,7 +5,16 @@ import { isModalCreateAssetsLocation } from "../val/isModalAssetsLocation";
 import { funCreateAssetsLocation } from "../fun/assets_location_create";
 import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
-import { Alert, Box, Button, Grid, Modal, Stack, Text, TextInput } from "@mantine/core";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Modal,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { ButtonBack, COLOR } from "@/modules/_global";
 import { useAtom } from "jotai";
 
@@ -20,15 +29,17 @@ export default function CreateAssetsLocation() {
   async function onAssetsLocation() {
     setLoading(true);
     const res = await funCreateAssetsLocation({ data: dataAssetsLoocation });
-    if (!res.success) return toast(res.message, { theme: "dark" });
+    if (!res.success)
+      return setLoading(false), toast(res.message, { theme: "dark" });
+    toast("Success", { theme: "dark" });
     router.push("/dashboard/configuration/assets-location");
     setOpenAssets(false);
   }
 
-  function validasiCreateAssets()  {
+  function validasiCreateAssets() {
     if (Object.values(dataAssetsLoocation).includes(""))
-    return toast("The form cannor be empty", {theme: "dark"})
-  setOpenAssets(true)
+      return toast("The form cannor be empty", { theme: "dark" });
+    setOpenAssets(true);
   }
 
   return (

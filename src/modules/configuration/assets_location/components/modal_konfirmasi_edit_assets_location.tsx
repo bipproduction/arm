@@ -1,22 +1,26 @@
-"use client";
+import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import { useAtom } from "jotai";
 import React from "react";
-import { isModalAssetsLocation } from "../val/isModalAssetsLocation";
+import { isModalEditAssetsLocation } from "../val/isModalAssetsLocation";
 import { useRouter } from "next/navigation";
-import { funDeleteAssetsLocation } from "../fun/assets_location_delete";
+import { funUpdateAssetsLocation } from "../fun/assets-location_update";
 import toast from "react-simple-toasts";
-import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import "react-simple-toasts/dist/theme/dark.css";
 
-export default function ModalKomfirmasiDeleteAssetsLocation(id: any) {
-  const [valOpenModal, setOpenModal] = useAtom(isModalAssetsLocation);
+export default function ModalKonfirmasiEditAssetsLocation({
+  data,
+}: {
+  data: any;
+}) {
+  const [valOpenModal, setOpenModal] = useAtom(isModalEditAssetsLocation);
   const router = useRouter();
 
-  async function deleteAssetsLocation() {
-    const edit = await funDeleteAssetsLocation(id);
-    if (!edit.success) return toast(edit.message, { theme: "dark" });
+  async function updAssetsLocation() {
+    const create = await funUpdateAssetsLocation(data);
+    if (!create.success) return toast(create.message, { theme: "dark" });
     toast("Success", { theme: "dark" });
+    router.push("/dashboard/configuration/assets-location");
     setOpenModal(false);
-    router.refresh();
   }
 
   return (
@@ -24,7 +28,7 @@ export default function ModalKomfirmasiDeleteAssetsLocation(id: any) {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO DELETE THIS ASSET LOCATION?
+            ARE YOU SURE TO EDIT THIS ASSET LOCATION?
           </Text>
           <Grid>
             <Grid.Col span={6}>
@@ -42,7 +46,7 @@ export default function ModalKomfirmasiDeleteAssetsLocation(id: any) {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={deleteAssetsLocation}
+                onClick={updAssetsLocation}
               >
                 YES
               </Button>
