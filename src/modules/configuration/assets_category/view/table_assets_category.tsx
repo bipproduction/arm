@@ -37,10 +37,10 @@ import {
 
 export default function TableAssetsCategory({
   data,
-  props,
+  // props,
 }: {
   data: any;
-  props: TextInputProps;
+  // props: TextInputProps;
 }) {
   const router = useRouter();
   const [listCategory, setListCategory] = useState<any[]>(data.data);
@@ -63,7 +63,7 @@ export default function TableAssetsCategory({
         <PageSubTitle text="TABLE ASSETS CATEGORY" />
       </Stack>
       <Group position="right" pt={20}>
-        <Grid >
+        <Grid>
           <Grid.Col>
             <TextInput
               icon={<LuSearch size="1.1rem" stroke={1.5} />}
@@ -85,7 +85,7 @@ export default function TableAssetsCategory({
               }
               placeholder="Search"
               // rightSectionWidth={30}
-              {...props}
+              // {...props}
             />
           </Grid.Col>
         </Grid>
