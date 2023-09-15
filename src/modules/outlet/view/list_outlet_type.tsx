@@ -14,14 +14,15 @@ import { funGetAllOutletType } from ".."
 export function ListOutletType({ data }: { data: any }) {
     const router = useRouter();
     const [listData, setListData] = useState<any[]>(data.data)
-    let number = 1;
     const [valOpenModal, setOpenModal] = useAtom(isModalOutlet)
     const [dataDelete, setDataDelete] = useState(Number)
     const [valPage, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(data.nPage)
-    async function onSearch(p: number) {
-        setPage(p)
-        const dataNext = await funGetAllOutletType(p)
+    let noAwal = valPage * 10 - 9;
+
+    async function onSearch(page: number) {
+        setPage(page)
+        const dataNext = await funGetAllOutletType({ p: page })
         setListData(dataNext.data);
         setTotalPage(dataNext.nPage)
     }
@@ -67,7 +68,7 @@ export function ListOutletType({ data }: { data: any }) {
                                         {
                                             listData.map((item) => (
                                                 <tr key={item.id}>
-                                                    <td>{number++}</td>
+                                                    <td>{noAwal++}</td>
                                                     <td>{item.name}</td>
                                                     <td>
                                                         <Group position="center">

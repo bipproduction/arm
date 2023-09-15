@@ -3,7 +3,7 @@
 import prisma from "@/modules/_global/lib/prisma"
 import _, { ceil } from "lodash";
 
-export async function funGetAllOutletType(p: number, s?: string) {
+export async function funGetAllOutletType({ p, s }: { p: number, s?: string }) {
     const skip = _.toNumber(p) * 10 - 10;
     const data = await prisma.outletType.findMany({
         skip: skip,
