@@ -17,7 +17,7 @@ export function LoginView() {
 
   async function sendOTP() {
     setRanOTP
-    const res = await fetch(`https://wa.makurostudio.my.id/code?nom=${inpTlp}&text=${ranOTP}`)
+    const res = await fetch(`https://wa.wibudev.com/code?nom=${inpTlp}&text=${ranOTP}`)
       .then(
         async (res) => {
           if (res.status == 200) {
