@@ -2,8 +2,8 @@
 
 import prisma from "@/modules/_global/lib/prisma";
 
-export async function funDeleteAssetsLocation({ id }: { id: number }) {
-  await prisma.assetsLocation.update({
+export async function funDeleteWarehouseLocation({ id }: { id: number }) {
+  const d = await prisma.warehouseLocation.update({
     where: {
       id: Number(id),
     },
@@ -15,5 +15,6 @@ export async function funDeleteAssetsLocation({ id }: { id: number }) {
   return {
     success: true,
     message: "success",
+    data: d
   };
 }
