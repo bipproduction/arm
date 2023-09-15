@@ -1,8 +1,7 @@
-import { ListOutletType } from "@/modules/outlet";
-import { funGetAllOutletType } from "@/modules/outlet/fun/get_all_outlet_type";
+import { ListOutletType, funGetAllOutletType } from "@/modules/outlet";
 
 export default async function Page() {
-    const data = await funGetAllOutletType()
+    const data = await funGetAllOutletType(1)
     return (
         <><ListOutletType data={data} /></>
     )

@@ -8,14 +8,23 @@ import { useState } from "react"
 import { MdAdd, MdDelete, MdOutlineModeEdit } from "react-icons/md"
 import { isModalOutlet } from "../val/valOutlet"
 import { ModalKonfirmasiDelOutletType } from "../component/modal_konfirmasi_del_outlet_type"
+import { funGetAllOutletType } from ".."
 
 
 export function ListOutletType({ data }: { data: any }) {
     const router = useRouter();
-    const [listData, setListData] = useState<any[]>(data)
+    const [listData, setListData] = useState<any[]>(data.data)
     let number = 1;
     const [valOpenModal, setOpenModal] = useAtom(isModalOutlet)
     const [dataDelete, setDataDelete] = useState(Number)
+    const [valPage, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(data.nPage)
+    async function onSearch(p: number) {
+        setPage(p)
+        const dataNext = await funGetAllOutletType(p)
+        setListData(dataNext.data);
+        setTotalPage(dataNext.nPage)
+    }
     return (
         <>
             <Stack>
@@ -23,7 +32,7 @@ export function ListOutletType({ data }: { data: any }) {
                 <PageSubTitle text="LIST OUTLET TYPE" />
                 <Box>
                     <Group position="right">
-                        <Button style={{ backgroundColor: COLOR.AbuAbu }} leftIcon={<MdAdd size="1rem" />} onClick={() => router.push('/dashboard/configuration/outlet-type/add')}>
+                        <Button color="green.9" leftIcon={<MdAdd size="1rem" />} onClick={() => router.push('/dashboard/configuration/outlet-type/add')}>
                             Add Outlet Type
                         </Button>
                     </Group>
@@ -31,7 +40,7 @@ export function ListOutletType({ data }: { data: any }) {
                 <Box>
                     <Box
                         sx={{
-                            backgroundColor: COLOR.AbuMuda,
+                            border: `1px solid ${COLOR.AbuMuda}`,
                             padding: 10,
                             borderRadius: 5,
                         }}
@@ -61,18 +70,23 @@ export function ListOutletType({ data }: { data: any }) {
                                                     <td>{number++}</td>
                                                     <td>{item.name}</td>
                                                     <td>
-                                                        <Center>
-                                                            <ActionIcon color="dark" onClick={() => router.push('/dashboard/configuration/outlet-type/edit/242313')}>
-                                                                <MdOutlineModeEdit size="25" />
-                                                            </ActionIcon>
-                                                            <ActionIcon color="red.9" onClick={() => {
-                                                                setDataDelete(item.id)
-                                                                setOpenModal(true)
-                                                            }
-                                                            }>
-                                                                <MdDelete size="23" />
-                                                            </ActionIcon>
-                                                        </Center>
+                                                        <Group position="center">
+                                                            <Box>
+                                                                <ActionIcon color="yellow.9" onClick={() => router.push(`/dashboard/configuration/outlet-type/edit/${item.id}`)}>
+                                                                    <MdOutlineModeEdit size="23" />
+                                                                </ActionIcon>
+                                                            </Box>
+                                                            <Box>
+                                                                <ActionIcon color="red.9" onClick={() => {
+                                                                    setDataDelete(item.id)
+                                                                    setOpenModal(true)
+                                                                }
+                                                                }>
+                                                                    <MdDelete size="23" />
+                                                                </ActionIcon>
+                                                            </Box>
+
+                                                        </Group>
                                                     </td>
                                                 </tr>
                                             ))
@@ -84,7 +98,7 @@ export function ListOutletType({ data }: { data: any }) {
                     </Box>
                 </Box>
                 <Group position="right" pt={10}>
-                    <Pagination total={10} />
+                    <Pagination value={valPage} onChange={(val) => onSearch(val)} total={totalPage} />
                 </Group>
             </Stack>
             <Modal
