@@ -2,30 +2,32 @@
 
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
 import { Box, Button, Divider, Grid, Modal, Stack, Text, TextInput } from "@mantine/core"
+import { ModalKonfirmasiEditOutletType } from "../component/modal_konfirmasi_edit_outlet_type"
 import { useFocusTrap } from "@mantine/hooks";
-import { isModalOutlet } from "../val/valOutlet";
 import { useAtom } from "jotai";
-import { ModalKonfirmasiOutletType } from "../component/modal_konfirmasi_add_outlet_type";
+import { isModalOutlet } from "../val/valOutlet";
 import { useState } from "react";
 import toast from "react-simple-toasts";
 
-export function AddOutletType() {
+export function EditOutletType({ data }: { data: any }) {
     const focusTrapRef = useFocusTrap();
-    const [valOpenModal, setOpenModal] = useAtom(isModalOutlet)
-    const [formAddOutletType, setAddOutletType] = useState({ name: '' })
+    const [valOpenModal, setOpenModal] = useAtom(isModalOutlet);
+    const [formEdit, setFormEdit] = useState(data)
 
-    function validasiOutlet() {
-        if (Object.values(formAddOutletType).includes("")) return toast("The form cannot be empty", { theme: "dark" });
+    function validasiOutletType() {
+        if(Object.values(formEdit).includes("")) return toast("The form cannot be empty", { theme: "dark" }); 
         setOpenModal(true);
     }
+
     return (
         <>
             <ButtonBack />
-            <PageSubTitle text="ADD OUTLET TYPE" />
+            <PageSubTitle text="EDIT OUTLET TYPE" />
             <Box pt={20}>
                 <Box
                     sx={{
-                        backgroundColor: COLOR.AbuMuda,
+                        backgroundColor: COLOR
+                            .AbuMuda,
                         padding: 15,
                         borderRadius: 5,
                     }}
@@ -42,11 +44,11 @@ export function AddOutletType() {
                             color="dark"
                         />
                         <Stack pt={10}>
-                            <TextInput placeholder="Outlet Type Name" onChange={(val) =>
-                                setAddOutletType({
-                                    ...formAddOutletType, name: val.target.value
-                                })}
-                            />
+                            <TextInput placeholder="Outlet Type Name" value={formEdit.name} onChange={(val) => {
+                                setFormEdit({
+                                    ...formEdit, name: val.target.value
+                                })
+                            }} />
                         </Stack>
                     </Box>
                 </Box>
@@ -54,7 +56,7 @@ export function AddOutletType() {
             </Box>
             <Grid pt={20}>
                 <Grid.Col md={3} sm={12}>
-                    <Button fullWidth radius={10} color="gray.7" onClick={validasiOutlet}>SUBMIT</Button>
+                    <Button fullWidth radius={10} color="gray.7" onClick={validasiOutletType}>SUBMIT</Button>
                 </Grid.Col>
             </Grid>
             <Modal
@@ -65,7 +67,7 @@ export function AddOutletType() {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalKonfirmasiOutletType data={formAddOutletType} />
+                <ModalKonfirmasiEditOutletType data={formEdit} />
             </Modal>
         </>
     )

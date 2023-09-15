@@ -1,13 +1,21 @@
 "use client";
 import { ButtonBack, COLOR } from "@/modules/_global";
-import { Box, Button, Stack, Text, TextInput } from "@mantine/core";
+import { Box, Button, Modal, Stack, Text, TextInput } from "@mantine/core";
+import { useAtom } from "jotai";
 import React, { useState } from "react";
+import { isModalFAQ } from "../val/isModalCreateFaq";
+import { ModalKonfirmasiEditFaq } from "../components/modal_konfirmasi_edit_faq";
+import { useFocusTrap } from "@mantine/hooks";
 
 export default function EditFaq({ data }: { data: any }) {
-  const [lisaData, setListData] = useState<any[]>(data);
+  const [listData, setListData] = useState(data);
+  const [valOpenModal, setOpenModal] = useAtom(isModalFAQ);
+  const focusTrapRef = useFocusTrap();
+  function validasiFaq() {
+    setOpenModal(true);
+  }
   return (
     <>
-      {/* {JSON.stringify(lisaData)} */}
       <Stack>
         <ButtonBack />
       </Stack>
@@ -18,36 +26,50 @@ export default function EditFaq({ data }: { data: any }) {
             padding: 20,
             borderRadius: 10,
           }}
+          ref={focusTrapRef}
         >
           <Stack>
             <Text>Edit FAQ</Text>
             <TextInput
               placeholder="Question"
-              // onChange={(val) =>
-              //   setDataFaq({
-              //     ...dataFaq,
-              //     question: val.target.value,
-              //   })
-              // }
+              value={listData.question}
+              onChange={(val) =>
+                setListData({
+                  ...listData,
+                  question: val.target.value,
+                })
+              }
             />
             <TextInput
               placeholder="Answer"
-              // onChange={(val) =>
-              //   setDataFaq({
-              //     ...dataFaq,
-              //     answer: val.target.value,
-              //   })
-              // }
+              value={listData.answer}
+              onChange={(val) =>
+                setListData({
+                  ...listData,
+                  answer: val.target.value,
+                })
+              }
             />
             <Button
               color="gray.7"
-              // onClick={onFaq}
+              onClick={validasiFaq}
             >
               EDIT
             </Button>
           </Stack>
         </Box>
       </Box>
+      <Modal
+        size={"md"}
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalKonfirmasiEditFaq data={listData} />
+      </Modal>
+
     </>
   );
 }

@@ -4,6 +4,7 @@ import {
   Alert,
   Box,
   Button,
+  FocusTrap,
   Grid,
   Modal,
   Stack,
@@ -17,30 +18,23 @@ import toasts from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import { funFaqCreate } from "../fun/faq_create";
 import { useAtom } from "jotai";
-import { isModalCreateFaq } from "../val/isModalCreateFaq";
+import { isModalFAQ } from "../val/isModalCreateFaq";
+import { useFocusTrap } from "@mantine/hooks";
+import { ModalKonfirmasiAddFaq } from "../components/modal_konfirmasi_add_faq";
+import toast from "react-simple-toasts";
 
 export default function CreateFaq() {
   const router = useRouter();
-  const [valOpenCreateFaq, setOpenCreateFaq] = useAtom(isModalCreateFaq);
-  const [loading, setLoading] = useState(false);
+  const [valOpenCreateFaq, setOpenCreateFaq] = useAtom(isModalFAQ);
   const [dataFaq, setDataFaq] = useState({
     question: "",
     answer: "",
   });
-
-  async function onFaq() {
-    setLoading(true)
-
-    const faqdata = await funFaqCreate({ data: dataFaq });
-    if (!faqdata.success) return setLoading(false), toasts(faqdata.message);
-    toasts("success");
-    router.push("/dashboard/configuration/faq");
-    setOpenCreateFaq(false);
-  }
+  const focusTrapRef = useFocusTrap();
 
   function validasiCreate() {
     if (Object.values(dataFaq).includes(""))
-      return toasts("The form cannor be empty", { theme: "dark" });
+      return toasts("The form cannot be empty", { theme: "dark" });
     setOpenCreateFaq(true);
   }
 
@@ -56,6 +50,7 @@ export default function CreateFaq() {
             padding: 20,
             borderRadius: 10,
           }}
+          ref={focusTrapRef}
         >
           <Stack>
             <Text>Create FAQ</Text>
@@ -91,30 +86,7 @@ export default function CreateFaq() {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <Box>
-          <Alert color="gray" variant="outline">
-            <Text fw={700} ta={"center"} mb={20} mt={20}>
-              ARE YOU SURE TO CREATE FAQ?
-            </Text>
-            <Grid>
-              <Grid.Col span={6}>
-                <Button
-                  radius={10}
-                  color="gray.7"
-                  fullWidth
-                  onClick={() => setOpenCreateFaq(false)}
-                >
-                  NO
-                </Button>
-              </Grid.Col>
-              <Grid.Col span={6}>
-                <Button radius={10} color="gray.7" fullWidth onClick={onFaq}>
-                  YES
-                </Button>
-              </Grid.Col>
-            </Grid>
-          </Alert>
-        </Box>
+        <ModalKonfirmasiAddFaq data={dataFaq} />
       </Modal>
     </>
   );

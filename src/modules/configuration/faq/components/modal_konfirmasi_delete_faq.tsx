@@ -22,7 +22,7 @@ export default function ModalKonfirmasiDeleteFaq(id: any) {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO DELETE THIS PROJECT CATEGORY?
+            ARE YOU SURE TO DELETE THIS FAQ?
           </Text>
           <Grid>
             <Grid.Col span={6}>
