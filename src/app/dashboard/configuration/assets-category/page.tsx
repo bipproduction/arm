@@ -5,6 +5,6 @@ import {
 import React from "react";
 
 export default async function Page() {
-  const data = await funGetAllAssetsCategory();
+  const data = await funGetAllAssetsCategory(1);
   return <TableAssetsCategory data={data} />;
 }

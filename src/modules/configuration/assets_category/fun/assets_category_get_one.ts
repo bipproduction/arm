@@ -6,7 +6,7 @@ export async function funGetOneAssetsCategory(id: any) {
   const data = await prisma.assetsCategory.findUnique({
     where: {
       isActive: true,
-      id: id,
+      id: Number(id),
     },
     select: {
       id: true,

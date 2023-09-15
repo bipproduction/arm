@@ -8,40 +8,101 @@ import {
   Box,
   Button,
   Center,
+  Flex,
+  Grid,
   Group,
   Modal,
+  Pagination,
   ScrollArea,
   SimpleGrid,
   Stack,
   Table,
   Text,
+  TextInput,
+  TextInputProps,
+  useMantineTheme,
 } from "@mantine/core";
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import ModalKonfirmasiDelAssetsCategory from "../components/modal_konfirmasi_del_assets_category";
+import { funGetAllAssetsCategory } from "..";
+import { LuSearch } from "react-icons/lu";
+import {
+  BsArrowLeftShort,
+  BsArrowRightShort,
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+} from "react-icons/bs";
 
-export default function TableAssetsCategory({ data }: { data: any }) {
+export default function TableAssetsCategory({
+  data,
+  props,
+}: {
+  data: any;
+  props: TextInputProps;
+}) {
   const router = useRouter();
-  const [listCategory, setListCategory] = useState<any[]>(data);
+  const [listCategory, setListCategory] = useState<any[]>(data.data);
   const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCategory);
   const [dataDelete, setDataDelete] = useState(Number);
+  const [valPage, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(data.nPage);
+  async function onSearch(p: number) {
+    setPage(p);
+    const dataNext = await funGetAllAssetsCategory(p);
+    setListCategory(dataNext.data);
+    setTotalPage(dataNext.nPage);
+  }
+  const theme = useMantineTheme();
+
   return (
     <>
       <Stack>
         <ButtonBack />
         <PageSubTitle text="TABLE ASSETS CATEGORY" />
       </Stack>
-      <Group pt={20} position="right">
-        <Button
-          color="green.9"
-          onClick={() =>
-            router.push(`/dashboard/configuration/assets-category/create`)
-          }
-          leftIcon={<AiOutlineFileAdd size={"20"} />}
-        >
-          ADD ASSETS CATEGORY
-        </Button>
+      <Group position="right" pt={20}>
+        <Grid >
+          <Grid.Col>
+            <TextInput
+              icon={<LuSearch size="1.1rem" stroke={1.5} />}
+              radius="sm"
+              rightSection={
+                <ActionIcon
+                  size="50"
+                  radius="sm"
+                  // color={COLOR.AbuMuda}
+                  bg={"gray.8"}
+                  variant="filled"
+                >
+                  {theme.dir === "ltr" ? (
+                    <BsArrowRightShort size="30" />
+                  ) : (
+                    <BsArrowLeftShort size="30" />
+                  )}
+                </ActionIcon>
+              }
+              placeholder="Search"
+              // rightSectionWidth={30}
+              {...props}
+            />
+          </Grid.Col>
+        </Grid>
+        <Grid>
+          <Grid.Col>
+            <Button
+              color="gray.7"
+              onClick={() =>
+                router.push(`/dashboard/configuration/assets-category/create`)
+              }
+              leftIcon={<AiOutlineFileAdd size={"20"} />}
+              fullWidth
+            >
+              ADD ASSETS CATEGORY
+            </Button>
+          </Grid.Col>
+        </Grid>
       </Group>
       <Box pt={20}>
         <Box
@@ -108,6 +169,13 @@ export default function TableAssetsCategory({ data }: { data: any }) {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10}>
+          <Pagination
+            value={valPage}
+            onChange={(val) => onSearch(val)}
+            total={totalPage}
+          />
+        </Group>
       </Box>
       <Modal
         size={"md"}

@@ -5,12 +5,23 @@ import React, { useState } from "react";
 import { isModalCreateAssetsCategory } from "../val/isModalAssetsCategory";
 import { funCreateAssetsCategory } from "../fun/assets_category_create";
 import toast from "react-simple-toasts";
-import { Alert, Box, Button, Grid, Modal, Stack, Text, TextInput } from "@mantine/core";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Modal,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { ButtonBack, COLOR } from "@/modules/_global";
 import "react-simple-toasts/dist/theme/dark.css";
+import { useFocusTrap } from "@mantine/hooks";
 
 export default function CreateAssetsCategory() {
   const router = useRouter();
+  const focusTrapRef = useFocusTrap();
   const [valOpenAssets, setOpenAssets] = useAtom(isModalCreateAssetsCategory);
   const [loading, setLoading] = useState(false);
   const [dataAssetsCategory, setDataAssetsCategory] = useState({
@@ -20,15 +31,17 @@ export default function CreateAssetsCategory() {
   async function onAssetscategory() {
     setLoading(true);
     const res = await funCreateAssetsCategory({ data: dataAssetsCategory });
-    if (!res.success) return setLoading(false), toast(res.message, {theme: "dark"});
+    if (!res.success)
+      return setLoading(false), toast(res.message, { theme: "dark" });
+    toast("Success", { theme: "dark" });
     router.push("/dashboard/configuration/assets-category");
     setOpenAssets(false);
   }
 
   function validasiCreateAssets() {
     if (Object.values(dataAssetsCategory).includes(""))
-    return  toast("The form cannor be empty", {theme: "dark"})
-  setOpenAssets(true)
+      return toast("The form cannor be empty", { theme: "dark" });
+    setOpenAssets(true);
   }
 
   return (
@@ -36,31 +49,35 @@ export default function CreateAssetsCategory() {
       <Stack>
         <ButtonBack />
       </Stack>
-      <Box pt={20}>
-        <Box
-          sx={{
-            border: `1px solid ${COLOR.AbuMuda}`,
-            padding: 20,
-            borderRadius: 10,
-          }}
-        >
-          <Stack>
-            <Text>Create Assets Category</Text>
-            <TextInput
-              placeholder="Name"
-              onChange={(val) =>
-                setDataAssetsCategory({
-                  ...dataAssetsCategory,
-                  name: val.target.value,
-                })
-              }
-            />
-            <Button color="gray.7" onClick={validasiCreateAssets}>
-              SUBMIT
-            </Button>
-          </Stack>
-        </Box>
-      </Box>
+      <Grid>
+        <Grid.Col md={6} xl={6} lg={6} sm={10}>
+          <Box pt={20} ref={focusTrapRef}>
+            <Box
+              sx={{
+                border: `1px solid ${COLOR.AbuMuda}`,
+                padding: 20,
+                borderRadius: 10,
+              }}
+            >
+              <Stack>
+                <Text>Create Assets Category</Text>
+                <TextInput
+                  placeholder="Name"
+                  onChange={(val) =>
+                    setDataAssetsCategory({
+                      ...dataAssetsCategory,
+                      name: val.target.value,
+                    })
+                  }
+                />
+                <Button color="gray.7" onClick={validasiCreateAssets}>
+                  SUBMIT
+                </Button>
+              </Stack>
+            </Box>
+          </Box>
+        </Grid.Col>
+      </Grid>
       <Modal
         size={"md"}
         opened={valOpenAssets}
@@ -99,6 +116,7 @@ export default function CreateAssetsCategory() {
           </Alert>
         </Box>
       </Modal>
+
     </>
   );
 }
