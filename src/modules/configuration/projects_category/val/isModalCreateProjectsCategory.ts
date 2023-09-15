@@ -7,3 +7,4 @@ export const isModalProjectCategory = atom(false)
 export const valAddProjectcategoryType = atom({
     name: ""
 })
+export const isModalEditProjectsCategory = atom(false)

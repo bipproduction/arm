@@ -1,11 +1,10 @@
+import { EditOutletLocation } from '@/modules/configuration/outlet_location';
+import { funGetOnOutletLocation } from '@/modules/configuration/outlet_location/fun/outlet_location_get_one';
 import React from 'react';
 
-function Page() {
+export default async function Page({params}: {params: {id: string}}) {
+  const data = await funGetOnOutletLocation(params.id)
   return (
-    <div>
-      Page
-    </div>
+    <EditOutletLocation data={data}/>
   );
 }
-
-export default Page;

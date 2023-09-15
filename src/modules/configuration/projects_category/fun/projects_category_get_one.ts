@@ -6,7 +6,7 @@ export async function funGetOneProjectsCategory(id: any) {
   const data = await prisma.projectCategory.findUnique({
     where: {
       isActive: true,
-      id: id,
+      id: Number(id),
     },
     select: {
       id: true,

@@ -18,9 +18,11 @@ import {
   TextInput,
 } from "@mantine/core";
 import { ButtonBack, COLOR } from "@/modules/_global";
+import { useFocusTrap } from "@mantine/hooks";
 
 export default function CreateProjectsCategory() {
   const router = useRouter();
+  const focusTrapRef = useFocusTrap();
   const [valOpenCreateProjectsCategory, setOpenCreateProjectscategory] =
     useAtom(isModalCreateProjectsCategory);
   const [loading, setLoading] = useState(false);
@@ -48,7 +50,7 @@ export default function CreateProjectsCategory() {
       <Stack>
         <ButtonBack />
       </Stack>
-      <Box pt={20}>
+      <Box pt={20} ref={focusTrapRef}>
         <Box
           sx={{
             border: `1px solid ${COLOR.AbuMuda}`,

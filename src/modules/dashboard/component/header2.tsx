@@ -105,9 +105,9 @@ export function HeaderDashboard2() {
                             </Box>
                         </Group>
                         <Group position="apart">
-                            <Box w={{ sm: 300, xl: 300, md: 300, lg: 300, base: 150 }}>
+                            {/* <Box w={{ sm: 300, xl: 300, md: 300, lg: 300, base: 150 }}>
                                 <TextInput placeholder="Search" />
-                            </Box>
+                            </Box> */}
                             <ActionIcon component="a" color="dark" href="/dashboard/cart">
                                 <BsFillCartFill size="20" />
                             </ActionIcon>

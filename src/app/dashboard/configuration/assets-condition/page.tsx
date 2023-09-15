@@ -6,6 +6,6 @@ import { data } from "autoprefixer";
 import React from "react";
 
 export default async function Page() {
-  const data = await funGetAllAssetsCondition();
+  const data = await funGetAllAssetsCondition(1);
   return <TableAssetsCondition data={data} />;
 }

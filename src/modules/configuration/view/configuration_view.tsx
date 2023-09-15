@@ -12,7 +12,7 @@ import {
   Stack,
   Box,
 } from "@mantine/core";
-import { FaHouseUser, FaQuora } from "react-icons/fa";
+import { FaDolly, FaHouseUser, FaQuora, FaUsers } from "react-icons/fa";
 import { GoProjectRoadmap } from "react-icons/go";
 import { MdLocationCity, MdOutlineMapsHomeWork, MdWorkHistory } from "react-icons/md";
 import { ImLocation2 } from "react-icons/im"
@@ -21,6 +21,8 @@ import { BiSolidEditLocation } from "react-icons/bi";
 import { HiFolderOpen } from "react-icons/hi";
 import { HiBuildingStorefront } from "react-icons/hi2";
 import { FaDollyFlatbed } from "react-icons/fa";
+import { TbBrandAppgallery } from "react-icons/tb";
+import { GrMapLocation } from "react-icons/gr";
 import { FcFaq } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 
@@ -69,27 +71,24 @@ const dataConfiguration = [
   },
   {
     id: 7,
-    title: "COMPANY",
-    icon: MdLocationCity,
-    color: "teal",
-   link: "#"
+    title: "CLIENT",
+    icon: FaUsers,
+    color: "indigo",
+   link: "/dashboard/configuration/client"
   },
   {
     id: 8,
     title: "ASSETS CATEGORY",
     icon: HiFolderOpen,
-    color: "cyan",
+    color: "orange",
    link: "/dashboard/configuration/assets-category"
   },
-];
-
-const dataConfiguration2 = [
   {
     id: 9,
-    title: "ASSETS LOCATION",
-    icon: BiSolidEditLocation,
+    title: "WAREHOUSE LOCATION",
+    icon: MdLocationCity,
     color: "pink",
-   link: "/dashboard/configuration/assets-location"
+   link: "/dashboard/configuration/warehouse-location"
   },
   {
     id: 10,
@@ -98,7 +97,23 @@ const dataConfiguration2 = [
     color: "violet",
     link: "#"
   },
+  {
+    id: 11,
+    title: "SUPPLIER",
+    icon: FaDolly,
+    color: "yellow",
+   link: "/dashboard/configuration/supplier"
+  },
+  {
+    id: 12,
+    title: "BRAND",
+    icon: TbBrandAppgallery,
+    color: "grape",
+    link: "/dashboard/configuration/brand"
+  },
 ];
+
+
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -144,14 +159,14 @@ export default function ConfigurationView() {
       </Text>
     </UnstyledButton>
   ));
-  const items2 = dataConfiguration2.map((item) => (
-    <UnstyledButton onClick={() => router.push(item.link)} key={item.id} className={classes.item}>
-      <item.icon color={theme.colors[item.color][6]} size="2rem" />
-      <Text size="xs" mt={7} fw={700}>
-        {item.title}
-      </Text>
-    </UnstyledButton>
-  ));
+  // const items2 = dataConfiguration2.map((item) => (
+  //   <UnstyledButton onClick={() => router.push(item.link)} key={item.id} className={classes.item}>
+  //     <item.icon color={theme.colors[item.color][6]} size="2rem" />
+  //     <Text size="xs" mt={7} fw={700}>
+  //       {item.title}
+  //     </Text>
+  //   </UnstyledButton>
+  // ));
 
   return (
     <>
@@ -172,7 +187,7 @@ export default function ConfigurationView() {
         >
           {items}
         </SimpleGrid>
-        <SimpleGrid
+        {/* <SimpleGrid
           cols={2}
           spacing="lg"
           breakpoints={[
@@ -181,7 +196,7 @@ export default function ConfigurationView() {
           pt={20}
         >
           {items2}
-        </SimpleGrid>
+        </SimpleGrid> */}
       </Card>
       </Box>
     </>
