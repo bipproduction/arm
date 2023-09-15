@@ -7,6 +7,7 @@ import {
   Center,
   Group,
   Modal,
+  Pagination,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -30,7 +31,7 @@ export default function TableFaq({ data }: { data: any }) {
     <>
       <Stack>
         <ButtonBack />
-        <PageSubTitle text="TABLE FAQ" />
+        <PageSubTitle text="LIST FAQ" />
       </Stack>
       <Group pt={20} position="right">
         <Button
@@ -38,7 +39,7 @@ export default function TableFaq({ data }: { data: any }) {
           onClick={() => router.push(`/dashboard/configuration/faq/create`)}
           leftIcon={<AiOutlineFileAdd size="20" />}
         >
-          ADD FAQ
+          Add FAQ
         </Button>
       </Group>
       <Box pt={20}>
@@ -78,17 +79,6 @@ export default function TableFaq({ data }: { data: any }) {
                         <Group position="center">
                           <Box>
                             <ActionIcon
-                              color="red.9"
-                              onClick={() => {
-                                setDataDelete(v.id);
-                                setOpenModal(true);
-                              }}
-                            >
-                              <MdDelete size="23" />
-                            </ActionIcon>
-                          </Box>
-                          <Box>
-                            <ActionIcon
                               color="yellow.9"
                               onClick={() =>
                                 router.push(
@@ -97,6 +87,17 @@ export default function TableFaq({ data }: { data: any }) {
                               }
                             >
                               <MdOutlineModeEdit size="23" />
+                            </ActionIcon>
+                          </Box>
+                          <Box>
+                            <ActionIcon
+                              color="red.9"
+                              onClick={() => {
+                                setDataDelete(v.id);
+                                setOpenModal(true);
+                              }}
+                            >
+                              <MdDelete size="23" />
                             </ActionIcon>
                           </Box>
                         </Group>
@@ -108,6 +109,9 @@ export default function TableFaq({ data }: { data: any }) {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10}>
+          <Pagination value={1} total={10} />
+        </Group>
       </Box>
       <Modal
         size={"md"}
