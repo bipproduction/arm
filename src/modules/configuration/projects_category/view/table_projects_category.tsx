@@ -1,6 +1,19 @@
 "use client";
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
-import { ActionIcon, Box, Button, Center, Group, Modal, ScrollArea, SimpleGrid, Stack, Table, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Center,
+  Group,
+  Modal,
+  Pagination,
+  ScrollArea,
+  SimpleGrid,
+  Stack,
+  Table,
+  Text,
+} from "@mantine/core";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -8,12 +21,22 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import { isModalProjectCategory } from "../val/isModalCreateProjectsCategory";
 import { ModalKonfirmasiDelProjectCategory } from "../components/modal_konfirmasi_del_project_category";
+import { funGetAllProjectsCategory } from "..";
 
 export default function TableProjectsCategory({ data }: { data: any }) {
   const router = useRouter();
-  const [listCategory, setListCategory] = useState<any[]>(data);
-  const[valOpenModal, setOpenModal] = useAtom(isModalProjectCategory)
-  const [dataDelete, setDataDelete] = useState(Number)
+  const [listCategory, setListCategory] = useState<any[]>(data.data);
+  const [valOpenModal, setOpenModal] = useAtom(isModalProjectCategory);
+  const [dataDelete, setDataDelete] = useState(Number);
+  const [valPage, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(data.nPage);
+
+  async function onSearch(p: number) {
+    setPage(p);
+    const dataNext = await funGetAllProjectsCategory(p);
+    setListCategory(dataNext.data);
+    setTotalPage(dataNext.nPage);
+  }
   return (
     <>
       <Stack>
@@ -65,10 +88,13 @@ export default function TableProjectsCategory({ data }: { data: any }) {
                       <td>
                         <Group position="center">
                           <Box>
-                            <ActionIcon color="red.9" onClick={() => {
-                              setDataDelete(v.id)
-                              setOpenModal(true)
-                            }}>
+                            <ActionIcon
+                              color="red.9"
+                              onClick={() => {
+                                setDataDelete(v.id);
+                                setOpenModal(true);
+                              }}
+                            >
                               <MdDelete size="23" />
                             </ActionIcon>
                           </Box>
@@ -93,17 +119,23 @@ export default function TableProjectsCategory({ data }: { data: any }) {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10}>
+          <Pagination
+            value={valPage}
+            onChange={(val) => onSearch(val)}
+            total={totalPage}
+          />
+        </Group>
       </Box>
       <Modal
-      size={"md"}
-      opened={valOpenModal}
-      onClose={()=> setOpenModal(false)}
-      centered
-      withCloseButton={false}
-      closeOnClickOutside={false}
+        size={"md"}
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDelProjectCategory id={dataDelete}/>
-
+        <ModalKonfirmasiDelProjectCategory id={dataDelete} />
       </Modal>
     </>
   );
