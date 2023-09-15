@@ -21,12 +21,23 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import { isModalFAQ } from "../val/isModalCreateFaq";
 import ModalKonfirmasiDeleteFaq from "../components/modal_konfirmasi_delete_faq";
+import { funGetFaq } from "../fun/faq_get";
 
 export default function TableFaq({ data }: { data: any }) {
   const router = useRouter();
-  const [lisaData, setListData] = useState<any[]>(data);
+  const [listData, setListData] = useState<any[]>(data.data);
   const [valOpenModal, setOpenModal] = useAtom(isModalFAQ);
   const [dataDelete, setDataDelete] = useState(String);
+  const [pageData, setPageData] = useState(1)
+  const [totalPage, setTotalPage] = useState(data.nPage)
+  let noAwal = pageData * 10 - 9;
+
+  async function onSearch(p: number) {
+    setPageData(p)
+    const dataNext = await funGetFaq(p)
+    setListData(dataNext.data);
+    setTotalPage(dataNext.nPage)
+  }
   return (
     <>
       <Stack>
@@ -70,9 +81,9 @@ export default function TableFaq({ data }: { data: any }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {lisaData.map((v, i) => (
+                  {listData.map((v, i) => (
                     <tr key={i}>
-                      <td>{i + 1}</td>
+                      <td>{noAwal++}</td>
                       <td>{v.question}</td>
                       <td>{v.answer}</td>
                       <td>
@@ -110,7 +121,7 @@ export default function TableFaq({ data }: { data: any }) {
           </SimpleGrid>
         </Box>
         <Group position="right" pt={10}>
-          <Pagination value={1} total={10} />
+          <Pagination value={pageData} onChange={(val) => onSearch(val)} total={totalPage} />
         </Group>
       </Box>
       <Modal
