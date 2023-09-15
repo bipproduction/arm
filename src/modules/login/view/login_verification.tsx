@@ -39,7 +39,7 @@ export function LoginVerification() {
 
   async function sendOTP() {
     setRanOTP
-    const res = await fetch(`https://wa.makurostudio.my.id/code?nom=${valPhoneLogin}&text=${ranOTP}`)
+    const res = await fetch(`https://wa.wibudev.com/code?nom=${valPhoneLogin}&text=${ranOTP}`)
       .then(
         async (res) => {
           if (res.status == 200) {

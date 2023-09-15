@@ -56,6 +56,7 @@ Cara seeder :
 
 - join : merupakan endpoint dari merge antara kontributor
 - build : merupakan branch yang digunakan untuk update pada server testing
+- fix-error : merupakan branch yang digunakan untuk handling error / apa bila terjadi error
 
 ### Server
 

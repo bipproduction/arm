@@ -48,12 +48,12 @@ model Profile {
   id        String   @id @default(cuid())
   Image     Image?   @relation(fields: [idImage], references: [id])
   idImage   String?
-  Company   Company? @relation(fields: [idCompany], references: [id])
-  idCompany String?
+  Client    Client?  @relation(fields: [idClient], references: [id])
+  idClient  String?
   name      String
   email     String   @unique
   phone     String   @unique
-  address   String
+  address   String   @db.Text
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -72,11 +72,11 @@ model Image {
   Assets              Assets[]
 }
 
-model Company {
+model Client {
   id             String           @id @default(cuid())
   name           String
   phone          String
-  address        String
+  address        String           @db.Text
   isActive       Boolean          @default(true)
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
@@ -93,8 +93,8 @@ model Reimbursement {
   id                 String    @id @default(cuid())
   User               User      @relation(fields: [idUser], references: [id])
   idUser             String
-  Company            Company   @relation(fields: [idCompany], references: [id])
-  idCompany          String
+  Client             Client    @relation(fields: [idClient], references: [id])
+  idClient           String
   ImageReimbursement Image?    @relation("ReimbursementToImage", fields: [idImgReimbursement], references: [id], map: "RembursementImg")
   idImgReimbursement String?
   Invoice            Invoice?  @relation(fields: [idInvoice], references: [id])
@@ -105,7 +105,7 @@ model Reimbursement {
   datePayment        DateTime? @db.Date
   price              BigInt
   title              String
-  description        String
+  description        String    @db.Text
   status             Int //0 = waiting approval, 1= approved, 2= paid
   isActive           Boolean   @default(true)
   createdAt          DateTime  @default(now())
@@ -113,35 +113,34 @@ model Reimbursement {
 }
 
 model Outlet {
-  id             String          @id @default(cuid())
-  Company        Company         @relation(fields: [idCompany], references: [id])
-  idCompany      String
-  OutletLocation OutletLocation? @relation(fields: [idLocation], references: [id])
-  idLocation     Int?
-  OutletType     OutletType?     @relation(fields: [idType], references: [id])
-  idType         Int?
-  OutletCategory OutletCategory? @relation(fields: [idCategory], references: [id])
-  idCategory     Int?
-  name           String
-  address        String
-  affiliation    String
-  pic            String
-  isActive       Boolean         @default(true)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  ProjectAssets  ProjectAssets[]
+  id                    String          @id @default(cuid())
+  Client                Client          @relation(fields: [idClient], references: [id])
+  idClient              String
+  OutletLocation        OutletLocation? @relation(fields: [idLocation], references: [id])
+  idLocation            Int?
+  OutletType            OutletType?     @relation(fields: [idType], references: [id])
+  idType                Int?
+  name                  String
+  address               String          @db.Text
+  contactName           String?
+  contactPhone          String?
+  email                 String?
+  size                  String?
+  licenseType           String
+  promotionalActivities String?         @db.Text
+  link                  String?
+  agreement             String?         @db.Text
+  visibility            String?         @db.Text
+  consumerGroup         String
+  pic                   String?
+  isActive              Boolean         @default(true)
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  ProjectAssets         ProjectAssets[]
+  OutletBrand           OutletBrand[]
 }
 
 model OutletType {
-  id        Int      @id @default(autoincrement())
-  name      String
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Outlet    Outlet[]
-}
-
-model OutletCategory {
   id        Int      @id @default(autoincrement())
   name      String
   isActive  Boolean  @default(true)
@@ -159,10 +158,21 @@ model OutletLocation {
   Outlet    Outlet[]
 }
 
+model OutletBrand {
+  id        String   @id @default(cuid())
+  Outlet    Outlet   @relation(fields: [idOutlet], references: [id])
+  idOutlet  String
+  Brand     Brand    @relation(fields: [idBrand], references: [id])
+  idBrand   Int
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Bill {
   id        String    @id @default(cuid())
-  Company   Company   @relation(fields: [idCompany], references: [id])
-  idCompany String
+  Client    Client    @relation(fields: [idClient], references: [id])
+  idClient  String
   dateBill  DateTime  @db.Date
   total     BigInt
   status    Int // 0 = unpaid, 1 = paid
@@ -187,6 +197,10 @@ model Invoice {
 
 model Assets {
   id                     String                   @id @default(cuid())
+  Brand                  Brand?                   @relation(fields: [idBrand], references: [id])
+  idBrand                Int?
+  Supplier               Supplier?                @relation(fields: [idSupplier], references: [id])
+  idSupplier             Int?
   AssetsCondition        AssetsCondition?         @relation(fields: [idCondition], references: [id])
   idCondition            Int?
   idType                 Int // 1= 1 kategori, 2 = per pcs
@@ -196,11 +210,20 @@ model Assets {
   idCategory             Int?
   Image                  Image?                   @relation(fields: [idImage], references: [id])
   idImage                String?
-  Company                Company                  @relation(fields: [idCompany], references: [id])
-  idCompany              String
+  Client                 Client                   @relation(fields: [idClient], references: [id])
+  idClient               String
+  sku                    String
   numberAssets           String
   name                   String
-  description            String
+  cost                   BigInt
+  price                  BigInt
+  qty                    Int
+  minimumQty             Int
+  safetyQty              Int
+  dimension              Int
+  expiredDate            DateTime                 @db.Date
+  handlingInstruction    String?
+  description            String?                  @db.Text
   isCondition            Boolean                  @default(false)
   isActive               Boolean                  @default(true)
   createdAt              DateTime                 @default(now())
@@ -208,6 +231,8 @@ model Assets {
   AssetsHistoryCondition AssetsHistoryCondition[]
   AssetsHistoryTracking  AssetsHistoryTracking[]
   ProjectListAssets      ProjectListAssets[]
+  AssetsAttributes       AssetsAttributes[]
+  AssetsDimension        AssetsDimension[]
 }
 
 model AssetsCategory {
@@ -229,13 +254,46 @@ model AssetsCondition {
   AssetsHistoryCondition AssetsHistoryCondition[]
 }
 
+model WarehouseLocation {
+  id             Int              @id @default(autoincrement())
+  name           String
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  AssetsLocation AssetsLocation[]
+}
+
 model AssetsLocation {
-  id        Int      @id @default(autoincrement())
+  id                Int               @id @default(autoincrement())
+  WarehouseLocation WarehouseLocation @relation(fields: [idWarehouse], references: [id])
+  idWarehouse       Int
+  name              String
+  isActive          Boolean           @default(true)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  Assets            Assets[]
+}
+
+model AssetsAttributes {
+  id        String   @id @default(cuid())
+  Assets    Assets   @relation(fields: [idAssets], references: [id])
+  idAssets  String
   name      String
+  value     String
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Assets    Assets[]
+}
+
+model AssetsDimension {
+  id        String   @id @default(cuid())
+  Assets    Assets   @relation(fields: [idAssets], references: [id])
+  idAssets  String
+  size      String
+  value     String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model AssetsHistoryCondition {
@@ -246,7 +304,7 @@ model AssetsHistoryCondition {
   idCondition     Int
   Assets          Assets          @relation(fields: [idAssets], references: [id])
   idAssets        String
-  description     String
+  description     String          @db.Text
   isActive        Boolean         @default(true)
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
@@ -258,7 +316,7 @@ model AssetsHistoryTracking {
   idUser    String
   Assets    Assets   @relation(fields: [idAssets], references: [id])
   idAssets  String
-  location  String
+  location  String   @db.Text
   amount    Int
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
@@ -292,8 +350,8 @@ model Project {
   idCategory      Int?
   ProjectStatus   ProjectStatus    @relation(fields: [idStatus], references: [id])
   idStatus        Int
-  Company         Company          @relation(fields: [idCompany], references: [id])
-  idCompany       String
+  Client          Client           @relation(fields: [idClient], references: [id])
+  idClient        String
   UserClients     User?            @relation("ClientToUser", fields: [idUserClient], references: [id], map: "ClientUser")
   idUserClient    String?
   UserBy          User?            @relation("ByUserToUser", fields: [idUserBy], references: [id], map: "ByUser")
@@ -302,7 +360,7 @@ model Project {
   projectNumber   String
   dateEvent       DateTime         @db.Date
   estimatesBudget BigInt
-  description     String
+  description     String           @db.Text
   isMadeByAgency  Boolean          @default(false)
   isFormal        Boolean          @default(true)
   isActive        Boolean          @default(true)
@@ -318,8 +376,8 @@ model ProjectHistory {
   idCategory      Int?
   ProjectStatus   ProjectStatus    @relation(fields: [idStatus], references: [id])
   idStatus        Int
-  Company         Company          @relation(fields: [idCompany], references: [id])
-  idCompany       String
+  Client          Client           @relation(fields: [idClient], references: [id])
+  idClient        String
   UserClients     User?            @relation("ClientHistoryToUser", fields: [idUserClient], references: [id], map: "ClientUserHistory")
   idUserClient    String?
   UserBy          User?            @relation("ByUserHistoryToUser", fields: [idUserBy], references: [id], map: "ByUserHistory")
@@ -328,7 +386,7 @@ model ProjectHistory {
   projectNumber   String
   dateEvent       DateTime         @db.Date
   estimatesBudget BigInt
-  description     String
+  description     String           @db.Text
   isMadeByAgency  Boolean          @default(false)
   isFormal        Boolean          @default(true)
   isActive        Boolean          @default(true)
@@ -343,7 +401,7 @@ model ProjectAssets {
   Outlet            Outlet              @relation(fields: [idOutlet], references: [id])
   idOutlet          String
   note              String
-  address           String
+  address           String              @db.Text
   dateDeliveryPlan  DateTime            @db.Date
   isActive          Boolean             @default(true)
   createdAt         DateTime            @default(now())
@@ -358,7 +416,7 @@ model ProjectListAssets {
   Assets          Assets        @relation(fields: [idAssets], references: [id])
   idAssets        String
   amount          Int
-  note            String
+  note            String        @db.Text
   isActive        Boolean       @default(true)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
@@ -384,7 +442,7 @@ model Cart {
   id        String   @id @default(cuid())
   idAssets  String
   amount    Int
-  note      String
+  note      String   @db.Text
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -396,7 +454,7 @@ model Notification {
   idUser    String
   kategori  String
   parameter String
-  message   String
+  message   String   @db.Text
   isRead    Boolean  @default(false)
   isACTived Boolean  @default(true)
   createdAt DateTime @default(now())
@@ -405,8 +463,8 @@ model Notification {
 
 model FAQ {
   id        String   @id @default(cuid())
-  question  String
-  answer    String
+  question  String   @db.Text
+  answer    String   @db.Text
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -417,8 +475,27 @@ model UserLog {
   User        User     @relation(fields: [idUser], references: [id])
   idUser      String
   activity    String
-  description String
+  description String   @db.Text
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Supplier {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Assets    Assets[]
+}
+
+model Brand {
+  id          Int           @id @default(autoincrement())
+  name        String
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Assets      Assets[]
+  OutletBrand OutletBrand[]
 }

@@ -2,8 +2,8 @@
 
 import prisma from "@/modules/_global/lib/prisma";
 
-export async function funGetOneAssetsLocation(id: any) {
-  const data = await prisma.assetsLocation.findUnique({
+export async function funGetOneWarehouseLocation(id: any) {
+  const data = await prisma.warehouseLocation.findUnique({
     where: {
       // isActive: true,
       id: Number(id),

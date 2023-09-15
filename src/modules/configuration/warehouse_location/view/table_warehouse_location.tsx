@@ -7,6 +7,7 @@ import {
   Center,
   Group,
   Modal,
+  Pagination,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -18,29 +19,42 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
-import { isModalAssetsLocation } from "../val/isModalAssetsLocation";
-import ModalKomfirmasiDeleteAssetsLocation from "../components/modal_komfirmasi_delete_assets_location";
+import { isModalWarehouseLocation } from "../val/isModalWarehouseLocation";
+import ModalKomfirmasiDeleteWarehouseLocation from "../components/modal_konfirmasi_delete_warehouse_location";
+import _ from "lodash";
+import { funGetAllWarehouseLocation } from "..";
 
-export default function TableAssetsLocation({ data }: { data: any }) {
+export const dynamic = "force-dynamic"
+export default function TableWarehouseLocation({ data }: { data: any }) {
   const router = useRouter();
-  const [listLocation, setListLocation] = useState<any[]>(data);
-  const [valOpenModal, setOpenModal] = useAtom(isModalAssetsLocation);
+  const [listLocation, setListLocation] = useState<any[]>(data.data);
+  const [valOpenModal, setOpenModal] = useAtom(isModalWarehouseLocation);
   const [dataDelete, setDataDelete] = useState(Number);
+  const [valPage, setValPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(data.nPage)
+  let noAwal = valPage*10-9;
+
+  async function onSearch(page: number) {
+    const dataNext = await funGetAllWarehouseLocation({ p: page })
+    setValPage(page)
+    setListLocation(dataNext.data)
+    setTotalPage(dataNext.nPage)
+  }
   return (
     <>
       <Stack>
         <ButtonBack />
-        <PageSubTitle text="TABLE ASSETS LOCATION" />
+        <PageSubTitle text="WAREHOUSE LOCATION" />
       </Stack>
       <Group pt={20} position="right">
         <Button
           color="green.9"
           onClick={() =>
-            router.push(`/dashboard/configuration/assets-location/create`)
+            router.push(`/dashboard/configuration/warehouse-location/create`)
           }
           leftIcon={<AiOutlineFileAdd size={"20"} />}
         >
-          ADD ASSETS LOCATION
+          ADD WAREHOUSE LOCATION
         </Button>
       </Group>
       <Box pt={20}>
@@ -72,7 +86,7 @@ export default function TableAssetsLocation({ data }: { data: any }) {
                 <tbody>
                   {listLocation.map((v, i) => (
                     <tr key={i}>
-                      <td>{i + 1}</td>
+                      <td>{noAwal++}</td>
                       <td>{v.name}</td>
                       <td>
                         <Group position="center">
@@ -92,7 +106,7 @@ export default function TableAssetsLocation({ data }: { data: any }) {
                               color="yellow.9"
                               onClick={() =>
                                 router.push(
-                                  `/dashboard/configuration/assets-location/edit/${v.id}`
+                                  `/dashboard/configuration/warehouse-location/edit/${v.id}`
                                 )
                               }
                             >
@@ -108,6 +122,9 @@ export default function TableAssetsLocation({ data }: { data: any }) {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10}>
+          <Pagination value={valPage} onChange={(val) => onSearch(val)} total={totalPage} />
+        </Group>
       </Box>
       <Modal
         size={"md"}
@@ -117,7 +134,11 @@ export default function TableAssetsLocation({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKomfirmasiDeleteAssetsLocation id={dataDelete} />
+        <ModalKomfirmasiDeleteWarehouseLocation id={dataDelete} onSuccess={(val) => {
+          const d = _.cloneDeep(listLocation)
+          const n = d.filter((v) => v.id !== val.data.id)
+          setListLocation(n)
+        }} />
       </Modal>
     </>
   );
