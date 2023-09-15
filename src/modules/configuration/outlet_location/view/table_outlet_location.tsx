@@ -7,6 +7,7 @@ import {
   Center,
   Group,
   Modal,
+  Pagination,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -20,12 +21,23 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import { isModalOutletLocation } from "../val/idModalOutletLocation";
 import ModalKonfirmasiDeleteOutletLocation from "../components/modal_konfirmasi_delete_outlet_location";
+import { funGetAllOutletLocation } from "..";
 
 export default function TableOutletLocation({ data }: { data: any }) {
   const router = useRouter();
-  const [listOutlet, setListOutlet] = useState<any[]>(data);
+  const [listOutlet, setListOutlet] = useState<any[]>(data.data);
   const [valOpenModal, setOpenModal] = useAtom(isModalOutletLocation);
   const [dataDelete, setDataDelete] = useState(Number);
+  const [valPage, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(data.nPage);
+
+  async function onSearch(p: number) {
+    setPage(p);
+    const dataNext = await funGetAllOutletLocation(p);
+    setListOutlet(dataNext.data);
+    setTotalPage(dataNext.nPage);
+  } 
+
   return (
     <>
       <Stack>
@@ -72,7 +84,7 @@ export default function TableOutletLocation({ data }: { data: any }) {
                 <tbody>
                   {listOutlet.map((v, i) => (
                     <tr key={i}>
-                      <td>{i + 1}</td>
+                      <td>{i + 1  }</td>
                       <td>{v.name}</td>
                       <td>
                         <Group position="center">
@@ -108,6 +120,13 @@ export default function TableOutletLocation({ data }: { data: any }) {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10}>
+          <Pagination
+            value={valPage}
+            onChange={(val) => onSearch(val)}
+            total={totalPage}
+          />
+        </Group>
       </Box>
       <Modal
         size={"md"}
@@ -117,7 +136,7 @@ export default function TableOutletLocation({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDeleteOutletLocation id={dataDelete}/>
+        <ModalKonfirmasiDeleteOutletLocation id={dataDelete} />
       </Modal>
     </>
   );

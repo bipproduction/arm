@@ -6,7 +6,7 @@ export async function funGetOnOutletLocation(id: any) {
   const data = await prisma.outletLocation.findUnique({
     where: {
       isActive: true,
-      id: id,
+      id: Number(id),
     },
     select: {
       id: true,
