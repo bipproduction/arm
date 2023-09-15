@@ -10,6 +10,7 @@ import {
   Center,
   Group,
   Modal,
+  Pagination,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -20,13 +21,21 @@ import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import ModalKonfirmasiDeleteAssetsCondition from "../components/modal_konfirmasi_delete_assets_condition";
+import { funGetAllAssetsCondition } from "..";
 
 export default function TableAssetsCondition({ data }: { data: any }) {
   const router = useRouter();
-  const [listCondition, setListCondition] = useState<any[]>(data);
+  const [listCondition, setListCondition] = useState<any[]>(data.data);
   const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCondition);
   const [dataDelete, setDataDelete] = useState(Number);
-
+  const [valPage, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(data.nPage);
+  async function onSearch(p: number) {
+    setPage(p);
+    const dataNext = await funGetAllAssetsCondition(p);
+    setListCondition(dataNext.data);
+    setTotalPage(dataNext.nPage);
+  }
   return (
     <>
       <Stack>
@@ -79,17 +88,6 @@ export default function TableAssetsCondition({ data }: { data: any }) {
                         <Group position="center">
                           <Box>
                             <ActionIcon
-                              color="red.9"
-                              onClick={() => {
-                                setDataDelete(v.id);
-                                setOpenModal(true);
-                              }}
-                            >
-                              <MdDelete size="23" />
-                            </ActionIcon>
-                          </Box>
-                          <Box>
-                            <ActionIcon
                               color="yellow.9"
                               onClick={() =>
                                 router.push(
@@ -98,6 +96,17 @@ export default function TableAssetsCondition({ data }: { data: any }) {
                               }
                             >
                               <MdOutlineModeEdit size="23" />
+                            </ActionIcon>
+                          </Box>
+                          <Box>
+                            <ActionIcon
+                              color="red.9"
+                              onClick={() => {
+                                setDataDelete(v.id);
+                                setOpenModal(true);
+                              }}
+                            >
+                              <MdDelete size="23" />
                             </ActionIcon>
                           </Box>
                         </Group>
@@ -109,6 +118,13 @@ export default function TableAssetsCondition({ data }: { data: any }) {
             </ScrollArea>
           </SimpleGrid>
         </Box>
+        <Group position="right" pt={10}>
+          <Pagination
+            value={valPage}
+            onChange={(val) => onSearch(val)}
+            total={totalPage}
+          />
+        </Group>
       </Box>
       <Modal
         size={"md"}

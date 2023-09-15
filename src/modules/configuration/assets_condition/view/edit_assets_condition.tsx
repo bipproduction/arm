@@ -18,7 +18,7 @@ export default function EditAssetsCondition({ data }: { data: any }) {
 
   return (
     <>
-      {JSON.stringify(formEdit)}
+      {/* {JSON.stringify(formEdit)} */}
       <Stack>
         <ButtonBack />
       </Stack>
