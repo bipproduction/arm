@@ -1,11 +1,10 @@
-import { EditAssetsCondition } from '@/modules/configuration/assets_condition';
-import { funGetOneAssetsCondition } from '@/modules/configuration/assets_condition/fun/assets_condition_get_one';
+import { EditAssetsCondition, funGetOneAssetsCondition } from '@/modules/assets';
 import React from 'react';
 
-export default async function Page({params}: {params: {id: string}}) {
-  const data = await funGetOneAssetsCondition(params.id)
-  if(!data) return <></>
+export default async function Page({ params }: { params: { id: string } }) {
+  const data = await funGetOneAssetsCondition({ id: params.id })
+  if (!data) return <></>
   return (
-    <EditAssetsCondition data={data}/>
+    <EditAssetsCondition data={data} />
   );
 }
