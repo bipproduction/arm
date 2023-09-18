@@ -1,9 +1,10 @@
 'use server'
 
 import prisma from "@/modules/_global/lib/prisma"
+import { OutletType } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
-export async function funCreateOutletType({ data }: { data: any }) {
+export async function funCreateOutletType({ data }: { data: OutletType }) {
     await prisma.outletType.create({
         data: {
             name: data.name,

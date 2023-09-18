@@ -2,7 +2,7 @@
 
 import { Box, Button, Center, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai"
-import { isModalOutlet } from "../val/valOutlet"
+import { isModalOutlet } from "../val/val_outlet"
 import toast from "react-simple-toasts"
 import "react-simple-toasts/dist/theme/dark.css"
 import { useRouter } from "next/navigation"

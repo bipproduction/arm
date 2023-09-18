@@ -2,7 +2,7 @@
 
 import prisma from "@/modules/_global/lib/prisma"
 
-export async function funGetOneOutletType(id: any) {
+export async function funGetOneOutletType({ id }: { id: any }) {
     const data = await prisma.outletType.findUnique({
         where: {
             id: Number(id)

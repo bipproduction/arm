@@ -3,15 +3,15 @@
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
 import { Box, Button, Divider, Grid, Modal, Stack, Text, TextInput } from "@mantine/core"
 import { useFocusTrap } from "@mantine/hooks";
-import { isModalOutlet } from "../val/valOutlet";
 import { useAtom } from "jotai";
-import { ModalKonfirmasiOutletType } from "../component/modal_konfirmasi_add_outlet_type";
 import { useState } from "react";
 import toast from "react-simple-toasts";
+import { isModalOutletType } from "../val/val_outlet_type";
+import { ModalKonfirmasiOutletType } from "../component/modal_konfirmasi_add_outlet_type";
 
 export function AddOutletType() {
     const focusTrapRef = useFocusTrap();
-    const [valOpenModal, setOpenModal] = useAtom(isModalOutlet)
+    const [valOpenModal, setOpenModal] = useAtom(isModalOutletType)
     const [formAddOutletType, setAddOutletType] = useState({ name: '' })
 
     function validasiOutlet() {
@@ -20,9 +20,34 @@ export function AddOutletType() {
     }
     return (
         <>
-            <ButtonBack />
-            <PageSubTitle text="ADD OUTLET TYPE" />
+            <Stack>
+                <ButtonBack />
+            </Stack>
             <Box pt={20}>
+                <Grid>
+                    <Grid.Col md={6} xl={6} lg={6} sm={10}>
+                        <Box
+                            sx={{
+                                border: `1px solid ${COLOR.AbuMuda}`,
+                                padding: 20,
+                                borderRadius: 10,
+                            }}
+                            ref={focusTrapRef}
+                        >
+                            <Stack>
+                                <Text>Create Outlet Type</Text>
+                                <TextInput placeholder="Outlet Type Name" value={formAddOutletType.name} onChange={(val) =>
+                                    setAddOutletType({
+                                        ...formAddOutletType, name: val.target.value
+                                    })}
+                                />
+                                <Button fullWidth radius={10} color="gray.7" onClick={validasiOutlet}>SUBMIT</Button>
+                            </Stack>
+                        </Box>
+                    </Grid.Col>
+                </Grid>
+            </Box>
+            {/* <Box pt={20}>
                 <Box
                     sx={{
                         backgroundColor: COLOR.AbuMuda,
@@ -42,7 +67,7 @@ export function AddOutletType() {
                             color="dark"
                         />
                         <Stack pt={10}>
-                            <TextInput placeholder="Outlet Type Name" onChange={(val) =>
+                            <TextInput placeholder="Outlet Type Name" value={formAddOutletType.name} onChange={(val) =>
                                 setAddOutletType({
                                     ...formAddOutletType, name: val.target.value
                                 })}
@@ -56,7 +81,7 @@ export function AddOutletType() {
                 <Grid.Col md={3} sm={12}>
                     <Button fullWidth radius={10} color="gray.7" onClick={validasiOutlet}>SUBMIT</Button>
                 </Grid.Col>
-            </Grid>
+            </Grid> */}
             <Modal
                 size={"md"}
                 opened={valOpenModal}
@@ -65,7 +90,9 @@ export function AddOutletType() {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalKonfirmasiOutletType data={formAddOutletType} />
+                <ModalKonfirmasiOutletType data={formAddOutletType} onSuccess={(val) => {
+                    setAddOutletType({ name: '' })
+                }} />
             </Modal>
         </>
     )

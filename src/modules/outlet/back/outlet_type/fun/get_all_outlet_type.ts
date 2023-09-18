@@ -3,13 +3,17 @@
 import prisma from "@/modules/_global/lib/prisma"
 import _, { ceil } from "lodash";
 
-export async function funGetAllOutletType({ p, s }: { p: number, s?: string }) {
-    const skip = _.toNumber(p) * 10 - 10;
+export async function funGetAllOutletType({ page, search }: { page: number, search?: string }) {
+    const skip = _.toNumber(page) * 10 - 10;
     const data = await prisma.outletType.findMany({
         skip: skip,
         take: 10,
         where: {
-            isActive: true
+            isActive: true,
+            name: {
+                contains: search,
+                mode: "insensitive"
+            }
         },
         select: {
             id: true,
@@ -22,12 +26,16 @@ export async function funGetAllOutletType({ p, s }: { p: number, s?: string }) {
 
     const nData = await prisma.outletType.count({
         where: {
-            isActive: true
+            isActive: true,
+            name: {
+                contains: search,
+                mode: "insensitive"
+            }
         }
     })
 
     const allData = {
-        data : data,
+        data: data,
         nPage: ceil(nData / 10)
     }
     return allData

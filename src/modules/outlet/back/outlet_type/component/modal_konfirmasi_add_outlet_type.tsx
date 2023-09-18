@@ -2,27 +2,29 @@
 
 import { Alert, Box, Button, Center, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai"
-import { isModalOutlet } from "../val/valOutlet"
 import toast from "react-simple-toasts"
 import "react-simple-toasts/dist/theme/dark.css"
 import { useRouter } from "next/navigation"
-import { funDelOutletType } from "../fun/del_outlet_type"
+import { funCreateOutletType } from "../fun/create_outlet_type"
+import { useState } from "react"
+import { isModalOutletType } from "../val/val_outlet_type"
 
-export function ModalKonfirmasiDelOutletType(id: any) {
-    const [valOpenModal, setOpenModal] = useAtom(isModalOutlet);
+export function ModalKonfirmasiOutletType({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
+    const [valOpenModal, setOpenModal] = useAtom(isModalOutletType);
+    const [formAddOutletType, setFormAddOutletType] = useState(data)
     const router = useRouter();
-    async function delOutletType() {
-        const edit = await funDelOutletType(id)
-        if (!edit.success) return toast(edit.message, { theme: "dark" });
+    async function createOutletType() {
+        const create = await funCreateOutletType({ data: formAddOutletType })
+        if (!create.success) return toast(create.message, { theme: "dark" });
         toast("Success", { theme: "dark" });
+        onSuccess(true)
         setOpenModal(false);
-        router.refresh();
     }
     return (
         <>
             <Box>
                 <Alert color="gray" variant="outline">
-                        <Text fw={700} ta={"center"} mb={20} mt={20}>ARE YOU SURE TO DELETE THIS OUTLET TYPE?</Text>
+                    <Text fw={700} ta={"center"} mb={20} mt={20}>ARE YOU SURE TO ADD OUTLET TYPE?</Text>
                     <Group position="apart" pt={10}>
                         <Button
                             radius={10}
@@ -36,7 +38,7 @@ export function ModalKonfirmasiDelOutletType(id: any) {
                             radius={10}
                             color="gray.7"
                             w={150}
-                            onClick={delOutletType}
+                            onClick={createOutletType}
                         >
                             YES
                         </Button>

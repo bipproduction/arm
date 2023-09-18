@@ -4,12 +4,16 @@ import prisma from "@/modules/_global/lib/prisma"
 import { revalidatePath } from "next/cache"
 
 export async function funDelOutletType({ id }: { id: number }) {
-    await prisma.outletType.update({
+    const data = await prisma.outletType.update({
         where: {
             id: Number(id)
         },
         data: {
             isActive: false
+        },
+        select: {
+            id: true,
+            name: true
         }
     })
 
@@ -17,7 +21,8 @@ export async function funDelOutletType({ id }: { id: number }) {
 
     return {
         success: true,
-        message: "success"
+        message: "success",
+        dataDel: data
     }
 
 }
