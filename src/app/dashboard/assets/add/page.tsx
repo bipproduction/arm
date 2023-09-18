@@ -1,4 +1,4 @@
-import { CreateAssets } from '@/modules/assets/modules';
+import { CreateAssets } from '@/modules/assets';
 import React from 'react';
 
 function Page() {
