@@ -8,9 +8,9 @@ export function CreateProject() {
   return (
     <>
       <Stack>
-        <ButtonBack link="/dashboard/list-client"/>
-        <PageSubTitle text="CREATE PROJECT"/>
-        <TabCreateProject/>
+        <ButtonBack link="/dashboard/list-client" />
+        <PageSubTitle text="CREATE PROJECT" />
+        <TabCreateProject />
       </Stack>
     </>
   );

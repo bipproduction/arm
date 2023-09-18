@@ -100,7 +100,7 @@ const dataDeliveryStatus = [
 ];
 
 export function ListDeliveryStatus() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <>
       <Stack>
@@ -151,7 +151,7 @@ export function ListDeliveryStatus() {
                   </tr>
                 </thead>
                 <tbody>
-                {dataDeliveryStatus.map((item) => (
+                  {dataDeliveryStatus.map((item) => (
                     <tr key={item.id}>
                       <td>{item.id}</td>
                       <td>{item.brand}</td>
@@ -162,7 +162,11 @@ export function ListDeliveryStatus() {
                         <Center>
                           <ActionIcon
                             color="dark"
-                            onClick={() => router.push(`/dashboard/delivery-status/` + item.no)}
+                            onClick={() =>
+                              router.push(
+                                `/dashboard/delivery-status/` + item.no
+                              )
+                            }
                           >
                             <BiSolidUserDetail size="25" />
                           </ActionIcon>

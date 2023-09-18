@@ -8,7 +8,7 @@ export const ButtonBack = ({ link }: { link?: string }) => {
     const router = useRouter()
     return (
         <>
-            <Group mb={20}>
+            <Group >
                 <Box onClick={router.back} style={{ textDecoration: "none" }}>
                     <Group style={{ cursor: "pointer" }}>
                         <BiArrowBack size="20" />

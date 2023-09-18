@@ -20,13 +20,12 @@ import { atomWithStorage } from "jotai/utils";
 import { useRouter } from "next/navigation";
 import React from "react";
 import ModalQuotationView from "./modal_quotation";
-
-const val_quotation = atomWithStorage("val_quotation", false);
+import { isModalQuotation } from "../val/isModalQuotation";
 
 export function CreateQuotation({ id }: { id: string }) {
   const focusTrapRef = useFocusTrap();
   const router = useRouter();
-  const [openQuotation, setOpenQuotation] = useAtom(val_quotation);
+  const [valOpenQuotation, setOpenQuotation] = useAtom(isModalQuotation);
   return (
     <>
       <Stack>
@@ -105,22 +104,15 @@ export function CreateQuotation({ id }: { id: string }) {
           </Button>
         </Grid.Col>
       </Grid>
-      <ModalQuotation />
-    </>
-  );
-}
-export function ModalQuotation() {
-  const [openQuotation, setOpenQuotation] = useAtom(val_quotation);
-  const router = useRouter();
-  return (
-    <>
       <Modal
-        opened={openQuotation}
-        onClose={() => openQuotation}
+        size={"md"}
+        opened={valOpenQuotation}
+        onClose={() => setOpenQuotation(false)}
         centered
         withCloseButton={false}
+        closeOnClickOutside={false}
       >
-        <ModalQuotationView closeQuotation={() => setOpenQuotation(false)} />
+        <ModalQuotationView />
       </Modal>
     </>
   );

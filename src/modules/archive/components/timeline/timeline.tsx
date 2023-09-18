@@ -194,7 +194,7 @@ export default function Timeline() {
             </ScrollArea>
           </SimpleGrid>
         </Box>
-      <Group position="right" pt={10} pb={60}>
+        <Group position="right" pt={10} pb={60}>
           <Pagination total={10} />
         </Group>
       </Box>

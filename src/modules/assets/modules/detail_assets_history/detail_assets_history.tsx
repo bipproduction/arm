@@ -34,9 +34,8 @@ const useStyles = createStyles((theme) => ({
   footer: {
     padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
     marginTop: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 }));
 
@@ -77,7 +76,7 @@ export default function DetailAssetsHistory() {
                 <Card.Section className={classes.footer}>
                   <Group position="apart" pt={10}>
                     <Group fw={700}>
-                      <Text>THE MACALLAN</Text>
+                      <Text>Item</Text>
                     </Group>
                     <Group>
                       <HiCheckCircle size="30" />

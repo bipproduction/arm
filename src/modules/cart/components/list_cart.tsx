@@ -1,55 +1,56 @@
 "use client";
-import { COLOR } from "@/modules/_global";
 import {
   ActionIcon,
-  AspectRatio,
   Box,
   Button,
-  Center,
   Checkbox,
   Collapse,
+  Flex,
   Grid,
   Group,
   Image,
-  Paper,
-  SimpleGrid,
-  Stack,
+  NumberInput,
+  NumberInputHandlers,
   Text,
-  TextInput,
   Textarea,
+  rem,
 } from "@mantine/core";
-import { useCounter, useDisclosure } from "@mantine/hooks";
-import React from "react";
-import { MdOutlineNoteAlt } from "react-icons/md";
-import { QuantityInput } from "./quantity_button";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { MdOutlineNoteAlt } from "react-icons/md";
 
 function ListCart() {
   const [opened, { toggle }] = useDisclosure(false);
-  const [count, handlers] = useCounter(0, { min: 0, max: 10 });
+  const [value, setValue] = useState<number | "">(0);
+  const handlers = useRef<NumberInputHandlers>();
   const router = useRouter()
   return (
     <>
       <Box pt={30}>
-        <Checkbox label="All" />
-        <Box pt={20}>
-          <Box
-            sx={{
-              backgroundColor: COLOR.AbuMuda,
-              borderRadius: 10,
-              padding: 20,
-            }}
-          >
-            <Grid>
-              <Grid.Col span={1}>
-                <Center>
-                  <Box pt={{ base: 30, sm: 70 }}>
-                    <Checkbox />
-                  </Box>
-                </Center>
-              </Grid.Col>
-              <Grid.Col span={4}>
+        <Box pb={10}>
+          <Checkbox label="All" />
+        </Box>
+        <Box
+          sx={{
+            border: "1px solid #CED4DA",
+            padding: 20,
+            borderRadius: 10,
+          }}
+        >
+          <Grid>
+            <Grid.Col md={9} lg={9}>
+              <Flex
+                mih={50}
+                gap="md"
+                justify="flex-start"
+                align="center"
+                direction="row"
+                wrap="wrap"
+              >
+                <Box>
+                  <Checkbox />
+                </Box>
                 <Box>
                   <Image
                     src={"../img/meja.jpeg"}
@@ -59,11 +60,9 @@ function ListCart() {
                     alt="img"
                   />
                 </Box>
-              </Grid.Col>
-              <Grid.Col span={4}>
                 <Box>
                   <Text fw={700} fz={{ sm: 20, base: 10 }}>
-                    THE MACALLAN
+                    Item
                   </Text>
                   <Text color="dark.3" fz={{ sm: 13, base: 9 }}>
                     Harmony 2
@@ -83,23 +82,53 @@ function ListCart() {
                     <Textarea />
                   </Collapse>
                 </Box>
-              </Grid.Col>
-              <Grid.Col span={3}>
-                <Box pt={{ base: 20, sm: 60 }}>
-                  <QuantityInput />
-                </Box>
-              </Grid.Col>
-            </Grid>
-          </Box>
-          <Grid pt={20}>
-            <Grid.Col md={3} sm={12}>
-              <Button fullWidth radius={10} color="gray.7" onClick={() => router.push("/dashboard/checkout")}>
-                SUBMIT
-              </Button>
+              </Flex>
+            </Grid.Col>
+            <Grid.Col md={3} lg={3}>
+              <Group position="center" pt={{ sm: 50, base: 0 }}>
+                <ActionIcon
+                  size={35}
+                  variant="default"
+                  onClick={() => handlers.current?.decrement()}
+                >
+                  –
+                </ActionIcon>
+
+                <NumberInput
+                  hideControls
+                  value={value}
+                  onChange={(val) => setValue(val)}
+                  handlersRef={handlers}
+                  max={10}
+                  min={0}
+                  step={2}
+                  styles={{ input: { width: rem(54), textAlign: "center" } }}
+                />
+
+                <ActionIcon
+                  size={35}
+                  variant="default"
+                  onClick={() => handlers.current?.increment()}
+                >
+                  +
+                </ActionIcon>
+              </Group>
             </Grid.Col>
           </Grid>
         </Box>
-      </Box>
+      </Box >
+      <Grid pt={20} pb={60}>
+        <Grid.Col md={3} sm={12}>
+          <Button
+            fullWidth
+            radius={10}
+            color="gray.7"
+            onClick={() => router.push("/dashboard/checkout")}
+          >
+            SUBMIT
+          </Button>
+        </Grid.Col>
+      </Grid>
     </>
   );
 }

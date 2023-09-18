@@ -37,9 +37,8 @@ const useStyles = createStyles((theme) => ({
   footer: {
     padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
     marginTop: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 }));
 
@@ -78,10 +77,18 @@ export function AssetsView() {
       <Group position="apart">
         <PageTitle text="ASSETS" />
         <Group position="right" pb={20}>
-          <Button leftIcon={<BsQrCodeScan size="20" />} color="gray.7" onClick={() => router.push("/dashboard/assets/scan")}>
+          <Button
+            leftIcon={<BsQrCodeScan size="20" />}
+            color="gray.7"
+            onClick={() => router.push("/dashboard/assets/scan")}
+          >
             SCAN BARCODE
           </Button>
-          <Button leftIcon={<AiOutlineFolderAdd size="20" />} color="gray.7" onClick={() => router.push("/dashboard/assets/add")}>
+          <Button
+            leftIcon={<AiOutlineFolderAdd size="20" />}
+            color="gray.7"
+            onClick={() => router.push("/dashboard/assets/add")}
+          >
             ADD ASSETS
           </Button>
         </Group>
@@ -152,19 +159,27 @@ export function AssetsView() {
                   </Card.Section>
 
                   <Text fw={700} className={classes.title} mt="xs">
-                    MEJA KAYU
+                    Mobile Bar
                   </Text>
                   <Card.Section className={classes.footer}>
                     <Group position="apart">
                       <Group spacing={30}>
-                        <ActionIcon onClick={() => router.push("/dashboard/assets/edit")}>
+                        <ActionIcon
+                          onClick={() => router.push("/dashboard/assets/edit")}
+                        >
                           <MdOutlineDriveFileRenameOutline
                             size="25"
                             color={theme.colors.red[6]}
                             stroke={1.5}
                           />
                         </ActionIcon>
-                        <ActionIcon onClick={() => router.push("/dashboard/assets/detail-assets/37923729")}>
+                        <ActionIcon
+                          onClick={() =>
+                            router.push(
+                              "/dashboard/assets/detail-assets/37923729"
+                            )
+                          }
+                        >
                           <MdOutlinePrint
                             size="25"
                             color={theme.colors.yellow[6]}

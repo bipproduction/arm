@@ -1,9 +1,18 @@
+import { isModalRevoked } from "@/modules/project_status/val/isModalRevoked";
 import { Box, Button, Center, Group, Text, Textarea } from "@mantine/core";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-simple-toasts";
+import "react-simple-toasts/dist/theme/dark.css";
 
-function ModalCloseRevoked({ closeRevoked }: any) {
-  const router = useRouter()
+function ModalCloseRevoked() {
+  const router = useRouter();
+  const [openRevoked, setOpenRevoked] = useAtom(isModalRevoked);
+  function closeRevoked() {
+    toast("Success", { theme: "dark" });
+    setOpenRevoked(false);
+  }
   return (
     <>
       <Box>
@@ -16,16 +25,11 @@ function ModalCloseRevoked({ closeRevoked }: any) {
             radius={10}
             color="gray.7"
             w={150}
-            onClick={() => closeRevoked(false)}
+            onClick={() => setOpenRevoked(false)}
           >
             NO
           </Button>
-          <Button
-            radius={10}
-            color="gray.7"
-            w={150}
-            onClick={() => closeRevoked(false)}
-          >
+          <Button radius={10} color="gray.7" w={150} onClick={closeRevoked}>
             YES
           </Button>
         </Group>

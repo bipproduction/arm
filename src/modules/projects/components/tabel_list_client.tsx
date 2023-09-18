@@ -108,7 +108,7 @@ function TabelListClient() {
   return (
     <>
       <Stack>
-        <ButtonBack link="/dashboard"/>
+        <ButtonBack link="/dashboard" />
         <PageSubTitle text="List Client" />
         <Box pt={20}>
           <Box

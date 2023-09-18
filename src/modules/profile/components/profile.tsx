@@ -36,7 +36,7 @@ export default function Profile() {
                   Welcome,
                 </Text>
                 <Text fw={700} fz={20}>
-                  A.R.M INDONESIA
+                  ARM INDONESIA
                 </Text>
               </Box>
             </Group>
@@ -76,7 +76,7 @@ export default function Profile() {
                       NAME
                     </Text>
                     <Text color="gray.6" fz={14}>
-                      A.R.M INDONESIA
+                      ARM INDONESIA
                     </Text>
                   </Box>
                   <Box pt={10}>

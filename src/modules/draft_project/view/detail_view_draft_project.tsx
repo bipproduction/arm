@@ -22,17 +22,15 @@ import { useAtom } from "jotai";
 import ModalCloseRevoked from "../components/modal_close_revoked";
 
 
-const val_open_revoked = atomWithStorage("val_open_revoked", false)
 
 export function DetailViewDraftProject({ id }: { id: string }) {
   const [opened, { toggle }] = useDisclosure(false);
-  const [openRevoked, setOpenRevoked] = useAtom(val_open_revoked)
   return (
     <>
       <Stack>
         <ButtonBack link="/dashboard/detail-draft-project" />
         <Group position="right">
-          <Button leftIcon={<IoIosCloseCircle size="20" />} color="gray.7" onClick={(() =>  setOpenRevoked(true))}>
+          <Button leftIcon={<IoIosCloseCircle size="20" />} color="gray.7">
             REVOKE
           </Button>
           <Button
@@ -161,7 +159,7 @@ export function DetailViewDraftProject({ id }: { id: string }) {
                     </Box>
                     <Box>
                       <Text fw={700} color="white" fz={{ sm: 20, base: 10 }}>
-                        THE MACALLAN
+                        Item
                       </Text>
                       <Text color="gray.5" fz={{ sm: 13, base: 9 }}>
                         Harmony 2
@@ -202,25 +200,9 @@ export function DetailViewDraftProject({ id }: { id: string }) {
           </Box>
         </Box>
       </Box>
-      <ModalRevoked/>
     </>
   );
 }
-export function ModalRevoked () {
-  const [openRevoked, setOpenRevoked] = useAtom(val_open_revoked)
-  return (
-    <>
-      <Modal
-        size={"md"}
-        opened={openRevoked}
-        onClose={() => openRevoked}
-        centered
-        withCloseButton={false}
-      >
-        <ModalCloseRevoked closeRevoked={(() => setOpenRevoked(false))} />
-      </Modal>
-    </>
-  );
-}
+
 
 export default DetailViewDraftProject

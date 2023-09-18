@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionIcon, Box, Burger, Drawer, Flex, Group, Header, MediaQuery, NavLink, Text, TextInput, Title, createStyles, getStylesRef } from "@mantine/core"
+import { ActionIcon, Box, Burger, Drawer, Flex, Group, Header, Image, MediaQuery, NavLink, Text, TextInput, Title, createStyles, getStylesRef } from "@mantine/core"
 import { useState } from "react"
 import { BsFillCartFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
@@ -97,16 +97,17 @@ export function HeaderDashboard2() {
                             </MediaQuery> */}
                             <Box>
                                 <Box>
-                                    <Text fz={25} fw={700}>
-                                        A.R.M
-                                    </Text>
+                                    {/* <Text fz={25} fw={700}>
+                                        ARM
+                                    </Text> */}
+                                    <Image width={100} src={"/img/logo.png"} alt="" />
                                 </Box>
                             </Box>
                         </Group>
                         <Group position="apart">
-                            <Box w={{ sm: 300, xl: 300, md: 300, lg: 300, base: 150 }}>
+                            {/* <Box w={{ sm: 300, xl: 300, md: 300, lg: 300, base: 150 }}>
                                 <TextInput placeholder="Search" />
-                            </Box>
+                            </Box> */}
                             <ActionIcon component="a" color="dark" href="/dashboard/cart">
                                 <BsFillCartFill size="20" />
                             </ActionIcon>
