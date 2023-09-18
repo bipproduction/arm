@@ -1,4 +1,4 @@
-import { CreateFaq } from "@/modules/configuration";
+import { CreateFaq } from "@/modules/help";
 import React from "react";
 
 function Page() {
