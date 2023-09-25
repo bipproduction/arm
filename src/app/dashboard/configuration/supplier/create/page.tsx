@@ -1,4 +1,4 @@
-import { CreateSupplier } from "@/modules/configuration/supplier";
+import { CreateSupplier } from "@/modules/configuration";
 import React from "react";
 
 function Page() {

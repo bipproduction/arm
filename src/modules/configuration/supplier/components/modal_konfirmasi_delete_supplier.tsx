@@ -28,7 +28,7 @@ export default function ModalKonfirmasiDeleteSupplier({
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO DELETE THIS BRAND?
+            ARE YOU SURE TO DELETE THIS SUPPLIER?
           </Text>
           <Grid>
             <Grid.Col span={6}>
