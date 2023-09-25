@@ -1,4 +1,4 @@
-import { TableSupplier, funGetAllSupplier } from '@/modules/configuration/supplier';
+import { TableSupplier, funGetAllSupplier } from '@/modules/configuration';
 import React from 'react';
 
 export default async function Page() {

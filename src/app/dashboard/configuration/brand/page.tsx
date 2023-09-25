@@ -1,10 +1,10 @@
-import { TableBrand, funGetAllBrand } from '@/modules/configuration/brand';
+import { TableBrand, funGetAllBrand } from '@/modules/configuration';
 import React from 'react';
 
 export default async function Page() {
-  const data = await funGetAllBrand({page: 1})
+  const data = await funGetAllBrand({ page: 1 })
   return (
-    <TableBrand data={data}/>
+    <TableBrand data={data} />
   );
 }
 

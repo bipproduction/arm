@@ -201,9 +201,10 @@ export default function TableAssetsCategory({ data }: { data: any; }) {
         closeOnClickOutside={false}
       >
         <ModalKonfirmasiDelAssetsCategory id={dataDelete} onSuccess={(val) => {
-          const d = _.cloneDeep(listCategory)
-          const n = d.filter((v) => v.id !== val.id)
-          setListCategory(n)
+          onSearch({ p: valPage, s: fixSearch })
+          // const d = _.cloneDeep(listCategory)
+          // const n = d.filter((v) => v.id !== val.id)
+          // setListCategory(n)
         }} />
       </Modal>
     </>

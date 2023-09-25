@@ -1,4 +1,4 @@
-import { seederProjectStatus, seederUserDev, seederUserRole } from "@/modules/_global"
+import { seederProjectCategory, seederProjectStatus, seederUserDev, seederUserRole } from "@/modules/_global"
 import prisma from "@/modules/_global/lib/prisma"
 import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
@@ -37,6 +37,22 @@ export async function GET(request: Request, { params }: { params: { pass: string
                 id: e.id,
                 name: e.name,
                 alias: e.alias
+            }
+        })
+    }
+
+    for (let e of seederProjectCategory) {
+        await prisma.projectCategory.upsert({
+            where: {
+                id: e.id
+            },
+            create: {
+                id: e.id,
+                name: e.name,
+            },
+            update: {
+                id: e.id,
+                name: e.name,
             }
         })
     }

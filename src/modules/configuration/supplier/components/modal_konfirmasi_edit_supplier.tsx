@@ -19,7 +19,7 @@ export default function ModalKonfirmasiEditSupplier({ data }: { data: any }) {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO EDIT THIS BRAND?
+            ARE YOU SURE TO EDIT THIS SUPPLIER?
           </Text>
           <Grid>
             <Grid.Col span={6}>

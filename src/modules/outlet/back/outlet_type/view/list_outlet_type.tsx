@@ -88,7 +88,7 @@ export function ListOutletType({ data }: { data: any }) {
                 <Grid.Col md={3} xl={2} lg={2} sm={3} xs={6}>
                     <Button
                         color="gray.7"
-                        onClick={() => router.push('/dashboard/configuration/outlet-type/add')}
+                        onClick={() => router.push('/dashboard/configuration/outlet-type/create')}
                         leftIcon={<AiOutlineFileAdd size="20" />}
                         fullWidth
                     >
@@ -170,9 +170,11 @@ export function ListOutletType({ data }: { data: any }) {
                 closeOnClickOutside={false}
             >
                 <ModalKonfirmasiDelOutletType id={dataDelete} onSuccess={(val) => {
-                    const d = _.cloneDeep(listData)
-                    const n = d.filter((v) => v.id !== val.id)
-                    setListData(n)
+                    onSearch({ p: valPage, s: fixSearch})
+
+                    // const d = _.cloneDeep(listData)
+                    // const n = d.filter((v) => v.id !== val.id)
+                    // setListData(n)
                 }} />
             </Modal>
         </>

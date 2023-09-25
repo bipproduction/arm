@@ -212,9 +212,10 @@ export default function TableSupplier({ data }: { data: any }) {
         <ModalKonfirmasiDeleteSupplier
           id={dataDelete}
           onSuccess={(val) => {
-            const dataN = _.cloneDeep(listSupplier);
-            const DataD = dataN.filter((v) => v.id !== val.id);
-            setListSupplier(DataD);
+            onSearch({ p: valPage, s: fixSearch })
+            // const dataN = _.cloneDeep(listSupplier);
+            // const DataD = dataN.filter((v) => v.id !== val.id);
+            // setListSupplier(DataD);
           }}
         />
       </Modal>

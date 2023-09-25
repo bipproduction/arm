@@ -5,6 +5,8 @@ import {
   Box,
   Button,
   Center,
+  Flex,
+  Grid,
   Group,
   Modal,
   Pagination,
@@ -13,16 +15,18 @@ import {
   Stack,
   Table,
   Text,
+  TextInput,
 } from "@mantine/core";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { AiOutlineFileAdd } from "react-icons/ai";
-import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
+import { MdClose, MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import { isModalWarehouseLocation } from "../val/isModalWarehouseLocation";
 import ModalKomfirmasiDeleteWarehouseLocation from "../components/modal_konfirmasi_delete_warehouse_location";
 import _ from "lodash";
 import { funGetAllWarehouseLocation } from "..";
+import { BsSearch } from "react-icons/bs";
 
 export const dynamic = "force-dynamic"
 export default function TableWarehouseLocation({ data }: { data: any }) {
@@ -32,11 +36,13 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
   const [dataDelete, setDataDelete] = useState(Number);
   const [valPage, setValPage] = useState(1);
   const [totalPage, setTotalPage] = useState(data.nPage)
-  let noAwal = valPage*10-9;
+  const [valSearch, setValSearch] = useState("")
+  const [fixSearch, setFixSearch] = useState("")
+  let noAwal = valPage * 10 - 9;
 
-  async function onSearch(page: number) {
-    const dataNext = await funGetAllWarehouseLocation({ p: page })
-    setValPage(page)
+  async function onSearch({ p, s }: { p: number, s: string }) {
+    const dataNext = await funGetAllWarehouseLocation({ page: p, search: s })
+    setValPage(p)
     setListLocation(dataNext.data)
     setTotalPage(dataNext.nPage)
   }
@@ -44,19 +50,67 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
     <>
       <Stack>
         <ButtonBack />
-        <PageSubTitle text="WAREHOUSE LOCATION" />
+        <PageSubTitle text="LIST WAREHOUSE LOCATION" />
       </Stack>
-      <Group pt={20} position="right">
-        <Button
-          color="green.9"
-          onClick={() =>
-            router.push(`/dashboard/configuration/warehouse-location/create`)
-          }
-          leftIcon={<AiOutlineFileAdd size={"20"} />}
-        >
-          ADD WAREHOUSE LOCATION
-        </Button>
-      </Group>
+      <Grid justify="flex-end">
+        <Grid.Col md={4} xl={4} lg={4} sm={4} xs={6}>
+          <Flex
+            gap="xs"
+            justify="flex-end"
+            align="center"
+            direction="row"
+            wrap="wrap"
+          >
+            <TextInput
+              radius="sm"
+              w={"70%"}
+              value={valSearch}
+              onChange={(val) => setValSearch(val.target.value)}
+              rightSection={valSearch != "" &&
+                <ActionIcon
+                  size="50"
+                  radius="sm"
+                  p={5}
+                  onClick={() => {
+                    setValSearch("");
+                    setFixSearch("");
+                    onSearch({ p: 1, s: '' })
+                  }}
+                >
+                  <MdClose size="21" />
+
+                </ActionIcon>
+
+              }
+              placeholder="Search"
+            />
+            <ActionIcon
+              size="50"
+              radius="sm"
+              bg={"gray.7"}
+              variant="filled"
+              p={6}
+              onClick={(val) => {
+                setFixSearch(valSearch)
+                onSearch({ p: 1, s: valSearch })
+              }}
+            >
+              <BsSearch size="21" />
+
+            </ActionIcon>
+          </Flex>
+        </Grid.Col>
+        <Grid.Col md={3} xl={2} lg={2} sm={3} xs={6}>
+          <Button
+            color="gray.7"
+            onClick={() => router.push('/dashboard/configuration/warehouse-location/create')}
+            leftIcon={<AiOutlineFileAdd size="20" />}
+            fullWidth
+          >
+            ADD WAREHOUSE LOCATION
+          </Button>
+        </Grid.Col>
+      </Grid>
       <Box pt={20}>
         <Box
           sx={{
@@ -92,17 +146,6 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
                         <Group position="center">
                           <Box>
                             <ActionIcon
-                              color="red.9"
-                              onClick={() => {
-                                setDataDelete(v.id);
-                                setOpenModal(true);
-                              }}
-                            >
-                              <MdDelete size="23" />
-                            </ActionIcon>
-                          </Box>
-                          <Box>
-                            <ActionIcon
                               color="yellow.9"
                               onClick={() =>
                                 router.push(
@@ -111,6 +154,17 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
                               }
                             >
                               <MdOutlineModeEdit size="23" />
+                            </ActionIcon>
+                          </Box>
+                          <Box>
+                            <ActionIcon
+                              color="red.9"
+                              onClick={() => {
+                                setDataDelete(v.id);
+                                setOpenModal(true);
+                              }}
+                            >
+                              <MdDelete size="23" />
                             </ActionIcon>
                           </Box>
                         </Group>
@@ -123,7 +177,7 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
           </SimpleGrid>
         </Box>
         <Group position="right" pt={10}>
-          <Pagination value={valPage} onChange={(val) => onSearch(val)} total={totalPage} />
+          <Pagination value={valPage} onChange={(val) => onSearch({ p: val, s: fixSearch })} total={totalPage} />
         </Group>
       </Box>
       <Modal
@@ -135,9 +189,10 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
         closeOnClickOutside={false}
       >
         <ModalKomfirmasiDeleteWarehouseLocation id={dataDelete} onSuccess={(val) => {
-          const d = _.cloneDeep(listLocation)
-          const n = d.filter((v) => v.id !== val.data.id)
-          setListLocation(n)
+          onSearch({ p: valPage, s: fixSearch })
+          // const d = _.cloneDeep(listLocation)
+          // const n = d.filter((v) => v.id !== val.data.id)
+          // setListLocation(n)
         }} />
       </Modal>
     </>
