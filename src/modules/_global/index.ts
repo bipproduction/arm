@@ -8,6 +8,8 @@ import { PageHeader } from './component/pageHeader'
 import seederUserRole from './seeder/user_role.json'
 import seederProjectStatus from './seeder/project_status.json'
 import seederUserDev from './seeder/user_dev.json'
+import seederProjectCategory from './seeder/project_category.json'
+import { funUserLog } from './fun/funUserLog'
 
 
 export { isMobile }
@@ -20,3 +22,5 @@ export { PageHeader }
 export { seederUserRole }
 export { seederProjectStatus }
 export { seederUserDev }
+export { seederProjectCategory }
+export { funUserLog }
