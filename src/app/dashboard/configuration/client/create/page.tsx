@@ -1,4 +1,4 @@
-import CreateClient from "@/modules/configuration/client/view/create_client";
+import { CreateClient } from "@/modules/configuration";
 
 export default function Page() {
     return (

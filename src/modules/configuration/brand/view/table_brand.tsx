@@ -31,13 +31,13 @@ export default function TableBrand({ data }: { data: any }) {
     setTotalPage(dataNext.nPage);
   }
 
-  return  (
+  return (
     <>
-    <Stack>
-      <ButtonBack/>
-      <PageSubTitle text="LIST BRAND"/>
-    </Stack>
-    <Grid justify="flex-end">
+      <Stack>
+        <ButtonBack />
+        <PageSubTitle text="LIST BRAND" />
+      </Stack>
+      <Grid justify="flex-end">
         <Grid.Col md={4} xl={4} lg={4} sm={4} xs={6}>
           <Flex
             gap="xs"
@@ -180,9 +180,10 @@ export default function TableBrand({ data }: { data: any }) {
         closeOnClickOutside={false}
       >
         <ModalKonfirmasiDeleteBrand id={dataDelete} onSuccess={(val) => {
-          const d = _.cloneDeep(listBrand)
-          const n = d.filter((v) => v.id !== val.id)
-          setListBrand(n)
+          onSearch({ p: valPage, s: fixSearch })
+          // const d = _.cloneDeep(listBrand)
+          // const n = d.filter((v) => v.id !== val.id)
+          // setListBrand(n)
         }} />
       </Modal>
     </>

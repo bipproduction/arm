@@ -1,4 +1,4 @@
-import { EditSupplier, funGetOneSupplier } from '@/modules/configuration/supplier';
+import { EditSupplier, funGetOneSupplier } from '@/modules/configuration';
 import React from 'react';
 
 export default async function Page({params}: {params: {id : string}}) {

@@ -1,4 +1,4 @@
-import { ListClient, funGetAllClient } from "@/modules/configuration/client";
+import { ListClient, funGetAllClient } from "@/modules/configuration";
 
 export default async function Page() {
     const data = await funGetAllClient({ page: 1 });

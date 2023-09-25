@@ -45,7 +45,7 @@ export default function CreateBrand() {
               }}
             >
               <Stack>
-                <Text> Create Breand</Text>
+                <Text> Create Brand</Text>
                 <TextInput
                   value={dataBrand.name}
                   placeholder="Name"
