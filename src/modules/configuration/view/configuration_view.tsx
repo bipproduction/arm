@@ -41,20 +41,20 @@ const dataConfiguration = [
     color: "blue",
    link: "/dashboard/configuration/assets-condition"
   },
-  {
-    id: 3,
-    title: "ASSETS",
-    icon: HiBuildingStorefront,
-    color: "green",
-   link: "#"
-  },
-  {
-    id: 4,
-    title: "PROJECT CATEGORY",
-    icon: GoProjectRoadmap,
-    color: "teal",
-   link: "/dashboard/configuration/projects-category"
-  },
+  // {
+  //   id: 3,
+  //   title: "ASSETS",
+  //   icon: HiBuildingStorefront,
+  //   color: "green",
+  //  link: "#"
+  // },
+  // {
+  //   id: 4,
+  //   title: "PROJECT CATEGORY",
+  //   icon: GoProjectRoadmap,
+  //   color: "teal",
+  //  link: "/dashboard/configuration/projects-category"
+  // },
   {
     id: 5,
     title: "OUTLET LOCATION",
@@ -170,14 +170,14 @@ export default function ConfigurationView() {
 
   return (
     <>
-      <Box>
+      <Stack>
         <ButtonBack />
         <PageSubTitle text="CONFIGURATION" />
-      </Box>
+      </Stack>
       <Box pb={60} pt={20} >
       <Card withBorder radius="md" className={classes.card}>
         <SimpleGrid
-          cols={4}
+          cols={5}
           spacing="lg"
           breakpoints={[
             { maxWidth: "md", cols: 3, spacing: "md" },
