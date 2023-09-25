@@ -194,9 +194,10 @@ export default function TableAssetsCondition({ data }: { data: any }) {
         closeOnClickOutside={false}
       >
         <ModalKonfirmasiDeleteAssetsCondition id={dataDelete} onSuccess={(val) => {
-          const d = _.cloneDeep(listCondition)
-          const n = d.filter((v) => v.id !== val.id)
-          setListCondition(n)
+          onSearch({ p: valPage, s: fixSearch })
+          // const d = _.cloneDeep(listCondition)
+          // const n = d.filter((v) => v.id !== val.id)
+          // setListCondition(n)
         }} />
       </Modal>
     </>

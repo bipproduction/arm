@@ -3,13 +3,17 @@
 import prisma from "@/modules/_global/lib/prisma";
 import _, { ceil } from "lodash";
 
-export async function funGetAllWarehouseLocation({ p, s }: { p: number, s?: string }) {
-  const skip = _.toNumber(p) * 10 - 10;
+export async function funGetAllWarehouseLocation({ page, search }: { page: number, search?: string }) {
+  const skip = _.toNumber(page) * 10 - 10;
   const data = await prisma.warehouseLocation.findMany({
     skip: skip,
     take: 10,
     where: {
       isActive: true,
+      name: {
+        contains: search,
+        mode: 'insensitive'
+      }
     },
     select: {
       id: true,
@@ -20,6 +24,10 @@ export async function funGetAllWarehouseLocation({ p, s }: { p: number, s?: stri
   const nData = await prisma.warehouseLocation.count({
     where: {
       isActive: true,
+      name: {
+        contains: search,
+        mode: 'insensitive'
+      }
     },
   })
 

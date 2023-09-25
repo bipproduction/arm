@@ -1,24 +1,22 @@
 'use client'
 
-import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global"
-import { ActionIcon, Box, Button, Center, Flex, Grid, Group, Modal, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text, TextInput } from "@mantine/core"
-import { useAtom } from "jotai"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { MdAdd, MdClose, MdDelete, MdOutlineModeEdit } from "react-icons/md"
-import { ModalKonfirmasiDelOutletType } from "../component/modal_konfirmasi_del_outlet_type"
-import { isModalOutletType } from "../val/val_outlet_type"
-import { funGetAllOutletType } from "../fun/get_all_outlet_type"
-import _ from "lodash"
-import { BsSearch } from "react-icons/bs"
-import { AiOutlineFileAdd } from "react-icons/ai"
+import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
+import { ActionIcon, Box, Button, Center, Flex, Grid, Group, Modal, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text, TextInput } from "@mantine/core";
+import { AiOutlineFileAdd } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { MdClose, MdDelete, MdOutlineModeEdit } from "react-icons/md";
+import { ModalKonfirmasiDelClient } from "../component/modal_konfirmasi_del_client";
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { isModalClient } from "../val/isModalClient";
+import { funGetAllClient } from "../fun/get_all_client";
+import { useRouter } from "next/navigation";
 
-
-export function ListOutletType({ data }: { data: any }) {
+export function ListClient({ data }: { data: any }) {
     const router = useRouter();
     const [listData, setListData] = useState<any[]>(data.data)
-    const [valOpenModal, setOpenModal] = useAtom(isModalOutletType)
-    const [dataDelete, setDataDelete] = useState(Number)
+    const [valOpenModal, setOpenModal] = useAtom(isModalClient)
+    const [dataDelete, setDataDelete] = useState("")
     const [valPage, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(data.nPage)
     const [valSearch, setValSearch] = useState("")
@@ -27,15 +25,17 @@ export function ListOutletType({ data }: { data: any }) {
 
     async function onSearch({ p, s }: { p: number, s: string }) {
         setPage(p)
-        const dataNext = await funGetAllOutletType({ page: p, search: s })
+        const dataNext = await funGetAllClient({ page: p, search: s })
         setListData(dataNext.data);
         setTotalPage(dataNext.nPage)
     }
+
+
     return (
         <>
             <Stack>
                 <ButtonBack />
-                <PageSubTitle text="LIST OUTLET TYPE" />
+                <PageSubTitle text="LIST CLIENT" />
             </Stack>
             <Grid justify="flex-end">
                 <Grid.Col md={4} xl={4} lg={4} sm={4} xs={6}>
@@ -88,11 +88,11 @@ export function ListOutletType({ data }: { data: any }) {
                 <Grid.Col md={3} xl={2} lg={2} sm={3} xs={6}>
                     <Button
                         color="gray.7"
-                        onClick={() => router.push('/dashboard/configuration/outlet-type/create')}
+                        onClick={() => router.push('/dashboard/configuration/client/create')}
                         leftIcon={<AiOutlineFileAdd size="20" />}
                         fullWidth
                     >
-                        ADD OUTLET TYPE
+                        ADD CLIENT
                     </Button>
                 </Grid.Col>
             </Grid>
@@ -116,6 +116,8 @@ export function ListOutletType({ data }: { data: any }) {
                                     <tr>
                                         <th>NO</th>
                                         <th>NAME</th>
+                                        <th>PHONE</th>
+                                        <th>ADDRESS</th>
                                         <th>
                                             <Center>
                                                 <Text>ACTIONS</Text>
@@ -129,10 +131,12 @@ export function ListOutletType({ data }: { data: any }) {
                                             <tr key={item.id}>
                                                 <td>{noAwal++}</td>
                                                 <td>{item.name}</td>
+                                                <td>{item.phone}</td>
+                                                <td>{item.address}</td>
                                                 <td>
                                                     <Group position="center">
                                                         <Box>
-                                                            <ActionIcon color="yellow.9" onClick={() => router.push(`/dashboard/configuration/outlet-type/edit/${item.id}`)}>
+                                                            <ActionIcon color="yellow.9" onClick={() => router.push(`/dashboard/configuration/client/edit/${item.id}`)}>
                                                                 <MdOutlineModeEdit size="23" />
                                                             </ActionIcon>
                                                         </Box>
@@ -169,13 +173,9 @@ export function ListOutletType({ data }: { data: any }) {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalKonfirmasiDelOutletType id={dataDelete} onSuccess={(val) => {
+                <ModalKonfirmasiDelClient id={dataDelete} onSuccess={(val)=>{
                     onSearch({ p: valPage, s: fixSearch})
-
-                    // const d = _.cloneDeep(listData)
-                    // const n = d.filter((v) => v.id !== val.id)
-                    // setListData(n)
-                }} />
+                }}/>
             </Modal>
         </>
     )
