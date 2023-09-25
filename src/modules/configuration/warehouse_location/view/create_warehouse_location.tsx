@@ -27,15 +27,6 @@ export default function CreateWarehouseLocation() {
     name: "",
   });
 
-  async function onAssetsLocation() {
-    setLoading(true);
-    const res = await funCreateWarehouseLocation({ data: dataAssetsLoocation });
-    if (!res.success)
-      return setLoading(false), toast(res.message, { theme: "dark" });
-    toast("Success", { theme: "dark" });
-    setDataAssetsLocation({ name: "" })
-    setOpenAssets(false);
-  }
 
   function validasiCreateAssets() {
     if (Object.values(dataAssetsLoocation).includes(""))
