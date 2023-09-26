@@ -1,0 +1,21 @@
+import { NextRequest, NextResponse } from "next/server"
+import fs from 'fs'
+
+export async function GET(req: NextRequest, { params }: { params: { name: any } }) {
+    const real = `./public/img/${params.name[1]}/${params.name[0]}`
+    let fl;
+
+
+    if (fs.existsSync(real)) {
+        fl = fs.readFileSync(`./public/img/${params.name[1]}/${params.name[0]}`)
+    } else {
+        fl = fs.readFileSync(`./public/img/image.jpeg`)
+    }
+
+    return new NextResponse(fl, {
+        headers: {
+            "Content-Type": "image/png"
+        }
+    })
+
+}

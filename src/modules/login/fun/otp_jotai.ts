@@ -4,3 +4,4 @@ import { atomWithStorage } from "jotai/utils";
 export const OtpView = atomWithStorage<any>("otp", "")
 export const RandomNew = atomWithStorage<any>("random", Math.floor(Math.random() * 1000) + 1000)
 export const phoneLogin = atomWithStorage<any>("phoneLogin", null)
+export const _isSetOTP = atomWithStorage<any>("setOTP", false)

@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 import "react-simple-toasts/dist/theme/dark.css"
 import toast from "react-simple-toasts"
 import { useAtom } from "jotai";
-import { RandomNew, phoneLogin } from "..";
+import { LoginVerification, RandomNew, phoneLogin } from "..";
+import { funLogin } from "../fun/login";
+import { _isSetOTP } from "../fun/otp_jotai";
 
 export function LoginView() {
   const focusTrapRef = useFocusTrap();
@@ -14,8 +16,13 @@ export function LoginView() {
   const router = useRouter()
   const [ranOTP, setRanOTP] = useAtom(RandomNew)
   const [valPhoneLogin, setPhoneLogin] = useAtom(phoneLogin)
+  const [valSetOTP, setSetOTP] = useAtom(_isSetOTP)
 
   async function sendOTP() {
+    const cekProfile = await funLogin({ phone: inpTlp })
+    if (!cekProfile.success)
+      return toast(cekProfile.message, { theme: 'dark' })
+
     setRanOTP
     const res = await fetch(`https://wa.wibudev.com/code?nom=${inpTlp}&text=${ranOTP}`)
       .then(
@@ -23,13 +30,17 @@ export function LoginView() {
           if (res.status == 200) {
             toast('Verification code has been sent', { theme: 'dark' })
             setPhoneLogin(inpTlp);
-            router.push('/login-verification')
+            setSetOTP(true)
+            // router.push('/login-verification')
           } else {
             toast('Error', { theme: 'dark' })
           }
         }
       );
   }
+
+  if (valSetOTP) return <LoginVerification />
+
   return (
     <>
       <div ref={focusTrapRef}>
