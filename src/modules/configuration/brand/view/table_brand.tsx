@@ -4,7 +4,24 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { isModalBrand } from "../val/isModalBrand";
 import { funGetAllBrand } from "..";
-import { ActionIcon, Box, Button, Center, Flex, Grid, Group, Modal, Pagination, ScrollArea, SimpleGrid, Stack, Table, Text, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Center,
+  Flex,
+  Grid,
+  Group,
+  MantineProvider,
+  Modal,
+  Pagination,
+  ScrollArea,
+  SimpleGrid,
+  Stack,
+  Table,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { ButtonBack, COLOR, PageSubTitle } from "@/modules/_global";
 import { MdClose, MdDelete, MdOutlineModeEdit } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
@@ -31,66 +48,79 @@ export default function TableBrand({ data }: { data: any }) {
     setTotalPage(dataNext.nPage);
   }
 
-  return  (
+  return (
     <>
-    <Stack>
-      <ButtonBack/>
-      <PageSubTitle text="LIST BRAND"/>
-    </Stack>
-    <Grid justify="flex-end">
-        <Grid.Col md={4} xl={4} lg={4} sm={4} xs={6}>
-          <Flex
-            gap="xs"
-            justify="flex-end"
-            align="center"
-            direction="row"
-            wrap="wrap"
+      <Stack>
+        <ButtonBack />
+        <PageSubTitle text="LIST BRAND" />
+      </Stack>
+      <Grid justify="flex-end">
+        <Grid.Col md={5} xl={5} lg={5} sm={5} xs={6}>
+          <MantineProvider
+            inherit
+            theme={{
+              components: {
+                InputWrapper: {
+                  styles: (theme) => ({
+                    label: {
+                      backgroundColor:
+                        theme.colorScheme === "dark"
+                          ? "rgba(255, 255, 255, .1)"
+                          : "rgba(0, 0, 0, .1)",
+                    },
+                  }),
+                },
+                Input: {
+                  styles: (theme) => ({
+                    input: {
+                      borderColor: theme.colors.gray[theme.fn.primaryShade()],
+                    },
+                  }),
+                },
+              },
+            }}
           >
-            <TextInput
-              radius="sm"
-              w={"70%"}
-              value={valSearch}
-              onChange={(val) => setValSearch(val.target.value)}
-              rightSection={valSearch != "" &&
-                <ActionIcon
-                  size="50"
-                  radius="sm"
-                  p={5}
-                  onClick={() => {
-                    setValSearch("");
-                    setFixSearch("");
-                    onSearch({ p: 1, s: '' })
-                  }}
-                >
-                  <MdClose size="21" />
-
-                </ActionIcon>
-
-              }
-              placeholder="Search"
-            />
-            <ActionIcon
-              size="50"
-              radius="sm"
-              bg={"gray.7"}
-              variant="filled"
-              p={6}
-              onClick={(val) => {
-                setFixSearch(valSearch)
-                onSearch({ p: 1, s: valSearch })
-              }}
-            >
-              <BsSearch size="21" />
-
-            </ActionIcon>
-          </Flex>
+            <Group>
+              <TextInput
+                radius="sm"
+                w={"80%"}
+                value={valSearch}
+                onChange={(val) => setValSearch(val.target.value)}
+                placeholder="Search"
+                rightSection={
+                  <Button.Group mr={23}>
+                    {valSearch != `` && (
+                      <Button
+                        variant="subtle"
+                        color="gray.7"
+                        onClick={() => {
+                          setValSearch("");
+                          setFixSearch("");
+                          onSearch({ p: 1, s: "" });
+                        }}
+                      >
+                        <MdClose size="21" />
+                      </Button>
+                    )}
+                    <Button
+                      color="gray.7"
+                      onClick={(val) => {
+                        setFixSearch(valSearch);
+                        onSearch({ p: 1, s: valSearch });
+                      }}
+                    >
+                      <BsSearch size="21" />
+                    </Button>
+                  </Button.Group>
+                }
+              />
+            </Group>
+          </MantineProvider>
         </Grid.Col>
         <Grid.Col md={4} xl={3} lg={3} sm={4} xs={6}>
           <Button
             color="gray.7"
-            onClick={() =>
-              router.push(`/dashboard/configuration/brand/create`)
-            }
+            onClick={() => router.push(`/dashboard/configuration/brand/create`)}
             leftIcon={<AiOutlineFileAdd size={"20"} />}
             fullWidth
           >
@@ -179,12 +209,15 @@ export default function TableBrand({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDeleteBrand id={dataDelete} onSuccess={(val) => {
-          const d = _.cloneDeep(listBrand)
-          const n = d.filter((v) => v.id !== val.id)
-          setListBrand(n)
-        }} />
+        <ModalKonfirmasiDeleteBrand
+          id={dataDelete}
+          onSuccess={(val) => {
+            const d = _.cloneDeep(listBrand);
+            const n = d.filter((v) => v.id !== val.id);
+            setListBrand(n);
+          }}
+        />
       </Modal>
     </>
-  )
+  );
 }
