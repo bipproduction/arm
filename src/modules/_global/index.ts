@@ -10,6 +10,7 @@ import seederProjectStatus from './seeder/project_status.json'
 import seederUserDev from './seeder/user_dev.json'
 import seederProjectCategory from './seeder/project_category.json'
 import { funUserLog } from './fun/funUserLog'
+import { funLogout } from './fun/funLogout'
 
 
 export { isMobile }
@@ -24,3 +25,4 @@ export { seederProjectStatus }
 export { seederUserDev }
 export { seederProjectCategory }
 export { funUserLog }
+export { funLogout }
