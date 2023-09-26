@@ -55,13 +55,13 @@ const dataConfiguration = [
   //   color: "teal",
   //  link: "/dashboard/configuration/projects-category"
   // },
-  {
-    id: 5,
-    title: "OUTLET LOCATION",
-    icon: ImLocation2,
-    color: "cyan",
-   link: "/dashboard/configuration/outlet-location"
-  },
+  // {
+  //   id: 5,
+  //   title: "OUTLET LOCATION",
+  //   icon: ImLocation2,
+  //   color: "cyan",
+  //  link: "/dashboard/configuration/outlet-location"
+  // },
   {
     id: 6,
     title: "OUTLET TYPE",
@@ -177,7 +177,7 @@ export default function ConfigurationView() {
       <Box pb={60} pt={20} >
       <Card withBorder radius="md" className={classes.card}>
         <SimpleGrid
-          cols={5}
+          cols={3}
           spacing="lg"
           breakpoints={[
             { maxWidth: "md", cols: 3, spacing: "md" },

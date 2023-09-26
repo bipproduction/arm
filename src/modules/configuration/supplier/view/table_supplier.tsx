@@ -56,64 +56,66 @@ export default function TableSupplier({ data }: { data: any }) {
       </Stack>
       <Grid justify="flex-end">
         <Grid.Col md={5} xl={5} lg={5} sm={5} xs={6}>
-        <MantineProvider
-      inherit
-      theme={{
-        components: {
-          InputWrapper: {
-            styles: (theme) => ({
-              label: {
-                backgroundColor:
-                  theme.colorScheme === 'dark' ? 'rgba(255, 255, 255, .1)' : 'rgba(0, 0, 0, .1)',
+          <MantineProvider
+            inherit
+            theme={{
+              components: {
+                InputWrapper: {
+                  styles: (theme) => ({
+                    label: {
+                      backgroundColor:
+                        theme.colorScheme === "dark"
+                          ? "rgba(255, 255, 255, .1)"
+                          : "rgba(0, 0, 0, .1)",
+                    },
+                  }),
+                },
+                Input: {
+                  styles: (theme) => ({
+                    input: {
+                      borderColor: theme.colors.gray[theme.fn.primaryShade()],
+                    },
+                  }),
+                },
               },
-            }),
-          },
-
-          Input: {
-            styles: (theme) => ({
-              input: { borderColor: theme.colors.gray[theme.fn.primaryShade()] },
-            }),
-          },
-        },
-      }}
-    >
-          <Group>
-            <TextInput
-              radius="sm"
-              w={"80%"}
-              value={valSearch}
-              onChange={(val) => setValSearch(val.target.value)}
-              placeholder="Search"
-              rightSection={
-                <Button.Group mr={23}>
-                  {valSearch != `` && (
+            }}
+          >
+            <Group>
+              <TextInput
+                radius="sm"
+                w={"80%"}
+                value={valSearch}
+                onChange={(val) => setValSearch(val.target.value)}
+                placeholder="Search"
+                rightSection={
+                  <Button.Group mr={23}>
+                    {valSearch != `` && (
+                      <Button
+                        variant="subtle"
+                        color="gray.7"
+                        onClick={() => {
+                          setValSearch("");
+                          setFixSearch("");
+                          onSearch({ p: 1, s: "" });
+                        }}
+                      >
+                        <MdClose size="21" />
+                      </Button>
+                    )}
                     <Button
-                    variant="subtle"
-                    color="gray.7"
-                      onClick={() => {
-                        setValSearch("");
-                        setFixSearch("");
-                        onSearch({ p: 1, s: "" });
+                      color="gray.7"
+                      onClick={(val) => {
+                        setFixSearch(valSearch);
+                        onSearch({ p: 1, s: valSearch });
                       }}
-
                     >
-                      <MdClose size="21" />
+                      <BsSearch size="21" />
                     </Button>
-                  )}
-                  <Button
-                  color="gray.7"
-                    onClick={(val) => {
-                      setFixSearch(valSearch);
-                      onSearch({ p: 1, s: valSearch });
-                    }}
-                  >
-                    <BsSearch size="21" />
-                  </Button>
-                </Button.Group>
-              }
-            />
-          </Group>
-    </MantineProvider>
+                  </Button.Group>
+                }
+              />
+            </Group>
+          </MantineProvider>
         </Grid.Col>
         <Grid.Col md={3} xl={3} lg={3} sm={3} xs={6}>
           <Button
