@@ -1,9 +1,8 @@
-import { TableFaq } from "@/modules/configuration";
-import { funGetFaq } from "@/modules/configuration/faq/fun/faq_get";
+import { TableFaq, funGetAllFaq } from "@/modules/help";
 import React from "react";
 
 export default async function Page() {
-  const data = await funGetFaq(1)
+  const data = await funGetAllFaq({ page: 1 })
   return <TableFaq data={data} />;
 }
 

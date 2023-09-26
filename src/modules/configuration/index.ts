@@ -1,7 +1,4 @@
 import ConfigurationView from "./view/configuration_view";
-import CreateFaq from "./faq/view/create_faq";
-import EditFaq from "./faq/view/edit_faq";
-import TableFaq from "./faq/view/table_faq";
 import {
     CreateWarehouseLocation,
     TableWarehouseLocation,
@@ -9,14 +6,31 @@ import {
     funGetOneWarehouseLocation,
     EditWarehouseLocation
 } from "./warehouse_location/";
+import { CreateSupplier, EditSupplier, TableSupplier, funGetAllSupplier, funGetOneSupplier } from "./supplier";
+import { CreateBrand, EditBrand, TableBrand, funGetAllBrand, funGetOneBrand } from "./brand";
+import { ListClient, funGetAllClient, funGetOneClient, EditClient, CreateClient } from './client'
+
+
 
 export { ConfigurationView };
-export { CreateFaq };
-export { EditFaq };
-export { TableFaq };
 export { CreateWarehouseLocation }
 export { TableWarehouseLocation }
 export { funGetAllWarehouseLocation }
 export { funGetOneWarehouseLocation }
 export { EditWarehouseLocation }
+export { CreateSupplier }
+export { EditSupplier }
+export { TableSupplier }
+export { funGetAllSupplier }
+export { funGetOneSupplier }
+export { CreateBrand }
+export { EditBrand };
+export { TableBrand }
+export { funGetAllBrand }
+export { funGetOneBrand }
+export { ListClient }
+export { funGetAllClient }
+export { funGetOneClient }
+export { EditClient }
+export { CreateClient }
 

@@ -13,7 +13,7 @@ export default function ModalKomfirmasiDeleteWarehouseLocation({ id, onSuccess }
   const router = useRouter();
 
   async function deleteAssetsLocation() {
-    const edit = await funDeleteWarehouseLocation({ id });
+    const edit = await funDeleteWarehouseLocation({ id: id });
     if (!edit.success) return toast(edit.message, { theme: "dark" });
     toast("Success", { theme: "dark" });
     setOpenModal(false);

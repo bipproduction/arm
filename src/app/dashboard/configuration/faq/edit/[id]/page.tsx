@@ -1,10 +1,9 @@
-import { EditFaq } from "@/modules/configuration";
-import { funGetOneFaq } from "@/modules/configuration/faq/fun/faq_get_one";
+import { EditFaq, funGetOneFaq } from "@/modules/help";
 import React from "react";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const data = await funGetOneFaq(params.id)
-  if(!data) return<>kosong</>
+  const data = await funGetOneFaq({ id: params.id })
+  if (!data) return <>kosong</>
   return (
     <><EditFaq data={data} /></>
   )

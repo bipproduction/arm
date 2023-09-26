@@ -1,4 +1,4 @@
-import { CreateAssetsCategory } from "@/modules/configuration/assets_category";
+import { CreateAssetsCategory } from "@/modules/assets";
 import React from "react";
 
 function Page() {

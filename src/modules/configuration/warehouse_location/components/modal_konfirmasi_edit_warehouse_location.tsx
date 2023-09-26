@@ -12,7 +12,7 @@ export default function ModalKonfirmasiEditWarehouseLocation({ data, }: { data: 
   const router = useRouter();
 
   async function updAssetsLocation() {
-    const create = await funUpdateWarehouseLocation(data);
+    const create = await funUpdateWarehouseLocation({ data: data });
     if (!create.success) return toast(create.message, { theme: "dark" });
     toast("Success", { theme: "dark" });
     setOpenModal(false);

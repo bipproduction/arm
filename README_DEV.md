@@ -41,7 +41,7 @@
   - Add FAQ : /dashboard/configuration/faq/add
   - Edit FAQ : /dashboard/configuration/faq/edit/(id)
   - List Outlet Type : /dashboard/configuration/outlet-type
-  - Add Outlet Type : /dashboard/configuration/outlet-type/add
+  - Add Outlet Type : /dashboard/configuration/outlet-type/create
   - Edit Outlet Type : /dashboard/configuration/outlet-type/edit/(id)
 
 ### Seeder
@@ -49,7 +49,7 @@
 Cara seeder :
     - akses halaman berikut : localhost:3000/dev/seeder/ARM_wibudev
     - setelah success, maka seeder telah berhasil diinput/update
-    - data yang diseeder merupakan data untuk user role, status project, 1 akun user dan profile
+    - data yang diseeder merupakan data untuk user role, status project, project category, 1 akun user dan profile
     - selain data yang diseeder maka akan ada inputan form didalam sistem nantinya (configuration)
 
 ### Github Branch
