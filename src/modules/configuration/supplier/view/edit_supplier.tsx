@@ -54,15 +54,15 @@ export default function EditSupplier({ data }: { data: any }) {
           </Grid.Col>
         </Grid>
       </Box>
-      <Modal 
-      size={"md"}
-      opened={valOpenModal}
-      onClose={() => setOpenModal(false)}
-      centered
-      withCloseButton={false}
-      closeOnClickOutside={false}
+      <Modal
+        size={"md"}
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
       >
-        <ModalKonfirmasiEditSupplier data={formEdit}/>
+        <ModalKonfirmasiEditSupplier data={formEdit} />
 
       </Modal>
     </>

@@ -2,7 +2,7 @@ import { TableWarehouseLocation, funGetAllWarehouseLocation } from "@/modules/co
 import React from "react";
 
 export default async function Page() {
-  const data = await funGetAllWarehouseLocation({ p: 1 });
+  const data = await funGetAllWarehouseLocation({ page: 1 });
   return (
     <><TableWarehouseLocation data={data} /></>
   )

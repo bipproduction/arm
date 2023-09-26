@@ -28,7 +28,7 @@ export default function ModalKonfirmasiAddBrand({
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO CREATE BRAND?
+            ARE YOU SURE TO CREATE NEW BRAND?
           </Text>
           <Grid>
             <Grid.Col span={6}>

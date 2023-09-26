@@ -209,14 +209,13 @@ export default function TableAssetsCondition({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDeleteAssetsCondition
-          id={dataDelete}
-          onSuccess={(val) => {
-            const d = _.cloneDeep(listCondition);
-            const n = d.filter((v) => v.id !== val.id);
-            setListCondition(n);
-          }}
-        />
+
+        <ModalKonfirmasiDeleteAssetsCondition id={dataDelete} onSuccess={(val) => {
+          onSearch({ p: valPage, s: fixSearch })
+          // const d = _.cloneDeep(listCondition)
+          // const n = d.filter((v) => v.id !== val.id)
+          // setListCondition(n)
+        }} />
       </Modal>
     </>
   );

@@ -209,14 +209,13 @@ export default function TableBrand({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDeleteBrand
-          id={dataDelete}
-          onSuccess={(val) => {
-            const d = _.cloneDeep(listBrand);
-            const n = d.filter((v) => v.id !== val.id);
-            setListBrand(n);
-          }}
-        />
+
+        <ModalKonfirmasiDeleteBrand id={dataDelete} onSuccess={(val) => {
+          onSearch({ p: valPage, s: fixSearch })
+          // const d = _.cloneDeep(listBrand)
+          // const n = d.filter((v) => v.id !== val.id)
+          // setListBrand(n)
+        }} />
       </Modal>
     </>
   );

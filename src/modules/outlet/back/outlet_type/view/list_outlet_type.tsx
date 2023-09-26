@@ -203,24 +203,22 @@ export function ListOutletType({ data }: { data: any }) {
           />
         </Group>
       </Box>
+            <Modal
+                size={"md"}
+                opened={valOpenModal}
+                onClose={() => setOpenModal(false)}
+                centered
+                withCloseButton={false}
+                closeOnClickOutside={false}
+            >
+                <ModalKonfirmasiDelOutletType id={dataDelete} onSuccess={(val) => {
+                    onSearch({ p: valPage, s: fixSearch})
 
-      <Modal
-        size={"md"}
-        opened={valOpenModal}
-        onClose={() => setOpenModal(false)}
-        centered
-        withCloseButton={false}
-        closeOnClickOutside={false}
-      >
-        <ModalKonfirmasiDelOutletType
-          id={dataDelete}
-          onSuccess={(val) => {
-            const d = _.cloneDeep(listData);
-            const n = d.filter((v) => v.id !== val.id);
-            setListData(n);
-          }}
-        />
-      </Modal>
-    </>
-  );
+                    // const d = _.cloneDeep(listData)
+                    // const n = d.filter((v) => v.id !== val.id)
+                    // setListData(n)
+                }} />
+            </Modal>
+        </>
+    )
 }

@@ -6,6 +6,7 @@ import { isModalFAQ } from "../val/isModalCreateFaq";
 import { useRouter } from "next/navigation";
 import { funFaqCreate } from "../fun/faq_create";
 import toast from "react-simple-toasts";
+import { funUserLog } from "@/modules/_global";
 
 export function ModalKonfirmasiAddFaq({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalFAQ);
@@ -14,6 +15,7 @@ export function ModalKonfirmasiAddFaq({ data, onSuccess }: { data: any, onSucces
     async function onAddFaq() {
         const edit = await funFaqCreate({ data: data })
         if (!edit.success) return toast(edit.message, { theme: "dark" });
+        // await funUserLog({ user: 'adminUserWibuDeveloperARM', activity: 'ADD', desc: 'User added FAQ' })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)

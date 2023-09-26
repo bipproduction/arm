@@ -206,9 +206,10 @@ export default function TableFaq({ data }: { data: any }) {
         closeOnClickOutside={false}
       >
         <ModalKonfirmasiDeleteFaq id={dataDelete} onSuccess={(val) => {
-          const d = _.cloneDeep(listData)
-          const n = d.filter((v) => v.id !== val.id)
-          setListData(n)
+          onSearch({ p: pageData, s: fixSearch });
+          // const d = _.cloneDeep(listData)
+          // const n = d.filter((v) => v.id !== val.id)
+          // setListData(n)
         }} />
       </Modal>
     </>
