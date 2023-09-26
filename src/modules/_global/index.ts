@@ -10,6 +10,10 @@ import seederProjectStatus from './seeder/project_status.json'
 import seederUserDev from './seeder/user_dev.json'
 import seederProjectCategory from './seeder/project_category.json'
 import { funUserLog } from './fun/funUserLog'
+import seederKabupaten from './seeder/wilayah/kabupaten.json'
+import seederProvinsi from './seeder/wilayah/provinsi.json';
+import seederKecamatan from './seeder/wilayah/kecamatan.json'
+import seederNegara from './seeder/wilayah/negara.json'
 
 
 export { isMobile }
@@ -24,3 +28,7 @@ export { seederProjectStatus }
 export { seederUserDev }
 export { seederProjectCategory }
 export { funUserLog }
+export {seederKabupaten}
+export {seederProvinsi};
+export {seederKecamatan}
+export {seederNegara}

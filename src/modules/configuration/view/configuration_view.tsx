@@ -95,7 +95,7 @@ const dataConfiguration = [
     title: "USER",
     icon: FaHouseUser,
     color: "violet",
-    link: "#"
+    link: "/dashboard/configuration/user"
   },
   {
     id: 11,
