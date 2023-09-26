@@ -18,6 +18,8 @@ import { useAtom } from "jotai";
 import { OtpView, RandomNew, phoneLogin } from "..";
 import { MdArrowBackIosNew, MdArrowCircleLeft } from "react-icons/md";
 import { ButtonBack } from "@/modules/_global";
+import { _isSetOTP } from "../fun/otp_jotai";
+import { funSetCookies } from "../fun/set_cookies";
 
 export function LoginVerification() {
   const focusTrapRef = useFocusTrap();
@@ -26,12 +28,15 @@ export function LoginVerification() {
   const [otp, setotp] = useAtom(OtpView);
   const [ranOTP, setRanOTP] = useAtom(RandomNew)
   const [valPhoneLogin, setPhoneLogin] = useAtom(phoneLogin)
+  const [valSetOTP, setSetOTP] = useAtom(_isSetOTP)
 
   async function getverification() {
     if (otp == ranOTP) {
-      setPhoneLogin(null)
+      const setC = await funSetCookies({phone: valPhoneLogin})
       toast("Verification code is correct", { theme: "dark" });
+      setPhoneLogin(null)
       router.push("/dashboard");
+
     } else {
       toast("Incorrect verification code", { theme: "dark" });
     }

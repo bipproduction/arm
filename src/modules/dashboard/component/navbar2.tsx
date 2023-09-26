@@ -5,8 +5,9 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { MdSettings } from "react-icons/md";
 import { menuDashboard } from "../val/data_menu";
+import { menuDashboardSuperAdmin } from "../val/data_menu_super_admin";
 
-const data = menuDashboard
+
 const useStyles = createStyles((theme) => ({
     link: {
         ...theme.fn.focusStyles(),
@@ -72,7 +73,12 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export function NavbarDashboard2() {
+export function NavbarDashboard2({ role }: { role: number }) {
+    let data = menuDashboard
+    if (role == 5) {
+        data = menuDashboardSuperAdmin
+    }
+
     const [opened, setOpened] = useState(false);
     const router = useRouter();
     const { classes, cx } = useStyles();

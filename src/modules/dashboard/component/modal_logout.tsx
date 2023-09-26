@@ -7,13 +7,15 @@ import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import "react-simple-toasts/dist/theme/dark.css";
 import { isLogout } from "../val/isLogout";
+import { funLogout } from "@/modules/_global";
 
 export default function ModalLogout() {
   const [openLogout, setOpenLogout] = useAtom(isLogout);
   const router = useRouter();
-  function viewBarcode() {
+  async function logoutYes() {
+    const res = await funLogout();
     toast("Logout Success", { theme: "dark" });
-    router.push("/");
+    // router.push("/");
     setOpenLogout(false);
   }
   return (
@@ -21,7 +23,7 @@ export default function ModalLogout() {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO LOG OUT?
+            ARE YOU SURE TO LOGOUT?
           </Text>
           <Grid>
             <Grid.Col span={6}>
@@ -39,7 +41,7 @@ export default function ModalLogout() {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={viewBarcode}
+                onClick={logoutYes}
               >
                 YES
               </Button>

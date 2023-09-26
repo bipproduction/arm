@@ -1,8 +1,14 @@
-import { EditView } from "@/modules/profile";
+import { EditView, funGetProfile } from "@/modules/profile";
+import { unsealData } from "iron-session";
+import _ from "lodash";
+import { cookies } from "next/headers";
 import React from "react";
 
-function Page() {
-  return <EditView />;
+async function Page() {
+  const c = cookies().get("_tkn")
+  const dataCookies = await unsealData(c!.value, { password: process.env.PWD as string })
+  const profile = await funGetProfile({ id: _.toString(dataCookies.idProfile) })
+  return <EditView data={profile} />;
 }
 
 export default Page;

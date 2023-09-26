@@ -6,13 +6,15 @@ import toast from "react-simple-toasts";
 import { useRouter } from "next/navigation";
 import "react-simple-toasts/dist/theme/dark.css";
 import { isModalProfile } from "../val/isModalProfile";
+import { funUpdProfile } from "../fun/upd_profile";
 
-export default function ModalProfile() {
+export default function ModalProfile({ data }: { data: any }) {
   const router = useRouter();
   const [openProfile, setOpenProfile] = useAtom(isModalProfile);
-  function createProfile() {
-    toast("Edit Profile Success", { theme: "dark" });
-    router.push("/dashboard/profile");
+
+  async function editProfile() {
+    const res = await funUpdProfile({ data: data })
+    toast(res.message, { theme: "dark" });
     setOpenProfile(false);
   }
   return (
@@ -38,7 +40,7 @@ export default function ModalProfile() {
                 radius={10}
                 color="gray.7"
                 fullWidth
-                onClick={createProfile}
+                onClick={() => { editProfile() }}
               >
                 YES
               </Button>

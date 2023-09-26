@@ -14,9 +14,13 @@ import { NavbarMobile } from "./navbar_mobile";
 import { NavbarDashboard2 } from "./navbar2";
 import { HeaderDashboard2 } from "./header2";
 import { NavbarMobile2 } from "./navbar_mobile2";
+import { useAtom } from "jotai";
+import { _isSetOTP } from "@/modules/login/fun/otp_jotai";
 
 
-export function Dashboard({ children }: { children: React.ReactNode }) {
+export function Dashboard({ children, dataLogin }: { children: React.ReactNode, dataLogin: any }) {
+  const [valSetOTP, setSetOTP] = useAtom(_isSetOTP)
+  setSetOTP(false)
   const theme = useMantineTheme();
   return (
     <>
@@ -29,7 +33,7 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
                 : theme.colors.gray[0],
           },
         }}
-        navbar={<NavbarDashboard2 />}
+        navbar={<NavbarDashboard2 role={dataLogin.roleUser} />}
         header={<HeaderDashboard2 />}
       >
         {children}
