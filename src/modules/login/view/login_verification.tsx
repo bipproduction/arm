@@ -35,7 +35,7 @@ export function LoginVerification() {
       const setC = await funSetCookies({phone: valPhoneLogin})
       toast("Verification code is correct", { theme: "dark" });
       setPhoneLogin(null)
-      router.push("/dashboard");
+      // router.push("/dashboard");
 
     } else {
       toast("Incorrect verification code", { theme: "dark" });

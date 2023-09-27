@@ -16,10 +16,23 @@ import { IoMdNotifications } from "react-icons/io";
 import ModalLogout from "./modal_logout";
 import { useAtom } from "jotai";
 import { isLogout } from "../val/isLogout";
+import { useState } from "react";
+import { PiUserSwitch } from "react-icons/pi";
+import { HiOutlineUserCircle } from "react-icons/hi";
+import { funGetListRole } from "@/modules/profile/fun/get_list_role";
+import { useShallowEffect } from "@mantine/hooks";
+import { funChangeRole } from "@/modules/profile/fun/change_role";
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ dataRole }: { dataRole: any }) {
   const [valOpenLogout, setOpenLogout] = useAtom(isLogout);
+  const [listRole, setListRole] = useState(dataRole)
   const router = useRouter();
+
+  async function changingRole({ user }: { user: string }) {
+    const c = await funChangeRole({ idUser: user })
+    if (c.success) return window.location.href = "/dashboard";
+  }
+
   return (
     <>
       <Menu shadow="md" width={300}>
@@ -33,11 +46,24 @@ export default function ProfileHeader() {
           <Menu.Item onClick={() => router.push("/dashboard/profile")}>
             <Box>
               <Group>
-                <FaUserCircle size="20" />
+                <HiOutlineUserCircle size="20" />
                 <Text>Profile</Text>
               </Group>
             </Box>
           </Menu.Item>
+          {
+            listRole && listRole.map((item: any, i: any) => (
+              <Menu.Item key={i} onClick={() => changingRole({ user: item.id })}>
+                <Box>
+                  <Group>
+                    <PiUserSwitch size="20" />
+                    <Text>Switch to {item.role}</Text>
+                  </Group>
+                </Box>
+              </Menu.Item>
+            ))
+          }
+
           <Menu.Item onClick={() => setOpenLogout(true)}>
             <Box>
               <Group>
