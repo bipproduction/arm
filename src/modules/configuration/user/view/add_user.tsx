@@ -5,7 +5,6 @@ import { useAtom } from "jotai";
 import { isModalCreateUser, valData } from "../val/isModaluser";
 import { useState } from "react";
 import toast from "react-simple-toasts";
-import { useForm } from "@mantine/form";
 import {
   Box,
   Button,
