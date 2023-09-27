@@ -1,11 +1,11 @@
-import { ViewUser } from '@/modules/configuration/user';
-import React from 'react';
+import { ViewUser } from "@/modules/configuration/user";
+import React from "react";
 
 function Page() {
   return (
-  <>
-  <ViewUser/>
-  </>
+    <>
+      <ViewUser />
+    </>
   );
 }
 
