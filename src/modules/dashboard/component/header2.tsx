@@ -10,8 +10,8 @@ import { usePathname, useRouter } from "next/navigation"
 import { useMediaQuery, useViewportSize } from "@mantine/hooks"
 import Notification from "./notification"
 import ProfileHeader from "./profile"
+import { menuDashboardSuperAdmin } from "../val/data_menu_super_admin"
 
-const data = menuDashboard
 const useStyles = createStyles((theme) => ({
     link: {
         ...theme.fn.focusStyles(),
@@ -77,7 +77,7 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export function HeaderDashboard2() {
+export function HeaderDashboard2({ role, dataRole }: { role: number, dataRole: any }) {
     const [openDrawer, setOpenDrawer] = useState(false)
     const router = useRouter();
     const { classes, cx } = useStyles();
@@ -85,13 +85,18 @@ export function HeaderDashboard2() {
     const [active, setActive] = useState(pathname);
     const { height, width } = useViewportSize();
 
+    let data = menuDashboard
+    if (role == 5) {
+        data = menuDashboardSuperAdmin
+    }
+
     return (
         <>
             <Header p={"sm"} height={60}>
                 <Box>
                     <Group position="apart">
                         <Group>
-                            {width > 576 && width < 768 && <Burger opened={openDrawer} onClick={() => setOpenDrawer(!openDrawer)} /> }
+                            {width > 576 && width < 768 && <Burger opened={openDrawer} onClick={() => setOpenDrawer(!openDrawer)} />}
                             {/* <MediaQuery smallerThan={"md"} styles={{ display: 'none' }}>
                                 <Burger opened={openDrawer} onClick={() => setOpenDrawer(!openDrawer)} />
                             </MediaQuery> */}
@@ -111,8 +116,8 @@ export function HeaderDashboard2() {
                             <ActionIcon component="a" color="dark" href="/dashboard/cart">
                                 <BsFillCartFill size="20" />
                             </ActionIcon>
-                            <Notification/>
-                            <ProfileHeader/>
+                            <Notification />
+                            <ProfileHeader dataRole={dataRole} />
                         </Group>
                     </Group>
                 </Box>

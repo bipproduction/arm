@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { MdSettings } from "react-icons/md";
 import { menuDashboard } from "../val/data_menu";
 import { menuDashboardSuperAdmin } from "../val/data_menu_super_admin";
+import { useShallowEffect } from "@mantine/hooks";
 
 
 const useStyles = createStyles((theme) => ({
@@ -83,7 +84,11 @@ export function NavbarDashboard2({ role }: { role: number }) {
     const router = useRouter();
     const { classes, cx } = useStyles();
     const pathname = usePathname();
-    const [active, setActive] = useState(pathname);
+    const [active, setActive] = useState("");
+
+    useShallowEffect(() => {
+        setActive(pathname)
+    })
     return (
         <>
             <Navbar hiddenBreakpoint="sm" p="md" hidden={!opened} width={{ sm: 200, lg: 300 }}>
@@ -99,7 +104,7 @@ export function NavbarDashboard2({ role }: { role: number }) {
                                 c={item.label ? "#61677A" : "dark"}
                                 fw={item.label ? "bolder" : "normal"}
                                 label={item.label}
-                                onClick={() => { router.push(item.link); setActive(item.link) }}
+                                onClick={() => { router.push(item.link) }}
                             />
                         );
                     })}

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export default function ProfileView({ data }: { data: any }) {
   const router = useRouter();
-  const [hasilGambar, setHasilGambar] = useState(`/img/${data.idImage}.${data.extension}-user`)
+  const [hasilGambar, setHasilGambar] = useState(`/img/user/${data.idImage}.${data.extension}`)
   return (
     <>
       <ButtonBack />

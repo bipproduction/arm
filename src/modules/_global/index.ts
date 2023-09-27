@@ -15,6 +15,7 @@ import seederProvinsi from './seeder/wilayah/provinsi.json';
 import seederKecamatan from './seeder/wilayah/kecamatan.json'
 import seederNegara from './seeder/wilayah/negara.json'
 import { funLogout } from './fun/funLogout'
+import { funUploadImg } from './fun/funUploadImg'
 
 
 export { isMobile }
@@ -29,8 +30,9 @@ export { seederProjectStatus }
 export { seederUserDev }
 export { seederProjectCategory }
 export { funUserLog }
-export {seederKabupaten}
-export {seederProvinsi};
-export {seederKecamatan}
-export {seederNegara}
+export { seederKabupaten }
+export { seederProvinsi };
+export { seederKecamatan }
+export { seederNegara }
 export { funLogout }
+export { funUploadImg }

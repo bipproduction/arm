@@ -1,19 +1,24 @@
 "use client";
-import React, { useState } from "react";
-import { ButtonBack } from "@/modules/_global";
-import { Avatar, Box, Button, Center, Divider, Grid, Group, Modal, Stack, Text, TextInput } from "@mantine/core";
+import React, { useRef, useState } from "react";
+import { ButtonBack, funUploadImg } from "@/modules/_global";
+import { Avatar, Box, Button, Center, Divider, Grid, Group, Modal, Stack, Text, TextInput, rem } from "@mantine/core";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { isModalProfile } from "../val/isModalProfile";
 import ModalProfile from "../components/modal_profile";
 import toast from "react-simple-toasts";
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import _ from "lodash";
+import { funUpdProfileImg } from "../fun/upd_profile.img";
 
 export default function EditView({ data }: { data: any }) {
   const router = useRouter();
-  const [hasilGambar, setHasilGambar] = useState(`/img/${data.idImage}.${data.extension}-user`)
+  const [hasilGambar, setHasilGambar] = useState(`/img/user/${data.idImage}.${data.extension}`)
   const [valOpenProfile, setOpenProfile] = useAtom(isModalProfile);
   const [dataUser, setDataUser] = useState(data)
+  const [loading, setLoading] = useState(false)
+  const openRef = useRef<() => void>(null);
 
   function validasiProfile() {
     if (Object.values(dataUser).includes(""))
@@ -44,9 +49,32 @@ export default function EditView({ data }: { data: any }) {
             />
           </Center>
           <Center pt={10}>
-            <Button color="gray.5" radius="xl">
-              Edit Image Profile
-            </Button>
+            <Dropzone
+              openRef={openRef}
+              loading={loading}
+              onDrop={async (files) => {
+                setLoading(true)
+                if (!files || _.isEmpty(files)) return toast("tidak ada yang dipilih")
+                const fd = new FormData()
+                fd.append('file', files[0])
+
+                const apa = await funUploadImg(fd)
+                if (apa.success) {
+                  setHasilGambar(`/img/user/${apa.data.id}.${apa.data.extension}`)
+                  funUpdProfileImg({ id: dataUser.id, img: apa.data.id })
+                  return setLoading(false), toast('Success', { theme: "dark" })
+                }
+              }}
+              onReject={(files) => console.log('rejected files', files)}
+              // maxSize={3 * 1024 ** 2}
+              accept={IMAGE_MIME_TYPE}
+              activateOnClick={false}
+              styles={{ inner: { pointerEvents: 'all' } }}
+            >
+              <Group position="center">
+                <Button color="gray.5" radius="xl" onClick={() => openRef.current?.()}>Edit Image Profile</Button>
+              </Group>
+            </Dropzone>
           </Center>
           <Box pt={40}>
             <Grid gutter={5} gutterXs="md" gutterMd="xl" gutterXl={50}>
