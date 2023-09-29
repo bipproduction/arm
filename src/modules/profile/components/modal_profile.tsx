@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import "react-simple-toasts/dist/theme/dark.css";
 import { isModalProfile } from "../val/isModalProfile";
 import { funUpdProfile } from "../fun/upd_profile";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalProfile({ data }: { data: any }) {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function ModalProfile({ data }: { data: any }) {
 
   async function editProfile() {
     const res = await funUpdProfile({ data: data })
+    await funUserLog({activity: "EDIT", desc: "User Edit Profile"})
     toast(res.message, { theme: "dark" });
     setOpenProfile(false);
   }

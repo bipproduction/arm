@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isModalCreateAssetsCategory } from "../val/isModalAssetsCategory";
 import { funCreateAssetsCategory } from "../fun/assets_category_create";
 import toast from "react-simple-toasts";
+import { funUserLog } from "@/modules/_global";
 
 export function ModalKonfirmasiAddAssetsCategory({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [valOpenAssets, setOpenAssets] = useAtom(isModalCreateAssetsCategory);
@@ -13,6 +14,7 @@ export function ModalKonfirmasiAddAssetsCategory({ data, onSuccess }: { data: an
         const res = await funCreateAssetsCategory({ data: data });
         if (!res.success)
             return toast(res.message, { theme: "dark" });
+        await funUserLog({activity: "ADD", desc: "User Added Assets Category"})
         toast("Success", { theme: "dark" });
         setOpenAssets(false);
         onSuccess(true)

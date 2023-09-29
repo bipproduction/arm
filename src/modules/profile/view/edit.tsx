@@ -1,7 +1,20 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { ButtonBack, funUploadImg } from "@/modules/_global";
-import { Avatar, Box, Button, Center, Divider, Grid, Group, Modal, Stack, Text, TextInput, rem } from "@mantine/core";
+import { ButtonBack, COLOR, funUploadImg, funUserLog } from "@/modules/_global";
+import {
+  Avatar,
+  Box,
+  Button,
+  Center,
+  Divider,
+  Grid,
+  Group,
+  Modal,
+  Stack,
+  Text,
+  TextInput,
+  rem,
+} from "@mantine/core";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
@@ -14,16 +27,18 @@ import { funUpdProfileImg } from "../fun/upd_profile.img";
 
 export default function EditView({ data }: { data: any }) {
   const router = useRouter();
-  const [hasilGambar, setHasilGambar] = useState(`/img/user/${data.idImage}.${data.extension}`)
+  const [hasilGambar, setHasilGambar] = useState(
+    `/img/user/${data.idImage}.${data.extension}`
+  );
   const [valOpenProfile, setOpenProfile] = useAtom(isModalProfile);
-  const [dataUser, setDataUser] = useState(data)
-  const [loading, setLoading] = useState(false)
+  const [dataUser, setDataUser] = useState(data);
+  const [loading, setLoading] = useState(false);
   const openRef = useRef<() => void>(null);
 
   function validasiProfile() {
     if (Object.values(dataUser).includes(""))
       return toast("The form cannot be empty", { theme: "dark" });
-    setOpenProfile(true)
+    setOpenProfile(true);
   }
   return (
     <>
@@ -53,28 +68,58 @@ export default function EditView({ data }: { data: any }) {
               openRef={openRef}
               loading={loading}
               onDrop={async (files) => {
-                setLoading(true)
-                if (!files || _.isEmpty(files)) return toast("tidak ada yang dipilih")
-                const fd = new FormData()
-                fd.append('file', files[0])
+                setLoading(true);
+                if (!files || _.isEmpty(files))
+                  return toast("tidak ada yang dipilih");
+                const fd = new FormData();
+                fd.append("file", files[0]);
 
-                const apa = await funUploadImg(fd)
+                const apa = await funUploadImg(fd);
                 if (apa.success) {
-                  setHasilGambar(`/img/user/${apa.data.id}.${apa.data.extension}`)
-                  funUpdProfileImg({ id: dataUser.id, img: apa.data.id })
-                  return setLoading(false), toast('Success', { theme: "dark" })
+                  setHasilGambar(
+                    `/img/user/${apa.data.id}.${apa.data.extension}`
+                  );
+                  funUpdProfileImg({ id: dataUser.id, img: apa.data.id });
+                  await funUserLog({activity: "EDIT", desc: "User Edit Image Profile"})
+                  return setLoading(false), toast("Success", { theme: "dark" });
                 }
               }}
-              onReject={(files) => console.log('rejected files', files)}
+              onReject={(files) => console.log("rejected files", files)}
               // maxSize={3 * 1024 ** 2}
               accept={IMAGE_MIME_TYPE}
               activateOnClick={false}
-              styles={{ inner: { pointerEvents: 'all' } }}
+              styles={{ inner: { pointerEvents: "all" } }}
+              sx={(theme) => ({
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                border: 0,
+                backgroundColor:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.dark[6]
+                    : theme.colors.gray[0],
+
+                "&[data-accept]": {
+                  color: theme.white,
+                  backgroundColor: theme.colors.blue[6],
+                },
+
+                "&[data-reject]": {
+                  color: theme.white,
+                  backgroundColor: theme.colors.red[6],
+                },
+              })}
             >
-            </Dropzone>
               <Group position="center">
-                <Button color="gray.5" radius="xl" onClick={() => openRef.current?.()}>Edit Image Profile</Button>
+                <Button
+                  color="gray.5"
+                  radius="xl"
+                  onClick={() => openRef.current?.()}
+                >
+                  Edit Image Profile
+                </Button>
               </Group>
+            </Dropzone>
           </Center>
           <Box pt={40}>
             <Grid gutter={5} gutterXs="md" gutterMd="xl" gutterXl={50}>
@@ -84,11 +129,17 @@ export default function EditView({ data }: { data: any }) {
                     <Text fw={700} fz={14}>
                       NAME
                     </Text>
-                    <TextInput placeholder="Name" value={dataUser.name} radius={20} onChange={(val) => {
-                      setDataUser({
-                        ...dataUser, name: val.target.value
-                      })
-                    }} />
+                    <TextInput
+                      placeholder="Name"
+                      value={dataUser.name}
+                      radius={20}
+                      onChange={(val) => {
+                        setDataUser({
+                          ...dataUser,
+                          name: val.target.value,
+                        });
+                      }}
+                    />
                   </Box>
                   <Box pt={10}>
                     <Text fw={700} fz={14}>
@@ -100,8 +151,9 @@ export default function EditView({ data }: { data: any }) {
                       value={dataUser.email}
                       onChange={(val) => {
                         setDataUser({
-                          ...dataUser, email: val.target.value
-                        })
+                          ...dataUser,
+                          email: val.target.value,
+                        });
                       }}
                     />
                   </Box>
@@ -113,11 +165,17 @@ export default function EditView({ data }: { data: any }) {
                     <Text fw={700} fz={14}>
                       NO. PHONE
                     </Text>
-                    <TextInput placeholder="phone number" value={dataUser.phone} radius={20} onChange={(val) => {
-                      setDataUser({
-                        ...dataUser, phone: val.target.value
-                      })
-                    }} />
+                    <TextInput
+                      placeholder="phone number"
+                      value={dataUser.phone}
+                      radius={20}
+                      onChange={(val) => {
+                        setDataUser({
+                          ...dataUser,
+                          phone: val.target.value,
+                        });
+                      }}
+                    />
                   </Box>
                   <Box pt={10}>
                     <Text fw={700} fz={14}>
@@ -129,8 +187,9 @@ export default function EditView({ data }: { data: any }) {
                       value={dataUser.address}
                       onChange={(val) => {
                         setDataUser({
-                          ...dataUser, address: val.target.value
-                        })
+                          ...dataUser,
+                          address: val.target.value,
+                        });
                       }}
                     />
                   </Box>
@@ -154,7 +213,7 @@ export default function EditView({ data }: { data: any }) {
                   radius={"xl"}
                   color="gray.7"
                   onClick={() => {
-                    validasiProfile()
+                    validasiProfile();
                   }}
                   fullWidth
                 >
@@ -176,6 +235,5 @@ export default function EditView({ data }: { data: any }) {
         <ModalProfile data={dataUser} />
       </Modal>
     </>
-
   );
 }

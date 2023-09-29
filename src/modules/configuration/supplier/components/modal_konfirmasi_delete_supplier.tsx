@@ -5,6 +5,7 @@ import { isModalSupplier } from "../val/isModalSupplier";
 import { funDeleteSuplier } from "../fun/supplier_delete";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiDeleteSupplier({
   id,
@@ -18,6 +19,7 @@ export default function ModalKonfirmasiDeleteSupplier({
   async function deleteSupplier() {
     const del = await funDeleteSuplier({ id: id });
     if (!del.success) return toast(del.message, { theme: "dark" });
+    await funUserLog({activity: "DELETE", desc: "User Delete Supplier"})
     toast("Success", { theme: "dark" });
     setOpenModal(false);
     onSuccess(del.dataDel);

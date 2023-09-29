@@ -5,6 +5,7 @@ import { isModalEditBrand } from "../val/isModalBrand";
 import { funUpdateBrand } from "../fun/brand_update";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiEditBrand({ data }: { data: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalEditBrand);
@@ -12,6 +13,7 @@ export default function ModalKonfirmasiEditBrand({ data }: { data: any }) {
   async function updateBrand() {
     const edit = await funUpdateBrand({ data: data });
     if (!edit.success) return toast(edit.message, { theme: "dark" });
+    await funUserLog({activity: "EDIT", desc: "User Edit Brand"})
     toast("Success", { theme: "dark" });
     setOpenModal(false);
   }

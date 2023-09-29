@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { funCreateOutletType } from "../fun/create_outlet_type"
 import { useState } from "react"
 import { isModalOutletType } from "../val/val_outlet_type"
+import { funUserLog } from "@/modules/_global"
 
 export function ModalKonfirmasiOutletType({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalOutletType);
@@ -16,6 +17,7 @@ export function ModalKonfirmasiOutletType({ data, onSuccess }: { data: any, onSu
     async function createOutletType() {
         const create = await funCreateOutletType({ data: formAddOutletType })
         if (!create.success) return toast(create.message, { theme: "dark" });
+        await funUserLog({activity: "ADD", desc: "User Added Outlet Type"})
         toast("Success", { theme: "dark" });
         onSuccess(true)
         setOpenModal(false);

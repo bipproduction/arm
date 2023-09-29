@@ -15,7 +15,7 @@ export function ModalKonfirmasiAddFaq({ data, onSuccess }: { data: any, onSucces
     async function onAddFaq() {
         const edit = await funFaqCreate({ data: data })
         if (!edit.success) return toast(edit.message, { theme: "dark" });
-        // await funUserLog({ user: 'adminUserWibuDeveloperARM', activity: 'ADD', desc: 'User added FAQ' })
+        await funUserLog({ activity: 'ADD', desc: 'User added FAQ' })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)

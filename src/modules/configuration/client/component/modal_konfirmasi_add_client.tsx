@@ -8,6 +8,7 @@ import { isModalClient } from "../val/isModalClient";
 import { funCreateClient } from "../fun/create_client";
 import { useState } from "react";
 import { val_loading } from "@/modules/_global/fun/val_loding";
+import { funUserLog } from "@/modules/_global";
 
 export function ModalKonfirmasiAddClient({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalClient);
@@ -19,6 +20,7 @@ export function ModalKonfirmasiAddClient({ data, onSuccess }: { data: any, onSuc
         setLoading(true)
         const create = await funCreateClient({ data: valForm })
         if (!create.success) return setLoading(false), toast(create.message, { theme: "dark" });
+        await funUserLog({activity: "ADD", desc: "User Added Client"})
         toast("Success", { theme: "dark" });
         onSuccess(true)
         setOpenModal(false);

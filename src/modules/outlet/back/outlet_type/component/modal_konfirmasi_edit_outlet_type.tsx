@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import { useRouter } from "next/navigation";
 import { isModalOutletType } from "../val/val_outlet_type";
 import { funUpdOutletType } from "../fun/upd_outlet_type";
+import { funUserLog } from "@/modules/_global";
 
 export function ModalKonfirmasiEditOutletType({ data }: { data: any }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalOutletType);
@@ -13,6 +14,7 @@ export function ModalKonfirmasiEditOutletType({ data }: { data: any }) {
     async function updOutletType() {
         const edit = await funUpdOutletType({ data: data })
         if (!edit.success) return toast(edit.message, { theme: "dark" });
+        await funUserLog({activity: "EDIT", desc: "User Edit Outlet Type"})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
     }

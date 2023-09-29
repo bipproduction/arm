@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import { funDeleteWarehouseLocation } from "../fun/warehouse_location_delete";
 import { isModalWarehouseLocation } from "../val/isModalWarehouseLocation";
+import { funUserLog } from "@/modules/_global";
 
 
 export default function ModalKomfirmasiDeleteWarehouseLocation({ id, onSuccess }: { id: number, onSuccess: (val: any) => void }) {
@@ -15,6 +16,7 @@ export default function ModalKomfirmasiDeleteWarehouseLocation({ id, onSuccess }
   async function deleteAssetsLocation() {
     const edit = await funDeleteWarehouseLocation({ id: id });
     if (!edit.success) return toast(edit.message, { theme: "dark" });
+    await funUserLog({activity: "DELETE", desc: "User Delete Warehouse Location"})
     toast("Success", { theme: "dark" });
     setOpenModal(false);
     onSuccess(edit)
