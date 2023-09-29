@@ -9,6 +9,7 @@ import { BsSearch } from "react-icons/bs";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { useAtom } from "jotai";
 import { isModalUserConf } from "../val/isModaluser";
+import { ModalKonfirmasiDeleteUser } from "../components/modal_konfirmasi_del_user";
 
 function ViewUser({ data }: { data: any }) {
   const router = useRouter();
@@ -37,30 +38,7 @@ function ViewUser({ data }: { data: any }) {
       </Stack>
       <Grid justify="flex-end">
         <Grid.Col md={5} xl={5} lg={5} sm={5} xs={6}>
-          <MantineProvider
-            inherit
-            theme={{
-              components: {
-                InputWrapper: {
-                  styles: (theme) => ({
-                    label: {
-                      backgroundColor:
-                        theme.colorScheme === "dark"
-                          ? "rgba(255, 255, 255, .1)"
-                          : "rgba(0, 0, 0, .1)",
-                    },
-                  }),
-                },
-                Input: {
-                  styles: (theme) => ({
-                    input: {
-                      borderColor: theme.colors.gray[theme.fn.primaryShade()],
-                    },
-                  }),
-                },
-              },
-            }}
-          >
+          <Box>
             <Group>
               <TextInput
                 radius="sm"
@@ -96,7 +74,7 @@ function ViewUser({ data }: { data: any }) {
                 }
               />
             </Group>
-          </MantineProvider>
+          </Box>
         </Grid.Col>
         <Grid.Col md={3} xl={2} lg={2} sm={3} xs={6}>
           <Button
@@ -173,7 +151,7 @@ function ViewUser({ data }: { data: any }) {
                               color="red.9"
                               onClick={() => {
                                 setDataDelete(item.id);
-                                // setOpenModal(true);
+                                setOpenModal(true);
                               }}
                             >
                               <MdDelete size="23" />
@@ -197,7 +175,7 @@ function ViewUser({ data }: { data: any }) {
         </Group>
       </Box>
 
-      {/* <Modal
+      <Modal
         size={"md"}
         opened={valOpenModal}
         onClose={() => setOpenModal(false)}
@@ -205,13 +183,13 @@ function ViewUser({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKonfirmasiDelClient
+        <ModalKonfirmasiDeleteUser
           id={dataDelete}
           onSuccess={(val) => {
             onSearch({ p: valPage, s: fixSearch });
           }}
         />
-      </Modal> */}
+      </Modal>
     </>
   );
 }

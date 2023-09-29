@@ -4,6 +4,7 @@ import React from 'react';
 import { isModalCreateUser } from '../val/isModaluser';
 import { funCreateProfile } from '../fun/profile_create';
 import toast from 'react-simple-toasts';
+import { funUserLog } from '@/modules/_global';
 
 export default function ModalKonfirmasihAddUser({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
   const [openModal, setOpenModal] = useAtom(isModalCreateUser)
@@ -13,6 +14,7 @@ export default function ModalKonfirmasihAddUser({ data, onSuccess }: { data: any
     if (!res.success) return toast(res.message, { theme: "dark" });
     if (res.success)
       toast(res.message, { theme: "dark" });
+    await funUserLog({ activity: 'ADD', desc: 'User Add Data User/Profile' })
     setOpenModal(false);
     onSuccess(true)
   }
