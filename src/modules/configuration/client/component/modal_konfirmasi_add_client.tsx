@@ -7,18 +7,22 @@ import toast from "react-simple-toasts";
 import { isModalClient } from "../val/isModalClient";
 import { funCreateClient } from "../fun/create_client";
 import { useState } from "react";
+import { val_loading } from "@/modules/_global/fun/val_loding";
 
 export function ModalKonfirmasiAddClient({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalClient);
     const [valForm, setForm] = useState(data)
     const router = useRouter();
+    const [isLoading, setLoading] = useAtom(val_loading);
 
     async function onAddFaq() {
+        setLoading(true)
         const create = await funCreateClient({ data: valForm })
-        if (!create.success) return toast(create.message, { theme: "dark" });
+        if (!create.success) return setLoading(false), toast(create.message, { theme: "dark" });
         toast("Success", { theme: "dark" });
         onSuccess(true)
         setOpenModal(false);
+        setLoading(false)
     }
     return (
         <>

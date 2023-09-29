@@ -22,15 +22,20 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import { funGetListRole } from "@/modules/profile/fun/get_list_role";
 import { useShallowEffect } from "@mantine/hooks";
 import { funChangeRole } from "@/modules/profile/fun/change_role";
+import { val_loading } from "@/modules/_global/fun/val_loding";
 
 export default function ProfileHeader({ dataRole }: { dataRole: any }) {
   const [valOpenLogout, setOpenLogout] = useAtom(isLogout);
   const [listRole, setListRole] = useState(dataRole)
   const router = useRouter();
+  const [isLoading, setLoading] = useAtom(val_loading)
 
   async function changingRole({ user }: { user: string }) {
+    setLoading(true)
+    await new Promise((r) => setTimeout(r, 1000));
     const c = await funChangeRole({ idUser: user })
-    if (c.success) return window.location.href = "/dashboard";
+    if (c.success) return   window.location.href = "/dashboard", setLoading(false)
+    setLoading(false)
   }
 
   return (
