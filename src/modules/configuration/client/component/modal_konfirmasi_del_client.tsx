@@ -7,6 +7,7 @@ import "react-simple-toasts/dist/theme/dark.css"
 import { useRouter } from "next/navigation"
 import { isModalClient } from "../val/isModalClient"
 import { funDelClient } from "../fun/del_client"
+import { funUserLog } from "@/modules/_global"
 
 export function ModalKonfirmasiDelClient({ id, onSuccess }: { id: string, onSuccess: (val: any) => void }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalClient);
@@ -14,6 +15,7 @@ export function ModalKonfirmasiDelClient({ id, onSuccess }: { id: string, onSucc
     async function delOutletType() {
         const del = await funDelClient({ id: id })
         if (!del.success) return toast(del.message, { theme: "dark" });
+        await funUserLog({activity: "DELETE", desc: "User Delete Client"})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         onSuccess(del.dataDel)

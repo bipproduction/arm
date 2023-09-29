@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import { isModalCreateWarehouseLocation } from "../val/isModalWarehouseLocation";
 import { funCreateWarehouseLocation } from "../fun/warehouse_location_create";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiCreateWarehouseLocation({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalCreateWarehouseLocation);
@@ -14,6 +15,7 @@ export default function ModalKonfirmasiCreateWarehouseLocation({ data, onSuccess
     async function addWarehouseLocation() {
         const create = await funCreateWarehouseLocation({ data: data });
         if (!create.success) return toast(create.message, { theme: "dark" });
+        await funUserLog({activity: "ADD", desc: "User Added Warehouse Location"})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)

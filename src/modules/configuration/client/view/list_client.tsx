@@ -55,30 +55,7 @@ export function ListClient({ data }: { data: any }) {
       </Stack>
       <Grid justify="flex-end">
         <Grid.Col md={5} xl={5} lg={5} sm={5} xs={6}>
-          <MantineProvider
-            inherit
-            theme={{
-              components: {
-                InputWrapper: {
-                  styles: (theme) => ({
-                    label: {
-                      backgroundColor:
-                        theme.colorScheme === "dark"
-                          ? "rgba(255, 255, 255, .1)"
-                          : "rgba(0, 0, 0, .1)",
-                    },
-                  }),
-                },
-                Input: {
-                  styles: (theme) => ({
-                    input: {
-                      borderColor: theme.colors.gray[theme.fn.primaryShade()],
-                    },
-                  }),
-                },
-              },
-            }}
-          >
+          <Box>
             <Group>
               <TextInput
                 radius="sm"
@@ -114,7 +91,7 @@ export function ListClient({ data }: { data: any }) {
                 }
               />
             </Group>
-          </MantineProvider>
+          </Box>
         </Grid.Col>
         <Grid.Col md={3} xl={2} lg={2} sm={3} xs={6}>
           <Button

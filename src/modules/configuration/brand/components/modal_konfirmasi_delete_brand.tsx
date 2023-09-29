@@ -5,6 +5,7 @@ import { isModalBrand } from "../val/isModalBrand";
 import { funDeleteBrand } from "../fun/brand_delete";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiDeleteBrand({
   id,
@@ -18,6 +19,7 @@ export default function ModalKonfirmasiDeleteBrand({
   async function deleteBrand() {
     const del = await funDeleteBrand({ id: id });
     if (!del.success) return toast(del.message, { theme: "dark" });
+    await funUserLog({activity: "DELETE", desc: "User Delete Brand"})
     toast("Success", { theme: "dark" });
     setOpenModal(false);
     onSuccess(del.dataDel);

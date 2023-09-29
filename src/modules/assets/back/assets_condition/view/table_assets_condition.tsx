@@ -54,30 +54,7 @@ export default function TableAssetsCondition({ data }: { data: any }) {
       </Stack>
       <Grid justify="flex-end">
         <Grid.Col md={5} xl={5} lg={5} sm={5} xs={6}>
-          <MantineProvider
-            inherit
-            theme={{
-              components: {
-                InputWrapper: {
-                  styles: (theme) => ({
-                    label: {
-                      backgroundColor:
-                        theme.colorScheme === "dark"
-                          ? "rgba(255, 255, 255, .1)"
-                          : "rgba(0, 0, 0, .1)",
-                    },
-                  }),
-                },
-                Input: {
-                  styles: (theme) => ({
-                    input: {
-                      borderColor: theme.colors.gray[theme.fn.primaryShade()],
-                    },
-                  }),
-                },
-              },
-            }}
-          >
+          <Box>
             <Group>
               <TextInput
                 radius="sm"
@@ -113,7 +90,7 @@ export default function TableAssetsCondition({ data }: { data: any }) {
                 }
               />
             </Group>
-          </MantineProvider>
+          </Box>
         </Grid.Col>
         <Grid.Col md={4} xl={3} lg={3} sm={4} xs={6}>
           <Button
@@ -209,13 +186,15 @@ export default function TableAssetsCondition({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-
-        <ModalKonfirmasiDeleteAssetsCondition id={dataDelete} onSuccess={(val) => {
-          onSearch({ p: valPage, s: fixSearch })
-          // const d = _.cloneDeep(listCondition)
-          // const n = d.filter((v) => v.id !== val.id)
-          // setListCondition(n)
-        }} />
+        <ModalKonfirmasiDeleteAssetsCondition
+          id={dataDelete}
+          onSuccess={(val) => {
+            onSearch({ p: valPage, s: fixSearch });
+            // const d = _.cloneDeep(listCondition)
+            // const n = d.filter((v) => v.id !== val.id)
+            // setListCondition(n)
+          }}
+        />
       </Modal>
     </>
   );

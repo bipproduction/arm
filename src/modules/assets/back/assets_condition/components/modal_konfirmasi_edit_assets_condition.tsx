@@ -6,6 +6,7 @@ import { funUpdateAssetsCondition } from "../fun/assets_condition_update";
 import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiEditAssetsCondition({ data }: { data: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalEditAssetsCondition)
@@ -14,6 +15,7 @@ export default function ModalKonfirmasiEditAssetsCondition({ data }: { data: any
   async function updAssetsCondition() {
     const create = await funUpdateAssetsCondition({ data: data })
     if (!create.success) return toast(create.message, { theme: "dark" })
+    await funUserLog({activity: "EDIT", desc: "User Edit Assets Condition"})
     toast("Success", { theme: "dark" })
     setOpenModal(false);
   }

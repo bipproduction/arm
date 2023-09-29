@@ -7,6 +7,7 @@ import "react-simple-toasts/dist/theme/dark.css"
 import { useRouter } from "next/navigation"
 import { isModalOutletType } from "../val/val_outlet_type"
 import { funDelOutletType } from "../fun/del_outlet_type"
+import { funUserLog } from "@/modules/_global"
 
 export function ModalKonfirmasiDelOutletType({ id, onSuccess }: { id: any, onSuccess: (val: any) => void }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalOutletType);
@@ -14,6 +15,7 @@ export function ModalKonfirmasiDelOutletType({ id, onSuccess }: { id: any, onSuc
     async function delOutletType() {
         const del = await funDelOutletType({ id: id })
         if (!del.success) return toast(del.message, { theme: "dark" });
+        await funUserLog({activity: "DELETE", desc: "User Delete Outlet Type"})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         onSuccess(del.dataDel)

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { funDeleteFaq } from "../fun/faq_delete";
 import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiDeleteFaq({ id, onSuccess }: { id: any, onSuccess: (val: any) => void }) {
   const [openModal, setOpenModal] = useAtom(isModalFAQ);
@@ -13,6 +14,7 @@ export default function ModalKonfirmasiDeleteFaq({ id, onSuccess }: { id: any, o
   async function deleteFaq() {
     const edit = await funDeleteFaq({ id: id });
     if (!edit.success) return toast(edit.message, { theme: "dark" });
+    await funUserLog({ activity: 'DELETE', desc: 'User Delete FAQ' })
     toast("Success", { theme: "dark" });
     setOpenModal(false);
     router.refresh();

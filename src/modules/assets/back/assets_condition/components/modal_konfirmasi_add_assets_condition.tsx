@@ -5,6 +5,7 @@ import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import { funCreateAssetsCondition } from "../fun/assets_condition_create";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiAddAssetsCondition({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalCreateAssetsCondition)
@@ -12,6 +13,7 @@ export default function ModalKonfirmasiAddAssetsCondition({ data, onSuccess }: {
     async function onAssetsCondition() {
         const res = await funCreateAssetsCondition({ data: data });
         if (!res.success) return toast(res.message, { theme: "dark" });
+        await funUserLog({activity: "ADD", desc: "User Added Assets Condition"})
         toast("Success", { theme: "dark" })
         onSuccess(true)
         setOpenModal(false);

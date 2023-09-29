@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { funDeleteAssetsCondition } from "../fun/assets_condition_delete";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiDeleteAssetsCondition({ id, onSuccess }: { id: any, onSuccess: (val: any) => void }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCondition);
@@ -14,6 +15,7 @@ export default function ModalKonfirmasiDeleteAssetsCondition({ id, onSuccess }: 
   async function deleteAssetsCondition() {
     const del = await funDeleteAssetsCondition({ id: id });
     if (!del.success) return toast(del.message, { theme: "dark" });
+    await funUserLog({activity: "DELETE", desc: "User Delete Assets Condition"})
     toast("Success", { theme: "dark" });
     setOpenModal(false);
     onSuccess(del.dataDel)

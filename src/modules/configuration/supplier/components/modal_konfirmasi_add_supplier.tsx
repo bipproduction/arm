@@ -4,6 +4,7 @@ import { isModalCreateSupplier } from "../val/isModalSupplier";
 import { funCreateSupplier } from "../fun/supplier_create";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiAddSupplier({
   data,
@@ -16,6 +17,7 @@ export default function ModalKonfirmasiAddSupplier({
   async function onSupplier() {
     const res = await funCreateSupplier({ data: data });
     if (!res.sussess) return toast(res.message, { theme: "dark" });
+    await funUserLog({activity: "ADD", desc: "User Added Supplier"})
     toast("Success", { theme: "dark" });
     onSuccess(true);
     setOpenModal(false);

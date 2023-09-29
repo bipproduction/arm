@@ -6,6 +6,7 @@ import { isModalFAQ } from "../val/isModalCreateFaq";
 import { useRouter } from "next/navigation";
 import { funFaqEdit } from "../fun/faq_edit";
 import toast from "react-simple-toasts";
+import { funUserLog } from "@/modules/_global";
 
 export function ModalKonfirmasiEditFaq({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalFAQ);
@@ -14,6 +15,7 @@ export function ModalKonfirmasiEditFaq({ data }: { data: any }) {
     async function onEditFaq() {
         const edit = await funFaqEdit({ data: data })
         if (!edit.success) return toast(edit.message, { theme: "dark" });
+        await funUserLog({activity: "EDIT", desc: "User Edit FAQ"})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
     }

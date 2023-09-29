@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { OtpView, RandomNew, phoneLogin } from "..";
 import { MdArrowBackIosNew, MdArrowCircleLeft } from "react-icons/md";
-import { ButtonBack } from "@/modules/_global";
+import { ButtonBack, funUserLog } from "@/modules/_global";
 import { _isSetOTP } from "../fun/otp_jotai";
 import { funSetCookies } from "../fun/set_cookies";
 
@@ -33,6 +33,7 @@ export function LoginVerification() {
   async function getverification() {
     if (otp == ranOTP) {
       const setC = await funSetCookies({phone: valPhoneLogin})
+      await funUserLog({activity: "LOGIN", desc: "User Login"})
       toast("Verification code is correct", { theme: "dark" });
       setPhoneLogin(null)
       // router.push("/dashboard");

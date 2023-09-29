@@ -5,6 +5,7 @@ import { isModalCreateBrand } from "../val/isModalBrand";
 import { funCreateBrand } from "../fun/brand_create";
 import toast from "react-simple-toasts";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiAddBrand({
   data,
@@ -18,6 +19,7 @@ export default function ModalKonfirmasiAddBrand({
   async function onBrand() {
     const res = await funCreateBrand({ data: data });
     if (!res.success) return toast(res.message, { theme: "dark" });
+    await funUserLog({activity: "ADD", desc: "User Added Brand"})
     toast("Success", { theme: "dark" });
     onSuccess(true);
     setOpenModal(false);

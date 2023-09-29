@@ -29,23 +29,23 @@ import _ from "lodash";
 import { funGetAllWarehouseLocation } from "..";
 import { BsSearch } from "react-icons/bs";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 export default function TableWarehouseLocation({ data }: { data: any }) {
   const router = useRouter();
   const [listLocation, setListLocation] = useState<any[]>(data.data);
   const [valOpenModal, setOpenModal] = useAtom(isModalWarehouseLocation);
   const [dataDelete, setDataDelete] = useState(Number);
   const [valPage, setValPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(data.nPage)
-  const [valSearch, setValSearch] = useState("")
-  const [fixSearch, setFixSearch] = useState("")
+  const [totalPage, setTotalPage] = useState(data.nPage);
+  const [valSearch, setValSearch] = useState("");
+  const [fixSearch, setFixSearch] = useState("");
   let noAwal = valPage * 10 - 9;
 
-  async function onSearch({ p, s }: { p: number, s: string }) {
-    const dataNext = await funGetAllWarehouseLocation({ page: p, search: s })
-    setValPage(p)
-    setListLocation(dataNext.data)
-    setTotalPage(dataNext.nPage)
+  async function onSearch({ p, s }: { p: number; s: string }) {
+    const dataNext = await funGetAllWarehouseLocation({ page: p, search: s });
+    setValPage(p);
+    setListLocation(dataNext.data);
+    setTotalPage(dataNext.nPage);
   }
   return (
     <>
@@ -55,30 +55,7 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
       </Stack>
       <Grid justify="flex-end">
         <Grid.Col md={5} xl={5} lg={5} sm={5} xs={6}>
-        <MantineProvider
-            inherit
-            theme={{
-              components: {
-                InputWrapper: {
-                  styles: (theme) => ({
-                    label: {
-                      backgroundColor:
-                        theme.colorScheme === "dark"
-                          ? "rgba(255, 255, 255, .1)"
-                          : "rgba(0, 0, 0, .1)",
-                    },
-                  }),
-                },
-                Input: {
-                  styles: (theme) => ({
-                    input: {
-                      borderColor: theme.colors.gray[theme.fn.primaryShade()],
-                    },
-                  }),
-                },
-              },
-            }}
-          >
+          <Box>
             <Group>
               <TextInput
                 radius="sm"
@@ -114,12 +91,14 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
                 }
               />
             </Group>
-          </MantineProvider>
+          </Box>
         </Grid.Col>
         <Grid.Col md={3} xl={2} lg={2} sm={3} xs={6}>
           <Button
             color="gray.7"
-            onClick={() => router.push('/dashboard/configuration/warehouse-location/create')}
+            onClick={() =>
+              router.push("/dashboard/configuration/warehouse-location/create")
+            }
             leftIcon={<AiOutlineFileAdd size="20" />}
             fullWidth
           >
@@ -193,7 +172,11 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
           </SimpleGrid>
         </Box>
         <Group position="right" pt={10}>
-          <Pagination value={valPage} onChange={(val) => onSearch({ p: val, s: fixSearch })} total={totalPage} />
+          <Pagination
+            value={valPage}
+            onChange={(val) => onSearch({ p: val, s: fixSearch })}
+            total={totalPage}
+          />
         </Group>
       </Box>
       <Modal
@@ -204,12 +187,15 @@ export default function TableWarehouseLocation({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalKomfirmasiDeleteWarehouseLocation id={dataDelete} onSuccess={(val) => {
-          onSearch({ p: valPage, s: fixSearch })
-          // const d = _.cloneDeep(listLocation)
-          // const n = d.filter((v) => v.id !== val.data.id)
-          // setListLocation(n)
-        }} />
+        <ModalKomfirmasiDeleteWarehouseLocation
+          id={dataDelete}
+          onSuccess={(val) => {
+            onSearch({ p: valPage, s: fixSearch });
+            // const d = _.cloneDeep(listLocation)
+            // const n = d.filter((v) => v.id !== val.data.id)
+            // setListLocation(n)
+          }}
+        />
       </Modal>
     </>
   );

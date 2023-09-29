@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
 import { isModalEditAssetsCategory } from "../val/isModalAssetsCategory";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiEditAssetsCategory({ data, }: { data: any; }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalEditAssetsCategory);
@@ -14,6 +15,7 @@ export default function ModalKonfirmasiEditAssetsCategory({ data, }: { data: any
   async function updAssetsCategory() {
     const create = await funUpdateAssetsCategory({ data: data });
     if (!create.success) return toast(create.message, { theme: "dark" });
+    await funUserLog({activity: "EDIT", desc: "User Edit Assets Category"})
     toast("Success", { theme: "dark" });
     setOpenModal(false);
   }

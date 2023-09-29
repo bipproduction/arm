@@ -7,6 +7,7 @@ import { funDeleteAssetscategory } from "../fun/assets_category_delete";
 import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import { Alert, Box, Button, Grid, Text } from "@mantine/core";
+import { funUserLog } from "@/modules/_global";
 
 export default function ModalKonfirmasiDelAssetsCategory({ id, onSuccess }: { id: any, onSuccess: (val: any) => void }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalAssetsCategory);
@@ -15,6 +16,7 @@ export default function ModalKonfirmasiDelAssetsCategory({ id, onSuccess }: { id
   async function deleteAssetsCategory() {
     const del = await funDeleteAssetscategory({ id: id });
     if (!del.success) return toast(del.message, { theme: "dark" });
+    await funUserLog({activity: "DELETE", desc: "User Delete Assets Category"})
     toast("Success", { theme: "dark" });
     onSuccess(del.dataDel)
     setOpenModal(false)
