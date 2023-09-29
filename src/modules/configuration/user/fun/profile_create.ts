@@ -11,7 +11,7 @@ export async function funCreateProfile({ data }: { data: any }) {
       email: data.email,
     }
   })
-  if (availableEmail) return { success: true, message: "Available email" }
+  if (availableEmail) return { success: false, message: "Available email" }
 
 
   const availablePhoneNumber = await prisma.profile.findUnique({
@@ -19,7 +19,7 @@ export async function funCreateProfile({ data }: { data: any }) {
       phone: data.phone
     }
   })
-  if (availablePhoneNumber) return { success: true, message: "Available phone number" }
+  if (availablePhoneNumber) return { success: false, message: "Available phone number" }
 
 
   const profile = await prisma.profile.create({
