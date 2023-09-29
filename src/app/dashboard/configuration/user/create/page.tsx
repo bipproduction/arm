@@ -1,6 +1,5 @@
-import { funGetDatauserRole } from '@/modules/_global/fun/get_data_user_role';
-import { funGetDataClient } from '@/modules/configuration/client/fun/get_data_client';
-import { AddUser } from '@/modules/configuration/user';
+import { funGetDatauserRole } from '@/modules/_global';
+import { AddUser, funGetDataClient } from '@/modules/configuration';
 import React from 'react';
 
 export default async function Page() {

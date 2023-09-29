@@ -1,10 +1,11 @@
-import { ViewUser } from "@/modules/configuration/user";
+import { ViewUser, funGetAllUser } from "@/modules/configuration";
 import React from "react";
 
-function Page() {
+async function Page() {
+  const data = await funGetAllUser({ page: 1 })
   return (
     <>
-      <ViewUser />
+      <ViewUser data={data} />
     </>
   );
 }

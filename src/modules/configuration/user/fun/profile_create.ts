@@ -4,21 +4,25 @@ import prisma from "@/modules/_global/lib/prisma";
 import { Profile, User } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-export async function funCreateProfile({data}: {data: any}) {
+export async function funCreateProfile({ data }: { data: any }) {
+
   const availableEmail = await prisma.profile.findUnique({
-    where:{
+    where: {
       email: data.email,
     }
   })
-  if (availableEmail) return {success: true, message: "Email Telah digunakan"}  
+  if (availableEmail) return { success: true, message: "Available email" }
+
+
   const availablePhoneNumber = await prisma.profile.findUnique({
-    where:{
+    where: {
       phone: data.phone
     }
   })
-  if (availablePhoneNumber) return {success: true, message: "Phone Telah digunakan"}  
+  if (availablePhoneNumber) return { success: true, message: "Available phone number" }
 
- const profile =  await prisma.profile.create({
+
+  const profile = await prisma.profile.create({
     data: {
       name: data.name,
       idClient: data.idClient,
@@ -27,17 +31,18 @@ export async function funCreateProfile({data}: {data: any}) {
       address: data.address,
     },
     select: {
-      id: true ,
+      id: true,
     }
   });
 
-  await prisma.user.create({
-    data:{ 
-      idProfile: profile.id,
-      idUserRole: data.idUserRole
-    }
-
-  });
+  for (let item of data.idUserRole) {
+    await prisma.user.create({
+      data: {
+        idProfile: profile.id,
+        idUserRole: item
+      }
+    });
+  }
 
   revalidatePath("/dashboard/configuration/user");
 

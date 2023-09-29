@@ -8,7 +8,8 @@ import {
 } from "./warehouse_location/";
 import { CreateSupplier, EditSupplier, TableSupplier, funGetAllSupplier, funGetOneSupplier } from "./supplier";
 import { CreateBrand, EditBrand, TableBrand, funGetAllBrand, funGetOneBrand } from "./brand";
-import { ListClient, funGetAllClient, funGetOneClient, EditClient, CreateClient } from './client'
+import { ListClient, funGetAllClient, funGetOneClient, EditClient, CreateClient, funGetDataClient } from './client'
+import { AddUser, ViewUser, funGetAllUser } from "./user";
 
 
 
@@ -32,5 +33,8 @@ export { ListClient }
 export { funGetAllClient }
 export { funGetOneClient }
 export { EditClient }
+export { funGetDataClient }
 export { CreateClient }
-
+export { AddUser }
+export { ViewUser }
+export { funGetAllUser }
