@@ -16,6 +16,7 @@ import seederKecamatan from './seeder/wilayah/kecamatan.json'
 import seederNegara from './seeder/wilayah/negara.json'
 import { funLogout } from './fun/funLogout'
 import { funUploadImg } from './fun/funUploadImg'
+import { funGetDatauserRole } from './fun/get_data_user_role'
 
 
 export { isMobile }
@@ -36,3 +37,4 @@ export { seederKecamatan }
 export { seederNegara }
 export { funLogout }
 export { funUploadImg }
+export { funGetDatauserRole }

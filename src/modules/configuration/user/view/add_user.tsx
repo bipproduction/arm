@@ -27,8 +27,18 @@ import ModalKonfirmasihAddUser from "../components/modal_konfirmasih_add_user";
 import { funGetDatauserRole } from "@/modules/_global/fun/get_data_user_role";
 import { MdClose } from "react-icons/md";
 import { ButtonGroup } from "@mantine/core/lib/Button/ButtonGroup/ButtonGroup";
+import _ from "lodash";
 
 export default function AddUser({ client, role }: { client: any; role: any }) {
+  const initialDataUser = {
+    name: "",
+    idClient: null,
+    email: "",
+    phone: "",
+    address: "",
+    idUserRole: [""],
+  }
+
   const [listClient, setListClient] = useState<any[]>(client);
   const [listRole, setListRole] = useState<any[]>(role);
   const router = useRouter();
@@ -37,32 +47,18 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
   const [value, setValue] = useAtom(valData)
   const focusTrapRef = useFocusTrap();
   const [valOpenModal, setOpenModal] = useAtom(isModalCreateUser);
-  const [dataUser, setDataUser] = useState({
-    name: "",
-    idClient: "",
-    email: "",
-    phone: "",
-    address: "",
-    idUserRole: "",
-    // idProfile: "",
-    // verificationCode: "",
-    // expiresTime: "",
-    // password: "",
-  });
-  // const [dataUser, setDataUser] = useAtom(valData)
+  const [dataUser, setDataUser] = useState(initialDataUser);
 
 
 
   function validasiCreateUser() {
-    if (Object.values(dataUser).includes(""))
+    if (Object.values([dataUser.email, dataUser.address, dataUser.name, dataUser.phone]).includes(""))
       return toast("The form cannot be empty", { theme: "dark" });
+    if (dataUser.idUserRole.length < 1 || (dataUser.idUserRole.length == 1 && dataUser.idUserRole[0] == ""))
+      return toast("User role cannot be empty", { theme: "dark" });
     setOpenModal(true);
   }
 
-  async function changeRole({ category }: { category: string }) {
-    const dataRole = await funGetDatauserRole({ category: category });
-    setListRole(dataRole);
-  }
 
   async function cekClient({ val }: { val: any }) {
     setDataUser({
@@ -71,14 +67,10 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
     });
     let dataRole
 
-    // if (val != "") {
-    //   changeRole({ category: "CLIENT" });
-    // } else {
-    //   changeRole({ category: "AGENCY" });
-    // }
 
-     if (val != "") {
+    if (val != "" && !_.isNull(val)) {
       dataRole = await funGetDatauserRole({ category: 'CLIENT' });
+      console.log()
     } else {
       dataRole = await funGetDatauserRole({ category: 'AGENCY' });
     }
@@ -93,7 +85,6 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
       <Stack>
         <ButtonBack />
       </Stack>
-      {/* <pre>{JSON.stringify(listRole, null, 1)}</pre> */}
       <Box pt={20} ref={focusTrapRef}>
         <Grid>
           <Grid.Col md={6} xl={6} lg={6} sm={10}>
@@ -130,23 +121,25 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
                   value={dataUser.idClient}
                   searchable
                   placeholder="Client"
-                  rightSection={
+                  rightSection={dataUser.idClient && (
                     <Button.Group mr={23}>
                       <Button
-                        variant="subtle"
+                        variant="transparent"
                         color="gray.7"
                         onClick={(v) => {
-                          cekClient({ val: "" });
+                          cekClient({ val: null });
                         }}
                       >
                         <MdClose size="21" />
                       </Button>
                     </Button.Group>
+                  )
+
                   }
                 />
                 <TextInput
                   value={dataUser.email}
-                  placeholder="email"
+                  placeholder="Email"
                   onChange={(val) =>
                     setDataUser({
                       ...dataUser,
@@ -156,7 +149,7 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
                 />
                 <TextInput
                   value={dataUser.phone}
-                  placeholder="phone"
+                  placeholder="Phone"
                   onChange={(val) =>
                     setDataUser({
                       ...dataUser,
@@ -166,7 +159,7 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
                 />
                 <TextInput
                   value={dataUser.address}
-                  placeholder="address"
+                  placeholder="Address"
                   onChange={(val) =>
                     setDataUser({
                       ...dataUser,
@@ -187,18 +180,25 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
                   searchable
                 /> */}
                 <MultiSelect
-                  placeholder="User role"
+                  placeholder="User Role"
                   data={listRole.map((ag) => ({
                     value: ag.id,
                     label: ag.role,
                   }))}
-                  searchable
+                  value={
+                    !dataUser
+                      ? []
+                      : !dataUser.idUserRole
+                        ? []
+                        : dataUser.idUserRole.map((v: any) => v)
+                  }
+                  onChange={(value) => {
+                    setDataUser({ ...dataUser, idUserRole: value })
+                  }}
                 />
 
-                <Button color="gray.7" 
-                // onClick={validasiCreateUser}
-                onClick={()=> console.log(dataUser)}
-                
+                <Button color="gray.7"
+                  onClick={validasiCreateUser}
                 >
                   SUBMIT
                 </Button>
@@ -215,11 +215,10 @@ export default function AddUser({ client, role }: { client: any; role: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        {/* <ModalKonfirmasiAddBrand
-          data={dataBrand}
-          onSuccess={() => setDataBrand({ name: "" })}
-        /> */}
-        <ModalKonfirmasihAddUser data={dataUser} />
+        <ModalKonfirmasihAddUser data={dataUser} onSuccess={(val) => {
+          cekClient({ val: null })
+          setDataUser({ ...initialDataUser })
+        }} />
       </Modal>
     </>
   );
