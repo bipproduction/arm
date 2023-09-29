@@ -71,10 +71,10 @@ export default function EditView({ data }: { data: any }) {
               activateOnClick={false}
               styles={{ inner: { pointerEvents: 'all' } }}
             >
+            </Dropzone>
               <Group position="center">
                 <Button color="gray.5" radius="xl" onClick={() => openRef.current?.()}>Edit Image Profile</Button>
               </Group>
-            </Dropzone>
           </Center>
           <Box pt={40}>
             <Grid gutter={5} gutterXs="md" gutterMd="xl" gutterXl={50}>
